@@ -2,6 +2,7 @@
 import { RiArrowRightLine, RiShareLine } from "@remixicon/react";
 import Image from "next/image";
 import React from "react";
+import Button from "../common/Button";
 
 const insightsData = [
   {
@@ -20,28 +21,24 @@ const insightsData = [
 
 const Insights = () => {
   return (
-    <div className="w-full bg-[#F7F8FF] py-24 relative overflow-hidden">
+    <div className="w-full bg-[#00689F] py-24 relative overflow-hidden">
       {/* Background decoration can go here later */}
-      
+
       <div className="container mx-auto px-4 relative z-10 space-y-16">
-        
+
         {/* Header Section */}
         <div className="grid grid-cols-1 md:grid-cols-6 relative z-10">
           <div className="md:col-span-4">
-            <h2 className="text-4xl md:text-5xl font-semibold leading-none text-[#00689F]">
+            <h2 data-para-effect className="text-4xl md:text-5xl   leading-none text-white">
               Insights
             </h2>
           </div>
           <div className="md:col-span-2 space-y-5">
-            <p className="text-lg md:text-xl text-[#657882] leading-tight">
+            <p data-para-effect className="text-lg md:text-xl text-[#ededed] leading-tight">
               Articles and perspectives on leadership trends, talent strategy, and market developments.
             </p>
-            <button className="border border-[#00689F50] p-2 rounded-lg text-sm flex items-center gap-x-2 w-max">
-              <p className="text-[#00689F] px-2 font-medium">Explore Insights</p>
-              <div className="p-1 text-white rounded-md bg-[#00689F]">
-                <RiArrowRightLine size={14} />
-              </div>
-            </button>
+            <Button label={"Explore Insights"} theme="light" />
+
           </div>
         </div>
 
@@ -75,7 +72,7 @@ const Insights = () => {
 
               {/* Text Content */}
               <div className="px-2 pb-2">
-                <h3 className="text-[#00689F] text-2xl font-semibold mb-4">
+                <h3 className="text-[#00689F] text-2xl   mb-4">
                   {insight.title}
                 </h3>
                 <p className="text-[#657882] text-lg leading-relaxed line-clamp-2">

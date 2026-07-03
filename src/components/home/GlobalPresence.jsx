@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import { RiMapPinLine, RiDirectionLine } from "@remixicon/react";
 import { useGSAP } from "@gsap/react";
@@ -47,48 +47,49 @@ const locations = [
 
 const GlobalPresence = () => {
 
-  useGSAP(()=>{
+  const conainerRef = useRef()
+
+  useGSAP(() => {
     const tl = gsap.timeline({
-      scrollTrigger:{
-        trigger:".city_card_paren",
-        start:"5% bottom",
-        end:"bottom bottom",
-        scrub:true
+      scrollTrigger: {
+        trigger: ".c_city_card_paren",
+        start: "5% bottom",
+        end: "bottom bottom",
+        scrub: true,
       }
     })
 
-    gsap.utils.toArray(".city_card").forEach((card)=>{
-      tl.from(card,{
-        x:400,
-        y:200,
-        rotate:15,
-        stagger:0.5
-      })
-    })
-  })
+    tl.from(".c_city_card", {
+      x: 400,
+      y: 200,
+      rotate: 15,
+      stagger: 0.5,
+    });
+
+  }, { scope: conainerRef })
 
   return (
-    <div className="w-full bg-white pt-24">
-      <div className=" city_card_paren container h-[74rem]!   grid grid-cols-2">
+    <div ref={conainerRef} className="w-full bg-white pt-24">
+      <div className=" c_city_card_paren container h-[74rem]!   grid grid-cols-2">
 
         <div className="sticky h-fit top-24 pb-20 space-y-5 pr-20">
           <div className="md:col-span-4">
-            <h2 className="text-4xl md:text-5xl font-semibold leading-none text-[#00689F]">
+            <h2 data-para-effect className="text-4xl md:text-5xl   leading-none text-[#00689F]">
               Global Presence
             </h2>
           </div>
           <div className="md:col-span-2 space-y-5">
-            <p className="text-xl text-[#657882] leading-tight">
+            <p data-para-effect className="text-xl text-[#657882] leading-tight">
               Led by industry veterans, our founding team combines deep expertise, strategic insight, and a shared vision to redefine leadership hiring
             </p>
           </div>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 overflow-hidden">
           {locations.map((loc) => (
             <div
               key={loc.id}
-              className="city_card bg-[#f8fafd] rounded-2xl p-4 flex  gap-4 md:gap-6 relative overflow-hidden group hover:shadow-md transition-shadow border border-gray-50"
+              className="c_city_card bg-[#F7F8FF] border border-[#00689F20] hover:bg-[#86B039] rounded-2xl p-4 flex  gap-4 md:gap-6 relative overflow-hidden group transition-all duration-300 "
             >
               {/* Image */}
               <div className="relative w-32 h-32 md:w-44 md:h-44 shrink-0 rounded-xl overflow-hidden bg-gray-200">
@@ -106,20 +107,20 @@ const GlobalPresence = () => {
               <div className="flex flex-col justify-between pr-10">
                 <div className="">
 
-                  <h3 className="text-xl md:text-2xl font-semibold text-[#00689F] mb-1">
+                  <h3 className="text-xl md:text-2xl   text-[#00689F]  transition-all duration-300 group-hover:text-white mb-1">
                     {loc.city}
                   </h3>
-                  <p className="text-[#00689F] text-sm font-medium mb-3">
+                  <p className="text-[#00689F] text-sm  transition-all duration-300 group-hover:text-white   mb-3">
                     {loc.phone}
                   </p>
                 </div>
-                <p className="text-[#657882]">
+                <p className="text-[#657882]  transition-all duration-300 group-hover:text-[#EDEDED]">
                   {loc.address}
                 </p>
               </div>
 
               {/* Map Icon */}
-              <div className="absolute top-4 right-4 w-8 h-8 rounded-lg bg-[#00689F] flex items-center justify-center text-white">
+              <div className="absolute top-4 right-4 w-8 h-8 rounded-lg bg-[#00689F] group-hover:bg-white group-hover:text-[#86B039] flex items-center justify-center text-white transition-all duration-300">
                 <RiDirectionLine size={16} />
               </div>
             </div>
