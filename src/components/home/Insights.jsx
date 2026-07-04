@@ -3,6 +3,10 @@ import { RiArrowRightLine, RiShareLine } from "@remixicon/react";
 import Image from "next/image";
 import React from "react";
 import Button from "../common/Button";
+import { useGSAP } from "@gsap/react";
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import gsap from "gsap";
+gsap.registerPlugin(ScrollTrigger)
 
 const insightsData = [
   {
@@ -20,8 +24,23 @@ const insightsData = [
 ];
 
 const Insights = () => {
+
+  useGSAP(() => {
+    gsap.from(".insight_card", {
+      y: 100,
+      opacity: 0,
+      stagger: 0.1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".insight_card",
+        start: "top 70%",
+        toggleActions: "play none none reverse"
+      }
+    })
+  })
+
   return (
-    <div className="w-full bg-[#00689F] py-24 relative overflow-hidden">
+    <div className="w-full bg-[#00689F] py-12 md:py-24  relative overflow-hidden">
       {/* Background decoration can go here later */}
 
       <div className="container mx-auto px-4 relative z-10 space-y-16">
@@ -33,7 +52,7 @@ const Insights = () => {
               Insights
             </h2>
           </div>
-          <div className="md:col-span-2 space-y-5">
+          <div className="md:col-span-2 max-sm:mt-2 space-y-5">
             <p data-para-effect className="text-lg md:text-xl text-[#ededed] leading-tight">
               Articles and perspectives on leadership trends, talent strategy, and market developments.
             </p>
@@ -47,10 +66,10 @@ const Insights = () => {
           {insightsData.map((insight) => (
             <div
               key={insight.id}
-              className="bg-white rounded-3xl p-5  border border-gray-100 flex flex-col group cursor-pointer"
+              className=" insight_card bg-white rounded-3xl p-5  border border-gray-100 flex flex-col group cursor-pointer"
             >
               {/* Image Container */}
-              <div className="relative aspect-[16/9] md:aspect-[16/10] rounded-2xl overflow-hidden mb-6 bg-[#e2e8f0]">
+              <div className="relative aspect-[16/9] md:aspect-[16/10] rounded-2xl overflow-hidden mb-5 bg-[#e2e8f0]">
                 {insight.img ? (
                   <Image
                     src={insight.img}
@@ -71,11 +90,11 @@ const Insights = () => {
               </div>
 
               {/* Text Content */}
-              <div className="px-2 pb-2">
-                <h3 className="text-[#00689F] text-2xl   mb-4">
+              <div className="md:px-2 ">
+                <h5 className="text-[#00689F] leading-none   mb-2 md:mb-4">
                   {insight.title}
-                </h3>
-                <p className="text-[#657882] text-lg leading-relaxed line-clamp-2">
+                </h5>
+                <p className="text-[#657882]  leading-tight line-clamp-2">
                   {insight.desc}
                 </p>
               </div>

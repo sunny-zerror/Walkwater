@@ -60,3 +60,39 @@ button {
   text-align: inherit;
   will-change: transform;
 }
+
+
+/* page transition css */
+.PageTransition-curtainGradientLeft {
+    background: linear-gradient(to left, #86B039, #86B039bc 19%, #86B0398a 34%, #86B03961 47%, #86B03947 56.5%, #86B03931 65%, #86B03920 73%, #86B03913 80.2%, #86B0390b 86.1%, #86B03905 91%, #86B03902 95.2%, #86B03901 98.2%, #86B03900);
+    width: 75vw;
+    height: 100%;
+    background-repeat: no-repeat;
+}
+.PageTransition-curtainGradientTop {
+    background: linear-gradient(to top, #86B039, #86B039bc 19%, #86B0398a 34%, #86B03961 47%, #86B03947 56.5%, #86B03931 65%, #86B03920 73%, #86B03913 80.2%, #86B0390b 86.1%, #86B03905 91%, #86B03902 95.2%, #86B03901 98.2%, #86B03900);
+    position: absolute;
+    width: 100%;
+    height: 75lvh;
+    bottom: 100lvh;
+    background-repeat: no-repeat;
+}
+.PageTransition-curtainCentre {
+    width: 100vw;
+    height: 100%;
+    background: #86B039;
+}
+.PageTransition-curtainGradientBottom {
+    background: linear-gradient(to bottom, #86B039, #86B039bc 19%, #86B0398a 34%, #86B03961 47%, #86B03947 56.5%, #86B03931 65%, #86B03920 73%, #86B03913 80.2%, #86B0390b 86.1%, #86B03905 91%, #86B03902 95.2%, #86B03901 98.2%, #86B03900);
+    position: absolute;
+    width: 100%;
+    height: 75lvh;
+    top: 100lvh;
+    background-repeat: no-repeat;
+}
+.PageTransition-curtainGradientRight {
+    background: linear-gradient(to right, #86B039, #86B039bc 19%, #86B0398a 34%, #86B03961 47%, #86B03947 56.5%, #86B03931 65%, #86B03920 73%, #86B03913 80.2%, #86B0390b 86.1%, #86B03905 91%, #86B03902 95.2%, #86B03901 98.2%, #86B03900);
+    width: 75vw;
+    height: 100%;
+    background-repeat: no-repeat;
+}

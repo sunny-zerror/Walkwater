@@ -5,6 +5,8 @@ import { RiMapPinLine, RiDirectionLine } from "@remixicon/react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 gsap.registerPlugin(ScrollTrigger)
 
 const locations = [
@@ -50,46 +52,58 @@ const GlobalPresence = () => {
   const conainerRef = useRef()
 
   useGSAP(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".c_city_card_paren",
-        start: "5% bottom",
-        end: "bottom bottom",
-        scrub: true,
-      }
-    })
+    let mm = gsap.matchMedia();
 
-    tl.from(".c_city_card", {
-      x: 400,
-      y: 200,
-      rotate: 15,
-      stagger: 0.5,
+    mm.add("(min-width: 768px)", () => {
+      gsap.set(".c_city_card", {
+        x: 400,
+        y: 200,
+        rotate: 15,
+        stagger: 0.5,
+      });
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".c_city_card_paren",
+          start: "10% bottom",
+          end: "bottom bottom",
+          scrub: true,
+        }
+      });
+
+      tl.to(".c_city_card", {
+        x: 0,
+        y: 0,
+        rotate: 0,
+        stagger: 0.5,
+      });
     });
 
+    return () => mm.revert();
   }, { scope: conainerRef })
 
   return (
-    <div ref={conainerRef} className="w-full bg-white pt-24">
-      <div className=" c_city_card_paren container h-[74rem]!   grid grid-cols-2">
+    <div ref={conainerRef} className="w-full bg-white pt-12 md:pt-24  pb-10 md:pb-0">
+      <div className=" c_city_card_paren container flex flex-col md:grid md:grid-cols-2 md:h-[74rem]! gap-10 md:gap-0">
 
-        <div className="sticky h-fit top-24 pb-20 space-y-5 pr-20">
+        <div className="md:sticky h-fit md:top-24 md:pb-20 space-y-2 md:pr-20">
           <div className="md:col-span-4">
-            <h2 data-para-effect className="text-4xl md:text-5xl   leading-none text-[#00689F]">
+            <h2 data-para-effect className="   leading-none text-[#00689F]">
               Global Presence
             </h2>
           </div>
           <div className="md:col-span-2 space-y-5">
-            <p data-para-effect className="text-xl text-[#657882] leading-tight">
+            <p data-para-effect className="text-lg md:text-xl  text-[#657882] leading-tight">
               Led by industry veterans, our founding team combines deep expertise, strategic insight, and a shared vision to redefine leadership hiring
             </p>
           </div>
         </div>
 
-        <div className="space-y-4 overflow-hidden">
+        {/* DESKTOP VIEW */}
+        <div className="hidden md:block space-y-4 overflow-hidden">
           {locations.map((loc) => (
             <div
               key={loc.id}
-              className="c_city_card bg-[#F7F8FF] border border-[#00689F20] hover:bg-[#86B039] rounded-2xl p-4 flex  gap-4 md:gap-6 relative overflow-hidden group transition-all duration-300 "
+              className="c_city_card bg-[#F7F8FF] border border-[#00689F20] hover:bg-[#86B039] rounded-2xl p-4 flex  gap-4 md:gap-6 relative overflow-hidden group transition-colors duration-300 "
             >
               {/* Image */}
               <div className="relative w-32 h-32 md:w-44 md:h-44 shrink-0 rounded-xl overflow-hidden bg-gray-200">
@@ -99,17 +113,15 @@ const GlobalPresence = () => {
                   alt={loc.city}
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                {/* Fallback dummy background just in case image doesn't load */}
                 <div className="absolute inset-0 bg-[#e2e8f0] -z-10"></div>
               </div>
 
               {/* Content */}
               <div className="flex flex-col justify-between pr-10">
                 <div className="">
-
-                  <h3 className="text-xl md:text-2xl   text-[#00689F]  transition-all duration-300 group-hover:text-white mb-1">
+                  <h5 className=" text-[#00689F]  transition-all duration-300 group-hover:text-white mb-1">
                     {loc.city}
-                  </h3>
+                  </h5>
                   <p className="text-[#00689F] text-sm  transition-all duration-300 group-hover:text-white   mb-3">
                     {loc.phone}
                   </p>
@@ -125,6 +137,43 @@ const GlobalPresence = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* MOBILE SWIPER */}
+        <div className="md:hidden w-full overflow-hidden">
+          <Swiper
+            slidesPerView={1.1}
+            spaceBetween={16}
+            className="w-full"
+          >
+            {locations.map((loc) => (
+              <SwiperSlide key={loc.id}>
+                <div className="bg-[#F7F8FF] border border-[#00689F20] rounded-2xl flex flex-col overflow-hidden relative group h-full">
+                  <div className="w-full aspect-video relative shrink-0">
+                    <Image
+                      src={loc.img}
+                      fill
+                      alt={loc.city}
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-[#e2e8f0] -z-10"></div>
+                  </div>
+                  <div className="p-6 flex flex-col gap-2 flex-1">
+                    <div className="flex justify-between items-start w-full">
+                      <div>
+                        <h3 className=" text-[#00689F] ">{loc.city}</h3>
+                        <p className="text-[#00689F] text-base font-semibold">{loc.phone}</p>
+                      </div>
+                      <div className="w-10 h-10 shrink-0 rounded-lg bg-[#00689F] flex items-center justify-center text-white shadow-md mt-1">
+                        <RiDirectionLine size={20} />
+                      </div>
+                    </div>
+                    <p className="text-[#657882] leading-relaxed mt-2">{loc.address}</p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </div>

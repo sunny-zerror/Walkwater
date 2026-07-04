@@ -1,16 +1,73 @@
 "use client";
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'next-view-transitions';
 import Image from 'next/image';
 import { RiArrowRightUpLine } from '@remixicon/react';
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/dist/ScrollTrigger'
 import { useGSAP } from '@gsap/react';
-gsap.registerPlugin(ScrollTrigger)
+import Button from '../common/Button';
+import CustomLink from '../common/CustomLink';
+import SplitText from 'gsap/dist/SplitText';
+gsap.registerPlugin(ScrollTrigger, SplitText)
 
 const Hero = () => {
 
+  const curtainRef = useRef()
   useGSAP(() => {
+
+    const heading_split = SplitText.create(".heading_split", {
+      type: "lines",
+      linesClass: "split-line"
+    });
+
+    [...heading_split.lines].forEach((line) => {
+      const wrapper = document.createElement("div");
+
+      wrapper.classList.add("line-wrapper");
+
+      line.parentNode.insertBefore(wrapper, line);
+      wrapper.appendChild(line);
+    });
+
+    gsap.set([heading_split.lines], { yPercent: 100 });
+
+    const introText = SplitText.create(".anim_tt", { type: "chars" })
+    gsap.set(introText.chars, { yPercent: 100 })
+    const tl = gsap.timeline({
+      delay: 0.5
+    })
+    tl.to(".anim_tt", {
+      opacity: 1
+    })
+    tl.to(introText.chars, {
+      yPercent: 0,
+      ease: "power2.out",
+      duration: 0.3,
+      stagger: 0.02,
+    })
+    tl.to(introText.chars, {
+      delay: 0.5,
+      stagger: 0.02,
+      yPercent: -100,
+      ease: "power2.out",
+      duration: 0.3,
+    })
+    tl.to(curtainRef.current, {
+      transform: "translateX(-250vw)",
+    })
+
+    tl.to(heading_split.lines, {
+      yPercent: 0,
+      duration: 0.8,
+      ease: "expo.out",
+      stagger: 0.05,
+    });
+    tl.to([".blink_btn",], {
+      opacity: 1,
+      stagger: 0.15
+    }, "<");
+
 
     if (window.innerWidth < 750) return
     gsap.to([".hero_bg_video"], {
@@ -27,38 +84,66 @@ const Hero = () => {
   })
 
   return (
-    <section className="  hero_section relative w-full h-screen pb-20 overflow-hidden">
-      <div className=" hero_bg_video absolute inset-0 brightness-100 overflow-hidden z-0">
-        <video loop muted playsInline autoPlay className='brightness-75 cover' src="/videos/hero_vid.mp4"></video>
-      </div>
+    <>
 
-      <div className="relative z-10 text-white  w-full container flex items-end">
-        <div className="space-y-5">
-          <h1 className=" leading-none ">
-            India’s Fastest Growing Leadership <br /> Search and Talent Advisory Firm
-          </h1>
-          <p className="text-xl leading-tight">
-            Building future-ready leadership teams for global enterprises,  <br />high-growth businesses, and transformative organizations.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-            <Link
-              href="/contact"
-              className="inline-flex items-center text-[#00689F] justify-center px-4 py-2 border border-transparent text-sm   rounded  bg-white hover:bg-gray-100 transition-colors shadow-lg"
-            >
-              Get in Touch
-              <RiArrowRightUpLine className="w-5 h-5 ml-2" />
-            </Link>
-            <Link
-              href="/expertise"
-              className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm   rounded text-white hover:text-gray-200 transition-colors group"
-            >
-              Explore Our Expertise
-              <RiArrowRightUpLine className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-            </Link>
-          </div>
+      <div className='PageTransition fixed inset-0 w-full h-screen z-[1000] pointer-events-none overflow-hidden'>
+        <div className="w-full absolute inset-0 h-full flex items-center justify-center z-20">
+          <h2 className="text-white capitalize text-5xl md:text-7xl font-bold  overflow-hidden">
+            <div className=' anim_tt opacity-0'>
+              WalkWater
+            </div>
+          </h2>
+        </div>
+        <div
+          ref={curtainRef}
+          className="PageTransition-curtainWrapper h-full absolute flex inset-0"
+          style={{ width: '250vw', transform: 'translateX(-70vw)' }}
+        >
+          <div className="PageTransition-curtainGradientLeft shrink-0"></div>
+          <div className="PageTransition-curtainGradientTop hidden"></div>
+          <div className="PageTransition-curtainCentre shrink-0 relative flex items-center justify-center"></div>
+          <div className="PageTransition-curtainGradientBottom hidden"></div>
+          <div className="PageTransition-curtainGradientRight shrink-0"></div>
         </div>
       </div>
-    </section>
+
+      <section className="  hero_section relative w-full h-screen pb-20 overflow-hidden">
+        <div className=" hero_bg_video absolute inset-0 brightness-100 overflow-hidden z-0">
+          <video loop muted playsInline autoPlay className='brightness-75 cover' src="/videos/hero_vid.mp4"></video>
+        </div>
+
+        <div className="relative z-10 text-white  w-full container flex items-end">
+          <div className="space-y-5">
+            <h1 className=" leading-none heading_split  max-sm:hidden ">
+              India’s Fastest Growing Leadership <br /> Search and Talent Advisory Firm
+            </h1>
+            <h1 className=" leading-none heading_split  md:hidden ">
+              India’s Fastest Growing Leadership Search and Talent Advisory Firm
+            </h1>
+            <p className="text-lg md:text-xl   heading_split  leading-tight max-sm:hidden">
+              Building future-ready leadership teams for global enterprises,  <br />high-growth businesses, and transformative organizations.
+            </p>
+            <p className="text-lg md:text-xl   heading_split  leading-tight md:hidden">
+              Building future-ready leadership teams for global enterprises, high-growth businesses, and transformative organizations.
+            </p>
+            <div className="flex gap-4 items-center">
+              <Button label={"Get in Touch"} href={"/contact"} theme='light' className='blink_btn opacity-0' />
+              <CustomLink
+                href="/expertise"
+                label="Expertise"
+                className=" blink_btn opacity-0 inline-flex group relative items-center justify-center px-4 py-2 border border-transparent text-sm   rounded text-white hover:text-gray-200 transition-colors group"
+              >
+                <div className="relative">
+                  Explore Our Expertise
+                  <span className='absolute left-0 w-0 group-hover:w-full transition-all duration-300 bottom-0 bg-white h-px'></span>
+                </div>
+                <RiArrowRightUpLine size={18} className=" scale-0 group-hover:scale-100 origin-bottom-left transition-all duration-300 " />
+              </CustomLink>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
 

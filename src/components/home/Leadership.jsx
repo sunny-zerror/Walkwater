@@ -1,8 +1,14 @@
 "use client";
 import { RiArrowRightLine, RiAddLine, RiCloseLine, RiLinkedinFill, RiFacebookFill } from "@remixicon/react";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Button from "../common/Button";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+gsap.registerPlugin(ScrollTrigger)
 
 const teamData = [
   {
@@ -16,7 +22,7 @@ const teamData = [
     id: 2,
     name: "Rahul Shah",
     role: "Co-Founder & Director",
-    desc: "Rahul brings over two decades of leadership and executive search experience, partnering with organizations to identify exceptional talent for critical leadership roles. As Co-Founder of WalkWater Talent Advisors, he leads strategic search mandates across industries and geographies.",
+    desc: "Rahul brings over two decades of leadership and executive search experience, partnering with organizations to identify exceptional talent for critical leadership roles. ",
     img: "/images/homepage/leadership/rahul.png",
   },
   {
@@ -37,13 +43,81 @@ const teamData = [
 
 const Leadership = () => {
   const [expanded, setExpanded] = useState(null);
+  const containerRef = useRef(null);
+  const tl = useRef(null);
 
-  const toggleExpand = (id) => {
-    setExpanded((prev) => (prev === id ? null : id));
-  };
+  const { contextSafe } = useGSAP({ scope: containerRef });
+
+  const toggleExpand = contextSafe((id) => {
+    const nextExpanded = expanded === id ? null : id;
+
+    if (tl.current) tl.current.kill();
+    tl.current = gsap.timeline();
+
+    const shiftContainer = nextExpanded === 4 || nextExpanded === 3;
+    tl.current.to('.slider-container', {
+      x: shiftContainer ? '-25%' : '0%',
+      duration: 0.7,
+      ease: "power2.inOut"
+    }, 0);
+
+    teamData.forEach((member) => {
+      const isExpanded = nextExpanded === member.id;
+
+      tl.current.to(`.card-${member.id}`, {
+        delay: isExpanded ? 0.1 : 0,
+        width: isExpanded ? '50%' : '25%',
+        padding: isExpanded ? '1.25rem' : '0.625rem',
+        backgroundColor: isExpanded ? '#ffffff30' : 'rgba(255,255,255,0)',
+        duration: 0.6,
+        ease: "power2.inOut"
+      }, 0);
+
+      tl.current.to(`.img-container-${member.id}`, {
+        delay: isExpanded ? 0 : 0.1,
+        width: isExpanded ? '25%' : '100%',
+        backgroundColor: isExpanded ? '#ffffff50' : '#ffffff30',
+        duration: 0.6,
+        ease: "power2.inOut"
+      }, 0);
+
+      tl.current.to(`.desc-${member.id}`, {
+        opacity: isExpanded ? 1 : 0,
+        pointerEvents: isExpanded ? 'auto' : 'none',
+        duration: 0.3,
+        ease: "power2.inOut"
+      }, isExpanded ? 0.5 : 0);
+
+      tl.current.to(`.icon-${member.id}`, {
+        rotation: isExpanded ? 45 : 0,
+        duration: 0.3,
+        ease: "power2.inOut"
+      }, 0);
+    });
+
+    setExpanded(nextExpanded);
+  });
+
+  useGSAP(() => {
+    let mm = gsap.matchMedia();
+    mm.add("(min-width: 768px)", () => {
+      gsap.from(".mem_card", {
+        xPercent: 100,
+        opacity: 0,
+        stagger: 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".mem_card",
+          start: "top 70%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    });
+    return () => mm.revert();
+  })
 
   return (
-    <div className="w-full bg-[#00689F] py-24 relative">
+    <div className="w-full bg-[#00689F] py-12 md:py-24  relative" ref={containerRef}>
 
       <div className="w-[30vw] z-10 absolute left-0 top-0 aspect-square center">
         <Image fill className="cover" src={"/images/homepage/leadership/left_ellipse.png"} alt="left ellipse img" />
@@ -60,28 +134,25 @@ const Leadership = () => {
               Our Leadership
             </h2>
           </div>
-          <div className="md:col-span-2 space-y-5">
+          <div className="md:col-span-2 max-sm:mt-2 space-y-5">
             <p data-para-effect className="text-lg md:text-xl text-white leading-tight">
               Led by industry veterans, our founding team combines deep expertise, strategic insight, and a shared vision to redefine leadership hiring
             </p>
-                       <Button label={"Meet the Team"} theme="light" />
+            <Button label={"Meet the Team"} theme="light" />
           </div>
         </div>
-        <div className="w-full overflow-hidden z-50 relative">
-          <div
-            className={`w-full flex  transition-transform duration-700 ${expanded === 4 || expanded === 3 ? "-translate-x-[25%]" : "translate-x-0"
-              }`}
-          >
+        {/* DESKTOP */}
+        <div className="hidden md:block w-full overflow-hidden z-50 relative">
+          <div className="slider-container w-full flex">
             {teamData.map((member) => {
-              const isExpanded = expanded === member.id;
               return (
                 <div
                   key={member.id}
-                  className={`relative rounded-xl ${isExpanded ? "w-[50%] p-5 bg-[#ffffff30]" : " px-2.5 w-[25%]"}  transition-all duration-600 shrink-0 flex flex-col justify-between overflow-hidden`}
+                  className={` mem_card card-${member.id} relative rounded-xl p-2.5 w-[25%] shrink-0 flex flex-col justify-between overflow-hidden`}
                 >
                   <div className=" w-full flex items-start">
                     <div
-                      className={`relative rounded-xl ${isExpanded ? "w-[25%] bg-[#ffffff50]" : "w-full bg-[#ffffff30]"}  transition-all duration-600 shrink-0 overflow-hidden aspect-3/3.5`}
+                      className={`img-container-${member.id} relative rounded-xl w-full bg-[#ffffff30] shrink-0 overflow-hidden aspect-3/3.5`}
                     >
                       <Image
                         src={member.img}
@@ -93,15 +164,15 @@ const Leadership = () => {
                     <div
                       className={`h-full flex pl-5 flex-col justify-center`}
                     >
-                      <div className={`h-full flex flex-col justify-center transition-opacity duration-300  opacity-0 ${isExpanded ? "opacity-100 delay-500 " : "opacity-0 "} `}>
+                      <div className={`desc-${member.id} h-full flex flex-col justify-center opacity-0 pointer-events-none`}>
                         <p className="text-white text-base  mb-6">
                           {member.desc}
                         </p>
                         <div className="flex gap-3 mt-auto">
-                          <button className="bg-white/20 flex items-center gap-x-1 hover:bg-white/30 text-white px-4 py-2 rounded-md text-sm   transition-colors">
+                          <button className="bg-white/10 flex items-center gap-x-1 hover:bg-white/30 text-white px-4 py-2 rounded-md text-sm   transition-colors">
                             <RiLinkedinFill size={16} /> LinkedIn
                           </button>
-                          <button className="bg-white/20 flex items-center gap-x-1 hover:bg-white/30 text-white px-4 py-2 rounded-md text-sm   transition-colors">
+                          <button className="bg-white/10 flex items-center gap-x-1 hover:bg-white/30 text-white px-4 py-2 rounded-md text-sm   transition-colors">
                             <RiFacebookFill size={16} /> Facebook
                           </button>
                         </div>
@@ -112,16 +183,18 @@ const Leadership = () => {
 
                   <div className="mt-2 w-full flex justify-between text-white items-center">
                     <div className="flex flex-col">
-                      <h3 className="text-white text-xl   whitespace-nowrap">
+                      <h5 className="text-white  whitespace-nowrap">
                         {member.name}
-                      </h3>
+                      </h5>
                       <p className="text-white/80 text-sm whitespace-nowrap">{member.role}</p>
                     </div>
                     <button
                       onClick={() => toggleExpand(member.id)}
-                      className={`w-8 h-8 rounded-md bg-white text-[#00689F] shrink-0 flex items-center justify-center transition-all duration-300 z-10`}
+                      className={`w-8 h-8 rounded-md group bg-white text-[#00689F] shrink-0 flex items-center justify-center transition-all duration-300 z-10`}
                     >
-                      <RiAddLine size={20} className={` transition-all duration-300 ${isExpanded ? " rotate-45" : "rotate-0"}`} />
+                      <div className="group-hover:rotate-90 transition-all duration-300">
+                        <RiAddLine size={20} className={`icon-${member.id}`} />
+                      </div>
                     </button>
                   </div>
                 </div>
@@ -129,6 +202,42 @@ const Leadership = () => {
             })}
           </div>
 
+        </div>
+
+        {/* MOBILE SWIPER */}
+        <div className="md:hidden w-full relative z-50">
+          <Swiper
+            slidesPerView={1.1}
+            spaceBetween={16}
+            className="w-full"
+          >
+            {teamData.map((member) => (
+              <SwiperSlide key={member.id} className="">
+                <div className="bg-[#ffffff20] rounded-2xl w-full p-5 overflow-hidden">
+                  <div className="">
+                    <div className="w-full bg-[#ffffff50] aspect-square relative rounded-xl overflow-hidden shrink-0">
+                      <Image fill src={member.img} className='object-cover' alt={member.name} />
+                    </div>
+                    <div className="mt-4">
+                      <h4 className="text-white leading-none">{member.name}</h4>
+                      <p className="text-white/80 text-sm mb-4">{member.role}</p>
+                      <p className="text-white leading-tight mb-6 flex-1">
+                        {member.desc}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="w-full flex gap-x-2">
+                    <button className="bg-white/10 flex items-center justify-center w-[48%] gap-x-1 hover:bg-white/30 text-white py-2.5 rounded-md text-sm transition-colors">
+                      <RiLinkedinFill size={16} /> LinkedIn
+                    </button>
+                    <button className="bg-white/10 flex items-center justify-center w-[48%] gap-x-1 hover:bg-white/30 text-white py-2.5 rounded-md text-sm transition-colors">
+                      <RiFacebookFill size={16} /> Facebook
+                    </button>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </div>

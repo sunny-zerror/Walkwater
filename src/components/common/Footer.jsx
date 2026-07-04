@@ -11,7 +11,7 @@ import {
 
 const Footer = () => {
   return (
-    <div className="w-full bg-[#00689F] pb-10">
+    <div className="w-full bg-[#00689F] py-10">
       <div className="container ">
         <div className="  bg-white rounded-3xl flex flex-col md:flex-row overflow-hidden  relative">
 
@@ -24,7 +24,7 @@ const Footer = () => {
             </div>
 
             {/* Top Row: Logo & Links */}
-            <div className="flex flex-col md:flex-row justify-between mb-16 gap-10">
+            <div className="flex flex-col md:flex-row justify-between mb-10 md:mb-16 gap-10">
               {/* Logo */}
               <div className="w-64 shrink-0">
                 {/* Replace with your actual logo path */}
@@ -38,8 +38,8 @@ const Footer = () => {
               </div>
 
               {/* Links Columns */}
-              <div className="flex flex-col sm:flex-row gap-10 sm:gap-24">
-                <ul className="space-y-4">
+              <div className=" grid grid-cols-2 md:flex  gap-20 ">
+                <ul className=" space-y-2 md:space-y-4">
                   <li>
                     <a href="#" className="text-[#00689F]   border-b border-[#00689F] pb-0.5">Home</a>
                   </li>
@@ -57,7 +57,7 @@ const Footer = () => {
                   </li>
                 </ul>
 
-                <ul className="space-y-4">
+                <ul className=" space-y-2 md:space-y-4">
                   <li>
                     <a href="#" className="text-[#657882] hover:text-[#00689F] transition-colors text-sm md:text-base">Contact</a>
                   </li>
@@ -72,10 +72,10 @@ const Footer = () => {
             </div>
 
             {/* Bottom Row: Newsletter & Copyright */}
-            <div className="flex flex-col md:flex-row justify-between items-end gap-10 mt-auto">
+            <div className="flex flex-col md:flex-row justify-between md:items-end gap-10 mt-auto">
               {/* Newsletter */}
               <div className="w-full max-w-sm">
-                <h4 className="text-2xl md:text-3xl text-[#00689F]   mb-6">
+                <h4 className=" text-[#00689F]  leading-none  mb-6">
                   Subscribe for Latest<br />Newsletter
                 </h4>
                 <div className="relative w-full">
@@ -84,7 +84,7 @@ const Footer = () => {
                     placeholder="name@example.com"
                     className="w-full bg-[#00689F] text-white placeholder:text-white/80 rounded-xl py-3.5 px-5 pr-14 outline-none text-sm md:text-base"
                   />
-                  <button className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-md flex items-center justify-center text-[#00689F] hover:bg-gray-100 transition-colors">
+                  <button className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 hover:bg-transparent! hover:border-white border border-transparent hover:text-white bg-white rounded-md flex items-center justify-center text-[#00689F] transition-colors">
                     <RiArrowRightLine size={18} />
                   </button>
                 </div>
@@ -99,36 +99,36 @@ const Footer = () => {
           </div>
 
           {/* Right Column (Blue Section) */}
-          <div className="w-full md:w-[35%] relative lg:w-[30%] bg-[#00689F] p-8 md:p-14 lg:p-20 flex flex-col justify-between text-white shrink-0">
+          <div className="w-full md:w-[35%] relative lg:w-[30%] bg-[#00689F] p-6 md:p-14 lg:p-20 flex flex-col justify-between text-white shrink-0">
             <div className="w-full h-full absolute inset-0 bg-white/20 pointer-events-none"></div>
 
             {/* Social Links */}
-            <ul className="space-y-6">
+            <ul className=" space-y-2 md:space-y-6 max-sm:grid max-sm:grid-cols-2">
               <li>
                 <a href="#" className="flex items-center gap-4 hover:opacity-80 transition-opacity text-sm md:text-base">
-                  <RiFacebookCircleFill size={24} /> Facebook
+                  <RiFacebookCircleFill size={22} /> Facebook
                 </a>
               </li>
               <li>
                 <a href="#" className="flex items-center gap-4 hover:opacity-80 transition-opacity text-sm md:text-base">
-                  <RiLinkedinBoxFill size={24} /> Linkedin
+                  <RiLinkedinBoxFill size={22} /> Linkedin
                 </a>
               </li>
               <li>
                 <a href="#" className="flex items-center gap-4 hover:opacity-80 transition-opacity text-sm md:text-base">
-                  <RiInstagramLine size={24} /> Instagram
+                  <RiInstagramLine size={22} /> Instagram
                 </a>
               </li>
               <li>
                 <a href="#" className="flex items-center gap-4 hover:opacity-80 transition-opacity text-sm md:text-base">
-                  <RiTwitterFill size={24} /> Twitter
+                  <RiTwitterFill size={22} /> Twitter
                 </a>
               </li>
             </ul>
 
             {/* Contact Info */}
-            <div className="mt-16 md:mt-24">
-              <p className="text-base md:text-lg mb-3  ">+91 8049065000</p>
+            <div className="mt-4">
+              <p className="text-base md:text-lg   ">+91 8049065000</p>
               <p className="text-base md:text-lg  ">client@walkwatertalent.com</p>
             </div>
 
