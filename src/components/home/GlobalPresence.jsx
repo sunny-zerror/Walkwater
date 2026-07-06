@@ -93,7 +93,7 @@ const GlobalPresence = () => {
           </div>
           <div className="md:col-span-2 space-y-5">
             <p data-para-effect className="text-lg md:text-xl  text-[#657882] leading-tight">
-              Led by industry veterans, our founding team combines deep expertise, strategic insight, and a shared vision to redefine leadership hiring
+              Led by industry veterans, our founding team combines deep expertise, strategic insight, and a shared vision to redefine leadership hiring.
             </p>
           </div>
         </div>
@@ -132,8 +132,9 @@ const GlobalPresence = () => {
               </div>
 
               {/* Map Icon */}
-              <div className="absolute top-4 right-4 w-8 h-8 rounded-lg bg-[#00689F] group-hover:bg-white group-hover:text-[#86B039] flex items-center justify-center text-white transition-all duration-300">
-                <RiDirectionLine size={16} />
+              <div className="absolute top-4 border-2 border-white right-4 w-8 h-8 rounded-lg center text-white transition-all duration-300">
+                <img src="/icons/map_bg.svg" className="absolute inset-0 z-[-1]" alt="" />
+                <img src="/icons/location_target.svg" className="" alt="" />
               </div>
             </div>
           ))}
@@ -147,7 +148,7 @@ const GlobalPresence = () => {
             className="w-full"
           >
             {locations.map((loc) => (
-              <SwiperSlide key={loc.id}>
+              <SwiperSlide key={loc.id} className="h-auto!">
                 <div className="bg-[#F7F8FF] border border-[#00689F20] rounded-2xl flex flex-col overflow-hidden relative group h-full">
                   <div className="w-full aspect-video relative shrink-0">
                     <Image
@@ -161,7 +162,7 @@ const GlobalPresence = () => {
                   <div className="p-6 flex flex-col gap-2 flex-1">
                     <div className="flex justify-between items-start w-full">
                       <div>
-                        <h3 className=" text-[#00689F] ">{loc.city}</h3>
+                        <h4 className=" text-[#00689F] ">{loc.city}</h4>
                         <p className="text-[#00689F] text-base font-semibold">{loc.phone}</p>
                       </div>
                       <div className="w-10 h-10 shrink-0 rounded-lg bg-[#00689F] flex items-center justify-center text-white shadow-md mt-1">

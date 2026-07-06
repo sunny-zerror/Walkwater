@@ -6,122 +6,7 @@ import { RiArrowDownSLine, RiArrowRightUpLine, RiMenuLine, RiCloseLine } from '@
 import CustomLink from './CustomLink';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-
-const recentInsights = [
-  {
-    title: "Post Budget 2023 Quotes across various sectors",
-    date: "03 Jul, 2026",
-    image: "/images/homepage/insights/insight1.png",
-    href: "/insights/post-budget-2023",
-  },
-  {
-    title: "Microsoft job cuts likely to hit India too",
-    date: "03 Jul, 2026",
-    image: "/images/homepage/insights/insight2.png",
-    href: "/insights/microsoft-job-cuts",
-  },
-  {
-    title: "No change in salary structure post-budget",
-    date: "03 Jul, 2026",
-    image: "/images/homepage/insights/insight3.png",
-    href: "/insights/salary-structure",
-  },
-];
-
-const navItems = [
-  {
-    label: "About Us",
-    type: "numbered", // Type 2: numbered list
-    items: [
-      { label: "Company", href: "/about/company" },
-      { label: "CSR & Impact", href: "/about/csr-impact" },
-      { label: "Events & Media", href: "/about/events-media" },
-      { label: "Careers", href: "/about/careers" },
-    ],
-  },
-  {
-    label: "Expertise",
-    type: "grid",
-    items: [
-      {
-        label: "CEO and Board Search",
-        desc: "The future belongs to leaders who can navigate constant change.",
-        href: "/expertise/ceo-board-search",
-        icon: "/icons/fileSearch.svg",
-      },
-      {
-        label: "Talent Core",
-        desc: "Matching exceptional talent with ambitious organizations.",
-        href: "/expertise/talent-core",
-        icon: "/icons/bulb.svg",
-      },
-      {
-        label: "Talent Advisory",
-        desc: "Turning talent data into strategic business advantage.",
-        href: "/expertise/talent-advisory",
-        icon: "/icons/humanSearch.svg",
-      },
-      {
-        label: "Entrepreneurial Services",
-        desc: "The right leaders for businesses shaping the future.",
-        href: "/expertise/entrepreneurial-services",
-        icon: "/icons/boxSetting.svg",
-      },
-      {
-        label: "Diversity",
-        desc: "Insight-led research for a diverse and dynamic India.",
-        href: "/expertise/diversity",
-        icon: "/icons/shield.svg",
-      },
-      {
-        label: "PE & VC",
-        desc: "Strategic talent partnerships for investment-driven growth.",
-        href: "/expertise/pe-vc",
-        icon: "/icons/handshake.svg",
-      },
-    ],
-  },
-  {
-    label: "Industry Verticals",
-    type: "grid",
-    items: [
-      {
-        label: "Industrial, Energy & Process",
-        desc: "Building future-ready leaders for industrial and energy growth.",
-        href: "/industry/industrial-energy-process",
-        icon: "/icons/spark.svg",
-      },
-      {
-        label: "Technology & Digital",
-        desc: "Finding exceptional talent to accelerate business transformation.",
-        href: "/industry/technology-digital",
-        icon: "/icons/processor.svg",
-      },
-      {
-        label: "Consumer, Retail & Media",
-        desc: "Helping brands find leaders who inspire growth and customer loyalty.",
-        href: "/industry/consumer-retail-media",
-        icon: "/icons/youtubeTv.svg",
-      },
-      {
-        label: "Pharma & Healthcare",
-        desc: "Helping healthcare businesses build stronger leadership teams.",
-        href: "/industry/pharma-healthcare",
-        icon: "/icons/react.svg",
-      },
-      {
-        label: "Banking & Financial Services",
-        desc: "Connecting financial organizations with leaders who drive growth and innovation.",
-        href: "/industry/banking-financial-services",
-        icon: "/icons/stock.svg",
-      },
-    ],
-  },
-  {
-    label: "Insights",
-    href: "/insights",
-  },
-];
+import { navItems, recentInsights } from '@/data/navData';
 
 // ─── Recent Insights Sidebar ────────────────────────────────────────────────
 const RecentInsightsSidebar = () => (
@@ -134,14 +19,14 @@ const RecentInsightsSidebar = () => (
         <CustomLink
           key={i}
           href={insight.href}
-          className="flex gap-4 border-b pb-4 border-[#00689F15] last:border-none last:pb-0 group items-stretch"
+          className="flex gap-4 group border-b pb-4 border-[#00689F15] last:border-none last:pb-0 group items-stretch"
         >
           <div className="w-20 h-20 rounded-xl overflow-hidden shrink-0 bg-gray-100 relative ">
             <Image
               src={insight.image}
               alt={insight.title}
               fill
-              className="object-cover"
+              className="object-cover group-hover:scale-110 transition-all duration-300"
             />
           </div>
           <div className="flex flex-col justify-between min-w-0 pt-1">
@@ -156,11 +41,11 @@ const RecentInsightsSidebar = () => (
   </div>
 );
 
-// ─── Type 1: Grid Dropdown (Expertise / Industry Verticals) ─────────────────
-const GridDropdown = ({ navItem }) => (
-  <div className="flex gap-8">
-    <div className="flex-1 p-5">
-      <h6 className=" pb-2  border-b border-[#E8EDF1] font-semibold text-[#00689F] tracking-wide mb-6">
+// ─── Dropdown Panel ─────────────────────────────────────────────────────────
+const DropdownPanel = ({ navItem }) => (
+  <div className="flex gap-8 ">
+    <div className="flex-1 p-5 pb-0">
+      <h6 className="pb-2 border-b border-[#E8EDF1] font-semibold text-[#00689F] tracking-wide mb-6">
         {navItem.label}
       </h6>
       <div className="grid grid-cols-2 gap-x-4 gap-y-2">
@@ -181,7 +66,7 @@ const GridDropdown = ({ navItem }) => (
               <p className="text-base font-semibold text-[#00689F] group-hover:text-[#004d75] transition-colors mb-1">
                 {item.label}
               </p>
-              <p className="text-sm  text-[#657882] w-[85%] leading-tight">
+              <p className="text-sm text-[#657882] w-[85%] leading-tight">
                 {item.desc}
               </p>
             </div>
@@ -193,35 +78,6 @@ const GridDropdown = ({ navItem }) => (
   </div>
 );
 
-// ─── Type 2: Numbered List Dropdown (Company / About Us) ────────────────────
-const NumberedDropdown = ({ navItem }) => (
-  <div className="flex gap-8">
-    <div className="flex-1 p-5">
-      <h6 className=" font-semibold pb-3  border-b border-[#E8EDF1] text-[#00689F] tracking-wide mb-6">
-        {navItem.label}
-      </h6>
-      <div className="">
-        {navItem.items.map((item, i) => (
-          <CustomLink
-            key={i}
-            href={item.href}
-            className="flex items-center gap-6 group p-4 hover:pl-6 rounded-2xl hover:bg-[#F7F8FF] border border-transparent hover:border-[#00689F15] transition-all duration-300"
-          >
-            <div className="w-10 h-10 rounded-xl bg-white border border-[#E8EDF1] flex items-center justify-center shrink-0">
-              <span className="text-sm text-[#00689F] tabular-nums font-semibold">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-            </div>
-            <h5 className=" font-semibold text-[#00689F]  group-hover:text-[#86B039] transition-colors">
-              {item.label}
-            </h5>
-          </CustomLink>
-        ))}
-      </div>
-    </div>
-    <RecentInsightsSidebar />
-  </div>
-);
 
 // ─── Main Header ────────────────────────────────────────────────────────────
 const Header = () => {
@@ -287,10 +143,10 @@ const Header = () => {
   const activeNav = activeDropdown !== null ? navItems[activeDropdown] : null;
   const hasDropdown = activeNav && activeNav.items;
 
-  useGSAP(()=>{
-    gsap.to(headerRef.current,{
-      transform:"translateY(0)",
-      delay:3
+  useGSAP(() => {
+    gsap.to(headerRef.current, {
+      transform: "translateY(0)",
+      delay: 3
     })
   })
 
@@ -314,7 +170,7 @@ const Header = () => {
             </div>
 
             {/* Navigation */}
-            <nav className="col-span-6 hidden md:flex space-x-8 justify-center items-center">
+            <nav className="col-span-6 hidden md:flex space-x-5 justify-center items-center">
               {navItems.map((navItem, index) => {
                 const isActive = activeDropdown === index;
 
@@ -324,7 +180,8 @@ const Header = () => {
                     <CustomLink
                       key={index}
                       href={navItem.href}
-                      className="text-[#7A7A7A] hover:text-black transition-colors text-sm"
+                      className={`relative flex items-center p-1 px-2 rounded-md  cursor-pointer border border-transparent transition-colors hover:text-[#00689F] hover:bg-[#F7F8FF] hover:border-[#00689F20]!  text-[#7A7A7A] hover:text-black"
+                        }`}
                       onMouseEnter={() => {
                         clearTimeout(timeoutRef.current);
                         setActiveDropdown(null);
@@ -338,7 +195,7 @@ const Header = () => {
                 return (
                   <div
                     key={index}
-                    className={`relative flex items-center p-1 px-2 rounded-md text-sm cursor-pointer border border-transparent transition-colors ${isActive ? "text-[#00689F] bg-[#F7F8FF] border-[#00689F20]!" : "text-[#7A7A7A] hover:text-black"
+                    className={`relative flex items-center p-1 px-2 rounded-md  cursor-pointer border border-transparent transition-colors ${isActive ? "text-[#00689F] bg-[#F7F8FF] border-[#00689F20]!" : "text-[#7A7A7A] hover:text-black"
                       }`}
                     onMouseEnter={() => handleMouseEnter(index)}
                     onMouseLeave={handleMouseLeave}
@@ -358,10 +215,10 @@ const Header = () => {
               <CustomLink
                 label={"contact"}
                 href="/contact"
-                className="group inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm rounded-md text-white bg-[#00689F]  hover:border-[#00557A] hover:bg-transparent transition-colors hover:text-[#00557A]"
+                className="group inline-flex gap-x-1 items-center justify-center px-4 py-2 border border-transparent  rounded-md text-white bg-[#00689F]  hover:border-[#00557A] hover:bg-transparent transition-colors hover:text-[#00557A]"
               >
                 Contact
-                <RiArrowRightUpLine className=" group-hover:w-4 group-hover:h-4 group-hover:ml-1.5 w-0 h-0 ml-0 transition-all duration-300" />
+                <RiArrowRightUpLine size={18}/>
               </CustomLink>
             </div>
 
@@ -409,8 +266,8 @@ const Header = () => {
                       </div>
                       <div
                         className={`grid transition-all duration-300 ease-in-out ${expandedMobileNav === index
-                            ? "grid-rows-[1fr] opacity-100"
-                            : "grid-rows-[0fr] opacity-0"
+                          ? "grid-rows-[1fr] opacity-100"
+                          : "grid-rows-[0fr] opacity-0"
                           }`}
                       >
                         <div className="overflow-hidden">
@@ -422,17 +279,11 @@ const Header = () => {
                                 className="flex items-center gap-3 text-[#657882] hover:text-[#00689F] text-base py-2 transition-colors group"
                                 onClick={() => setIsMobileMenuOpen(false)}
                               >
-                                {item.icon ? (
+                                {item.icon && (
                                   <div className="w-9 h-9 rounded-xl bg-[#F7F8FF] border border-[#00689F20] flex items-center justify-center shrink-0 transition-colors">
                                     <Image src={item.icon} width={18} height={18} alt={item.label} />
                                   </div>
-                                ) : navItem.type === "numbered" ? (
-                                  <div className="w-9 h-9 rounded-xl bg-white border border-[#E8EDF1] flex items-center justify-center shrink-0 transition-colors">
-                                    <span className="text-xs text-[#00689F] tabular-nums font-semibold">
-                                      {String(i + 1).padStart(2, "0")}
-                                    </span>
-                                  </div>
-                                ) : null}
+                                )}
                                 <span className="font-medium">{item.label}</span>
                               </CustomLink>
                             ))}
@@ -468,8 +319,7 @@ const Header = () => {
 
           <div className="bg-white border-b border-[#E8EDF1] rounded-2xl">
             <div className="p-3">
-              {activeNav?.type === "grid" && <GridDropdown navItem={activeNav} />}
-              {activeNav?.type === "numbered" && <NumberedDropdown navItem={activeNav} />}
+              {hasDropdown && <DropdownPanel navItem={activeNav} />}
             </div>
           </div>
         </div>

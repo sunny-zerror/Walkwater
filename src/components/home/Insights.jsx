@@ -6,6 +6,8 @@ import Button from "../common/Button";
 import { useGSAP } from "@gsap/react";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import gsap from "gsap";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 gsap.registerPlugin(ScrollTrigger)
 
 const insightsData = [
@@ -21,22 +23,38 @@ const insightsData = [
     desc: "In the current values-oriented business environment, leadership transcends merely achieving financial targets; it focuses on creating...",
     img: "/images/homepage/insights/img2.png", // Empty for now
   },
+  {
+    id: 3,
+    title: "The Definitive Look at India’s Consumer CEO Journeys",
+    desc: "Introduction: Charting the Course of India’s Consumer Sector CEOs The Indian consumer landscape has undergone transformational changes over the last…",
+    img: "/images/homepage/insights/img3.jpg", // Empty for now
+  },
+  {
+    id: 4,
+    title: "Navigating Executive Search in Indian Family-Owned Businesses",
+    desc: "India’s vibrant economic narrative is inextricably linked to the profound influence of its family-owned businesses (FOBs). These aren’t merely enterprises;...",
+    img: "/images/homepage/insights/img4.jpg", // Empty for now
+  },
 ];
 
 const Insights = () => {
 
   useGSAP(() => {
-    gsap.from(".insight_card", {
-      y: 100,
-      opacity: 0,
-      stagger: 0.1,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: ".insight_card",
-        start: "top 70%",
-        toggleActions: "play none none reverse"
-      }
-    })
+    let ic = gsap.matchMedia();
+    ic.add("(min-width: 768px)", () => {
+      gsap.from(".insight_card", {
+        xPercent: 100,
+        opacity: 0,
+        stagger: 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".insight_card",
+          start: "top 70%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    });
+    return () => ic.revert();
   })
 
   return (
@@ -61,15 +79,15 @@ const Insights = () => {
           </div>
         </div>
 
-        {/* Cards Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Cards Section — Desktop */}
+        <div className="hidden md:grid grid-cols-4 gap-3">
           {insightsData.map((insight) => (
             <div
               key={insight.id}
-              className=" insight_card bg-white rounded-3xl p-5  border border-gray-100 flex flex-col group cursor-pointer"
+              className=" insight_card bg-white rounded-3xl p-3  border border-gray-100 flex flex-col group cursor-pointer"
             >
               {/* Image Container */}
-              <div className="relative aspect-[16/9] md:aspect-[16/10] rounded-2xl overflow-hidden mb-5 bg-[#e2e8f0]">
+              <div className="relative aspect-[16/9] md:aspect-[4/3] rounded-2xl overflow-hidden mb-5 bg-[#e2e8f0]">
                 {insight.img ? (
                   <Image
                     src={insight.img}
@@ -84,22 +102,66 @@ const Insights = () => {
                 )}
 
                 {/* Share Icon */}
-                <div className="absolute top-4 right-4 w-10 h-10 bg-white rounded-xl flex items-center justify-center text-[#00689F]  hover:bg-gray-50 transition-colors z-10">
-                  <RiShareLine size={20} />
+                <div className="absolute top-2 right-2 w-8 h-8 hover:bg-[#00689F]! hover:text-white! bg-white rounded-xl flex items-center justify-center text-[#00689F] transition-colors z-10">
+                  <RiShareLine size={16} />
                 </div>
               </div>
 
               {/* Text Content */}
               <div className="md:px-2 ">
-                <h5 className="text-[#00689F] leading-none   mb-2 md:mb-4">
+                <h6 className="text-[#00689F] leading-none   mb-2 md:mb-4">
                   {insight.title}
-                </h5>
+                </h6>
                 <p className="text-[#657882]  leading-tight line-clamp-2">
                   {insight.desc}
                 </p>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Cards Section — Mobile Swiper */}
+        <div className="md:hidden w-full relative z-50">
+          <Swiper
+            slidesPerView={1.1}
+            spaceBetween={16}
+            className="w-full"
+          >
+            {insightsData.map((insight) => (
+              <SwiperSlide key={insight.id} className="h-auto!" >
+                <div className=" h-full bg-white rounded-3xl p-3 border border-gray-100 flex flex-col group cursor-pointer">
+                  {/* Image Container */}
+                  <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-5 bg-[#e2e8f0]">
+                    {insight.img ? (
+                      <Image
+                        src={insight.img}
+                        fill
+                        alt={insight.title}
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-[#e2e8f0] flex items-center justify-center" />
+                    )}
+
+                    {/* Share Icon */}
+                    <div className="absolute top-2 right-2 w-8 h-8 hover:bg-[#00689F]! hover:text-white! bg-white rounded-xl flex items-center justify-center text-[#00689F] transition-colors z-10">
+                      <RiShareLine size={16} />
+                    </div>
+                  </div>
+
+                  {/* Text Content */}
+                  <div className="flex flex-col flex-1">
+                    <h6 className="text-[#00689F] max-sm:text-lg! leading-none mb-2">
+                      {insight.title}
+                    </h6>
+                    <p className="text-[#657882] leading-tight line-clamp-2">
+                      {insight.desc}
+                    </p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
 
       </div>

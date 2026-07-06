@@ -63,12 +63,15 @@ const Leadership = () => {
 
     teamData.forEach((member) => {
       const isExpanded = nextExpanded === member.id;
+      const isInactive = nextExpanded !== null && !isExpanded;
 
       tl.current.to(`.card-${member.id}`, {
         delay: isExpanded ? 0.1 : 0,
         width: isExpanded ? '50%' : '25%',
         padding: isExpanded ? '1.25rem' : '0.625rem',
         backgroundColor: isExpanded ? '#ffffff30' : 'rgba(255,255,255,0)',
+        opacity: isInactive ? 0.5 : 1,
+        filter: isInactive ? 'blur(2px)' : 'blur(0px)',
         duration: 0.6,
         ease: "power2.inOut"
       }, 0);
@@ -136,7 +139,7 @@ const Leadership = () => {
           </div>
           <div className="md:col-span-2 max-sm:mt-2 space-y-5">
             <p data-para-effect className="text-lg md:text-xl text-white leading-tight">
-              Led by industry veterans, our founding team combines deep expertise, strategic insight, and a shared vision to redefine leadership hiring
+              Led by industry veterans, our founding team combines deep expertise, strategic insight, and a shared vision to redefine leadership hiring.
             </p>
             <Button label={"Meet the Team"} theme="light" />
           </div>
@@ -152,13 +155,14 @@ const Leadership = () => {
                 >
                   <div className=" w-full flex items-start">
                     <div
-                      className={`img-container-${member.id} relative rounded-xl w-full bg-[#ffffff30] shrink-0 overflow-hidden aspect-3/3.5`}
+                      onClick={() => toggleExpand(member.id)}
+                      className={`img-container-${member.id} cursor-pointer relative rounded-xl w-full bg-[#ffffff30] shrink-0 overflow-hidden aspect-3/3.5`}
                     >
                       <Image
                         src={member.img}
                         alt={member.name}
                         fill
-                        className="cover"
+                        className="cover hover:scale-105 transition-all duration-300"
                       />
                     </div>
                     <div
@@ -212,8 +216,8 @@ const Leadership = () => {
             className="w-full"
           >
             {teamData.map((member) => (
-              <SwiperSlide key={member.id} className="">
-                <div className="bg-[#ffffff20] rounded-2xl w-full p-5 overflow-hidden">
+              <SwiperSlide key={member.id} className="h-auto!">
+                <div className="bg-[#ffffff20] rounded-2xl w-full flex flex-col p-5 overflow-hidden h-full">
                   <div className="">
                     <div className="w-full bg-[#ffffff50] aspect-square relative rounded-xl overflow-hidden shrink-0">
                       <Image fill src={member.img} className='object-cover' alt={member.name} />
@@ -226,11 +230,11 @@ const Leadership = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="w-full flex gap-x-2">
-                    <button className="bg-white/10 flex items-center justify-center w-[48%] gap-x-1 hover:bg-white/30 text-white py-2.5 rounded-md text-sm transition-colors">
+                  <div className="w-full flex-1 flex items-end gap-x-2">
+                    <button className="bg-white/10 flex h-fit items-center justify-center w-[48%] gap-x-1 hover:bg-white/30 text-white py-2.5 rounded-md text-sm transition-colors">
                       <RiLinkedinFill size={16} /> LinkedIn
                     </button>
-                    <button className="bg-white/10 flex items-center justify-center w-[48%] gap-x-1 hover:bg-white/30 text-white py-2.5 rounded-md text-sm transition-colors">
+                    <button className="bg-white/10 flex h-fit items-center justify-center w-[48%] gap-x-1 hover:bg-white/30 text-white py-2.5 rounded-md text-sm transition-colors">
                       <RiFacebookFill size={16} /> Facebook
                     </button>
                   </div>

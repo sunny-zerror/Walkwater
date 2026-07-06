@@ -125,12 +125,12 @@ const IndustryVerticals = () => {
             className="w-full"
           >
             {data.map((item, i) => (
-              <SwiperSlide key={i} className="h-auto">
+              <SwiperSlide key={i} className="h-auto!">
                 <div className="bg-[#F7F8FF] border border-[#00689F20] rounded-2xl w-full h-full flex flex-col overflow-hidden">
                   <div className="w-full aspect-4/3 relative shrink-0">
                     <Image fill src={item.img} className='object-cover' alt={item.title} />
                   </div>
-                  <div className="p-5 flex flex-col gap-y-3 flex-1 justify-center">
+                  <div className="p-5 flex flex-col gap-y-3 flex-1">
                     <h4 className="text-[#00689F]  leading-none">{item.title}</h4>
                     <p className="text-[#657882]  leading-tight">{item.desc}</p>
                   </div>

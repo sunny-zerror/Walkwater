@@ -32,26 +32,15 @@ const Hero = () => {
 
     gsap.set([heading_split.lines], { yPercent: 100 });
 
-    const introText = SplitText.create(".anim_tt", { type: "chars" })
-    gsap.set(introText.chars, { yPercent: 100 })
     const tl = gsap.timeline({
       delay: 0.5
     })
     tl.to(".anim_tt", {
       opacity: 1
     })
-    tl.to(introText.chars, {
-      yPercent: 0,
-      ease: "power2.out",
-      duration: 0.3,
-      stagger: 0.02,
-    })
-    tl.to(introText.chars, {
-      delay: 0.5,
-      stagger: 0.02,
-      yPercent: -100,
-      ease: "power2.out",
-      duration: 0.3,
+    tl.to(".anim_tt", {
+      opacity: 0,
+      delay: 0.5
     })
     tl.to(curtainRef.current, {
       transform: "translateX(-250vw)",
@@ -88,11 +77,15 @@ const Hero = () => {
 
       <div className='PageTransition fixed inset-0 w-full h-screen z-[1000] pointer-events-none overflow-hidden'>
         <div className="w-full absolute inset-0 h-full flex items-center justify-center z-20">
-          <h2 className="text-white capitalize text-5xl md:text-7xl font-bold  overflow-hidden">
-            <div className=' anim_tt opacity-0'>
-              WalkWater
-            </div>
-          </h2>
+          <Image
+            src="/logo.png"
+            alt="WalkWater Talent Advisors"
+            width={400}
+            height={100}
+            className="h-12  anim_tt opacity-0 w-auto object-contain"
+            priority
+          />
+
         </div>
         <div
           ref={curtainRef}

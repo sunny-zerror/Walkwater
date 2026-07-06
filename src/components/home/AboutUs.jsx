@@ -114,7 +114,7 @@ const AboutUs = () => {
           {stats.map((item, index) => (
             <div key={index} className="stat-card  md:aspect-square hover:bg-[#86B039] group transition-all duration-300 hover:py-24 ">
               <div className={`h-full w-full flex flex-col justify-between max-sm:gap-y-20  p-5 border-t border-b border-black/20 group-hover:border-transparent transition-all duration-300 ${index === 0 ? "border-l" : ""} ${index !== 0 ? "border-l" : ""} ${index === stats.length - 1 ? "border-r" : ""}`}>
-                <h6 data-para-effect className=" font-medium! text-[#657882] leading-tight group-hover:text-white transition-all duration-300">
+                <h6 data-para-effect className=" capitalize font-medium! text-[#657882] leading-tight group-hover:text-white transition-all duration-300">
                   {item.title}
                 </h6>
 
