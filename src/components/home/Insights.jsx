@@ -80,14 +80,14 @@ const Insights = () => {
         </div>
 
         {/* Cards Section — Desktop */}
-        <div className="hidden md:grid grid-cols-4 gap-3">
+        <div className="hidden md:grid grid-cols-4 gap-5">
           {insightsData.map((insight) => (
             <div
               key={insight.id}
-              className=" insight_card bg-white rounded-3xl p-3  border border-gray-100 flex flex-col group cursor-pointer"
+              className=" insight_card bg-white rounded-xl p-3  border border-gray-100 flex flex-col group cursor-pointer"
             >
               {/* Image Container */}
-              <div className="relative aspect-[16/9] md:aspect-[4/3] rounded-2xl overflow-hidden mb-5 bg-[#e2e8f0]">
+              <div className="relative aspect-[16/9] md:aspect-[4/3] rounded-lg overflow-hidden mb-5 bg-[#e2e8f0]">
                 {insight.img ? (
                   <Image
                     src={insight.img}
@@ -102,7 +102,7 @@ const Insights = () => {
                 )}
 
                 {/* Share Icon */}
-                <div className="absolute top-2 right-2 w-8 h-8 hover:bg-[#00689F]! hover:text-white! bg-white rounded-xl flex items-center justify-center text-[#00689F] transition-colors z-10">
+                <div className="absolute top-2 right-2 w-8 h-8 hover:bg-[#00689F]! hover:text-white! bg-white rounded-md flex items-center justify-center text-[#00689F] transition-colors z-10">
                   <RiShareLine size={16} />
                 </div>
               </div>

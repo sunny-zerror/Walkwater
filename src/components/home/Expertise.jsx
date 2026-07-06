@@ -86,7 +86,7 @@ const Expertise = () => {
 
   return (
     <>
-      <div className=" container pt-12 md:pt-24  grid grid-cols-1 bg-[#FAFBF8] md:grid-cols-6">
+      <div className=" container pt-12 md:pt-24  grid grid-cols-1 bg-[#C7C9C7] md:grid-cols-6">
         <div className="md:col-span-4">
           <h2 data-para-effect className="  leading-none text-[#00689F]">Our Expertise</h2>
         </div>
@@ -97,9 +97,11 @@ const Expertise = () => {
           <Button label={"Explore Our Expertise"} />
         </div>
       </div>
-      <div ref={containerRef} className=' relative h-[400vh] bg-[#FAFBF8] w-full ' >
+      <div ref={containerRef} className=' relative h-[400vh] bg-[#C7C9C7] w-full ' >
         <div className="container sticky! top-0 w-full h-screen!  overflow-hidden">
-          <RiveComponent className="w-full h-full max-sm:scale-150" />
+<RiveComponent
+  className="w-full h-full max-sm:scale-150 [filter:hue-rotate(30deg)_saturate(0.9)_brightness(0.8)]"
+/>
 
           <div className="left_1 absolute md:w-[35rem] z-10 top-[15%] md:top-[25%] left-0 padding">
             <h4 className="text-[#00689F]">CEO and Board Search</h4>

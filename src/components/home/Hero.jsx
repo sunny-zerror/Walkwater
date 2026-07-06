@@ -82,7 +82,7 @@ const Hero = () => {
             alt="WalkWater Talent Advisors"
             width={400}
             height={100}
-            className="h-12  anim_tt opacity-0 w-auto object-contain"
+            className="h-16  anim_tt opacity-0 w-auto object-contain"
             priority
           />
 
