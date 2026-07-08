@@ -4,7 +4,6 @@ import { RiArrowRightLine } from '@remixicon/react'
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import React, { useRef } from 'react'
-import { useRive } from '@rive-app/react-canvas';
 import Button from '../common/Button';
 
 gsap.registerPlugin(ScrollTrigger)
@@ -13,19 +12,99 @@ const Expertise = () => {
 
   const containerRef = useRef()
 
-  const { rive, RiveComponent } = useRive({
-    src: "/rive/expertise.riv",
-    autoplay: false,
-    animations: "main",
-  });
+      useGSAP(() => {
+
+        gsap.set(".outer_circ", { rotate: -90 });
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "10% bottom",
+                end: "bottom bottom",
+                scrub: true
+            }
+        })
+        tl.to(".outer_circ", {
+            scale: 1,
+            stagger: 0.1
+        })
+        tl.to(".inner_circ", {
+            scale: 1,
+        }, "<+=0.5")
+        tl.to(".outer_circ", {
+            rotate: 0,
+        }, "<")
+        tl.to(".grad_circle", {
+            backgroundColor: "#86B039",
+        })
+        tl.to(".pulse_ring", {
+            scale: 2.5,
+            opacity: 0,
+            backgroundColor: "#86B039",
+            duration: 0.5,
+            ease: "power2.out",
+        }, ">")
+
+        tl.to(".outer_circ", {
+            rotate: 90,
+        }, "<+=0.85")
+        tl.to(".inner_circ", {
+            scale: 0,
+        }, "<")
+        tl.to(".outer_center", {
+            backgroundColor: "#86B039",
+            duration: 0.2,
+        })
+        tl.to(".outer_center", {
+            width: "14vw",
+            height: "14vw",
+        }, "<+=0.5")
+        tl.to(".outer_center", {
+            width: "21vw",
+            height: "21vw",
+        })
+        tl.to(".outer_center", {
+            width: "28vw",
+            height: "28vw",
+        })
+        tl.to(".outer_center", {
+            width: "35vw",
+            height: "35vw",
+        })
+        tl.to(".outer_circ", {
+            opacity: 0,
+            duration: 0.0
+        })
+        tl.to(".last_circ_paren", {
+            opacity: 1,
+            duration: 0.0
+        })
+        tl.to(".pulse_ring_2", {
+            scale: 1.25,
+            opacity: 0,
+            duration: 0.5,
+            ease: "power2.out",
+        })
+        tl.to(".last_1", {
+            opacity: 1,
+            width: "29vw",
+            height: "29vw",
+        })
+        tl.to(".last_2", {
+            opacity: 1,
+            width: "21vw",
+            height: "21vw",
+        }, "<")
+        tl.to(".last_3", {
+            opacity: 1,
+            width: "13vw",
+            height: "13vw",
+        }, "<")
+
+    })
 
   useGSAP(() => {
-    if (!rive) return;
-
-    const duration = 20;
-
     const sections = [
-      [".left_0", ".right_0"],
       [".left_1", ".right_1"],
       [".left_2", ".right_2"],
       [".left_3", ".right_3"],
@@ -45,8 +124,6 @@ const Expertise = () => {
       scrub: true,
 
       onUpdate: (self) => {
-        rive.scrub("main", self.progress * duration);
-
         const index = Math.min(
           Math.floor(self.progress * sections.length),
           sections.length - 1
@@ -82,11 +159,11 @@ const Expertise = () => {
         activeIndex = index;
       },
     });
-  }, [rive]);
+  }, []);
 
   return (
     <>
-      <div className=" container pt-12 md:pt-24  grid grid-cols-1 bg-[#C7C9C7] md:grid-cols-6">
+      <div className=" container pt-12 md:pt-24  grid grid-cols-1 bg-white md:grid-cols-6">
         <div className="md:col-span-4">
           <h2 data-para-effect className="  leading-none text-[#00689F]">Our Expertise</h2>
         </div>
@@ -97,11 +174,44 @@ const Expertise = () => {
           <Button label={"Explore Our Expertise"} />
         </div>
       </div>
-      <div ref={containerRef} className=' relative h-[400vh] bg-[#C7C9C7] w-full ' >
+      <div ref={containerRef} className=' relative h-[400vh] bg-white  w-full ' >
         <div className="container sticky! top-0 w-full h-screen!  overflow-hidden">
-<RiveComponent
-  className="w-full h-full max-sm:scale-150 [filter:hue-rotate(30deg)_saturate(0.9)_brightness(0.8)]"
-/>
+
+          <div className="w-full h-full max-sm:scale-150 center">
+            <div className=" last_circ_paren opacity-0 size-[35vw] aspect-square border border-[#00000050] absolute flex items-end justify-center bg-[#86B039] rounded-full">
+              <div className="pulse_ring_2 absolute w-full h-full rounded-full bg-[#86B039] opacity-80"></div>
+              <div className=" last_1 opacity-0 size-[35vw] aspect-square border border-[#00000050] absolute bg-white/28 rounded-full"></div>
+              <div className="last_2 opacity-0 size-[35vw] aspect-square border border-[#00000050] absolute rounded-full bg-white/40 "></div>
+              <div className="last_3 opacity-0 size-[35vw] aspect-square border border-[#00000050] absolute rounded-full bg-white/70 "></div>
+            </div>
+            <div className=" outer_circ  scale-0 size-[35vw] aspect-square border border-[#00000050] absolute center rounded-full">
+              <div className=" inner_circ scale-0 absolute size-[1vw] aspect-square border border-[#00000050] bg-[#ffffff] rounded-full -translate-x-[4vw] translate-y-[-17vw]"></div>
+              <div className="inner_circ scale-0 absolute size-[4vw] aspect-square border border-[#00000050]  rounded-full bg-[#ffffff] grad_circle center -translate-x-[17.5vw]">
+                <div className="pulse_ring absolute w-full h-full rounded-full bg-[#ffffff] opacity-80"></div>
+              </div>
+              <div className="inner_circ scale-0 absolute size-[4vw] aspect-square border border-[#00000050]  rounded-full bg-[#ffffff] grad_circle center translate-x-[8vw] translate-y-[15.5vw]">
+                <div className="pulse_ring absolute w-full h-full rounded-full bg-[#ffffff] opacity-80"></div>
+              </div>
+            </div>
+            <div className=" outer_circ  scale-0 size-[28vw] aspect-square border border-[#00000050] absolute center rounded-full">
+              <div className="inner_circ scale-0 absolute size-[2vw] aspect-square border border-[#00000050] bg-[#ffffff] rounded-full -translate-x-[10vw] translate-y-[10vw]"></div>
+              <div className="inner_circ scale-0 absolute size-[1.5vw] aspect-square border border-[#00000050] bg-[#ffffff] rounded-full translate-x-[5vw] translate-y-[-13vw]"></div>
+            </div>
+            <div className=" outer_circ  scale-0 size-[21vw] aspect-square border border-[#00000050] absolute center rounded-full">
+              <div className=" inner_circ scale-0 absolute size-[2vw] aspect-square border border-[#00000050] rounded-full center translate-x-[9.5vw] bg-[#ffffff] grad_circle translate-y-[-4.5vw]">
+                <div className="pulse_ring absolute w-full h-full rounded-full bg-[#ffffff] opacity-80"></div>
+              </div>
+              <div className=" inner_circ scale-0 absolute size-[1vw] aspect-square border border-[#00000050] bg-[#ffffff] rounded-full translate-x-[1.5vw] translate-y-[10.3vw]"></div>
+            </div>
+            <div className=" outer_circ  scale-0 size-[14vw] aspect-square border border-[#00000050] absolute center rounded-full">
+              <div className="inner_circ scale-0 absolute size-[2vw] aspect-square border border-[#00000050] bg-[#ffffff] rounded-full -translate-x-[5vw] translate-y-[-4.9vw]"></div>
+            </div>
+            <div className=" outer_circ outer_center scale-0 size-[7vw] aspect-square border border-[#00000050] absolute center rounded-full">
+              <div className="inner_circ scale-0 absolute size-[1vw] aspect-square border border-[#00000050] rounded-full center translate-y-[3.35vw] bg-[#ffffff] grad_circle translate-x-[0.5vw]">
+                <div className="pulse_ring absolute w-full h-full rounded-full bg-[#ffffff] opacity-80"></div>
+              </div>
+            </div>
+          </div>
 
           <div className="left_1 absolute md:w-[35rem] z-10 top-[15%] md:top-[25%] left-0 padding">
             <h4 className="text-[#00689F]">CEO and Board Search</h4>
@@ -143,8 +253,8 @@ const Expertise = () => {
             <p className="text-[#657882] leading-tight text-lg">
               Partnering with Private Equity and Venture Capital firms to identify leaders who maximize value. We build executive teams that drive performance and long-term growth.
             </p>
-          </div>    
-              </div>
+          </div>
+        </div>
       </div>
     </>
   )
