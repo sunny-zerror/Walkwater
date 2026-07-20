@@ -159,7 +159,7 @@ const Header = () => {
             <div className="col-span-9 md:col-span-3 flex items-center">
               <CustomLink label={"Home"} href="/" className="flex items-center">
                 <Image
-                  src="/logo.png"
+                  src="/logo.svg"
                   alt="WalkWater Talent Advisors"
                   width={200}
                   height={50}
@@ -218,7 +218,7 @@ const Header = () => {
                 className="group inline-flex gap-x-1 items-center justify-center px-4 py-2 border border-transparent  rounded-md text-white bg-[#00689F]  hover:border-[#00557A] hover:bg-transparent transition-colors hover:text-[#00557A]"
               >
                 Contact
-                <RiArrowRightUpLine size={18}/>
+                <RiArrowRightUpLine size={18} />
               </CustomLink>
             </div>
 

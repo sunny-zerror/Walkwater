@@ -12,101 +12,128 @@ const Expertise = () => {
 
   const containerRef = useRef()
 
-      useGSAP(() => {
+  useGSAP(() => {
+    // Set initial states
+    gsap.set(".outer_circ", { rotate: -90, scale: 0 });
+    gsap.set(".inner_circ", { scale: 0 });
+    gsap.set(".last_circ_paren", { opacity: 0 });
 
-        gsap.set(".outer_circ", { rotate: -90 });
 
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: containerRef.current,
-                start: "10% bottom",
-                end: "bottom bottom",
-                scrub: true
-            }
-        })
-        tl.to(".outer_circ", {
-            scale: 1,
-            stagger: 0.1,
-            duration:0.5,
-        })
-        tl.to(".inner_circ", {
-            scale: 1,
-        }, "<+=0.5")
-        tl.to(".outer_circ", {
-            rotate: 0,
-        }, "<")
-        tl.to(".grad_circle", {
-            backgroundColor: "#86B039",
-        })
-        tl.to(".pulse_ring", {
-            scale: 2.5,
-            opacity: 0,
-            backgroundColor: "#86B039",
-            duration: 0.5,
-            ease: "power2.out",
-        }, ">")
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1.5, // Smooth lag/interpolation
+      }
+    });
 
-        tl.to(".outer_circ", {
-            rotate: 90,
-        }, "<+=0.25")
-        tl.to(".inner_circ", {
-            scale: 0,
-        }, "<")
-        tl.to(".outer_center", {
-            backgroundColor: "#86B039",
-            duration: 0.2,
-         }, "<+=0.25")
-        tl.to(".outer_center", {
-            width: "14vw",
-            height: "14vw",
-            duration: 0.2,
-        }, "<+=0.5")
-        tl.to(".outer_center", {
-            width: "21vw",
-            height: "21vw",
-            duration: 0.2,
-        })
-        tl.to(".outer_center", {
-            width: "28vw",
-            height: "28vw",
-            duration: 0.2,
-        })
-        tl.to(".outer_center", {
-            width: "35vw",
-            height: "35vw",
-            duration: 0.2,
-        })
-        tl.to(".outer_circ", {
-            opacity: 0,
-            duration: 0.0
-        })
-        tl.to(".last_circ_paren", {
-            opacity: 1,
-            duration: 0.0
-        })
-        tl.to(".pulse_ring_2", {
-            scale: 1.25,
-            opacity: 0,
-            duration: 0.5,
-            ease: "power2.out",
-        })
-        tl.to(".last_1", {
-            opacity: 1,
-            width: "29vw",
-            height: "29vw",
-        })
-        tl.to(".last_2", {
-            opacity: 1,
-            width: "21vw",
-            height: "21vw",
-        }, "<")
-        tl.to(".last_3", {
-            opacity: 1,
-            width: "13vw",
-            height: "13vw",
-        }, "<")
+    // 1. Scale up the outer circles
+    tl.to(".outer_circ", {
+      scale: 1,
+      stagger: 0.1,
+      duration: 0.6,
+      ease: "power2.out",
+    });
 
-    })
+    // 2. Scale up inner circles and rotate outer circles back to 0
+    tl.to(".inner_circ", {
+      scale: 1,
+      duration: 0.5,
+      ease: "power2.out",
+    }, "<+=0.3");
+
+    tl.call(() => {
+      gsap.fromTo(".pulse_ring",
+        { scale: 1, opacity: 0.8 },
+        { scale: 2.2, opacity: 0, duration: 1.2, ease: "power2.out" }
+      );
+    }, null, "<+=0.1");
+
+    tl.to(".outer_circ", {
+      rotate: 0,
+      duration: 0.6,
+      ease: "power2.inOut",
+    }, "<");
+
+    // 3. Highlight the grad circles
+    tl.to([".grad_circle", ".pulse_ring"], {
+      backgroundColor: "#86B039",
+      duration: 0.4,
+      ease: "power2.out",
+    });
+
+    // 4. Rotate circles to 90 and shrink inner circles
+    tl.to(".outer_circ", {
+      rotate: 90,
+      duration: 0.6,
+      ease: "power2.inOut",
+    }, "+=0.2");
+
+    tl.to(".inner_circ", {
+      scale: 0,
+      duration: 0.5,
+      ease: "power2.inOut",
+    }, "<");
+
+    // 5. Expand outer_center circle step-by-step
+    tl.to(".outer_center", {
+      backgroundColor: "#86B039",
+      duration: 0.3,
+      ease: "power2.out",
+    }, "<+=0.3");
+
+    tl.to(".outer_center", {
+      width: "35vw",
+      height: "35vw",
+      ease: "power2.inOut",
+    }, "+=0.2");
+
+    // 6. Transition to the final state
+    tl.to(".outer_circ", {
+      opacity: 0,
+      duration: 0.2,
+      ease: "power2.out",
+    });
+
+    tl.to(".last_circ_paren", {
+      opacity: 1,
+      duration: 0.2,
+      ease: "power2.out",
+    }, "<");
+
+    tl.call(() => {
+      gsap.fromTo(".pulse_ring_2",
+        { scale: 1, opacity: 0.8 },
+        { scale: 1.3, opacity: 0, duration: 1.2, ease: "power2.out" }
+      );
+    }, null, "<");
+
+    // 7. Scale up the final concentric circles
+    tl.to(".last_1", {
+      opacity: 1,
+      width: "29vw",
+      height: "29vw",
+      duration: 0.6,
+      ease: "power2.out",
+    });
+
+    tl.to(".last_2", {
+      opacity: 1,
+      width: "21vw",
+      height: "21vw",
+      duration: 0.6,
+      ease: "power2.out",
+    }, "<");
+
+    tl.to(".last_3", {
+      opacity: 1,
+      width: "13vw",
+      height: "13vw",
+      duration: 0.6,
+      ease: "power2.out",
+    }, "<");
+  });
 
   useGSAP(() => {
     const sections = [
@@ -124,9 +151,9 @@ const Expertise = () => {
 
     ScrollTrigger.create({
       trigger: containerRef.current,
-      start: "10% bottom",
+      start: "top top",
       end: "bottom bottom",
-      scrub: true,
+      scrub: 1.5,
 
       onUpdate: (self) => {
         const index = Math.min(
@@ -142,6 +169,7 @@ const Expertise = () => {
             opacity: 0,
             y: self.direction === 1 ? -50 : 50,
             duration: 0.5,
+            ease: "power2.out",
             stagger: 0.15,
           });
         }
@@ -157,6 +185,7 @@ const Expertise = () => {
             opacity: 1,
             y: 0,
             duration: 0.5,
+            ease: "power2.out",
             stagger: 0.15,
           }
         );

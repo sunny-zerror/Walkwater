@@ -29,7 +29,7 @@ const Footer = () => {
               <div className="w-64 shrink-0">
                 {/* Replace with your actual logo path */}
                 <Image
-                  src="/logo.png"
+                  src="/logo.svg"
                   width={200}
                   height={60}
                   alt="WalkWater Logo"

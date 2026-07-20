@@ -45,14 +45,14 @@ const Testimonials = () => {
   return (
     <div className="w-full bg-[#F7F8FF] py-12 md:py-24 ">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10  items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-0  items-center">
           {/* Left Column: Heading & Navigation */}
           <div className="flex flex-col justify-between h-full md:pr-10">
-            <div className="">
+            <div className="space-y-2">
               <h2 data-para-effect className=" leading-none text-[#00689F]">
                 Client Testimonials
               </h2>
-              <p data-para-effect className=" max-sm:mt-2 text-lg md:text-xl text-[#657882] leading-tight max-w-sm">
+              <p data-para-effect className=" text-lg md:text-xl text-[#657882] leading-tight max-w-sm">
                 Stories, feedback, and experiences from our clients.
               </p>
             </div>

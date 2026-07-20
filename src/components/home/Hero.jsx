@@ -78,7 +78,7 @@ const Hero = () => {
       <div className='PageTransition fixed inset-0 w-full h-screen z-[1000] pointer-events-none overflow-hidden'>
         <div className="w-full absolute inset-0 h-full flex items-center justify-center z-20">
           <Image
-            src="/logo.png"
+            src="/logo.svg"
             alt="WalkWater Talent Advisors"
             width={400}
             height={100}
