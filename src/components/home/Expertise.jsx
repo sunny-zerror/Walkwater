@@ -22,7 +22,7 @@ const Expertise = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top top",
+        start: "top center",
         end: "bottom bottom",
         scrub: 1.5, // Smooth lag/interpolation
       }
