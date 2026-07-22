@@ -40,6 +40,21 @@ const insightsData = [
 const Insights = () => {
 
   useGSAP(() => {
+
+    gsap.to(".spin-ellipse-left", {
+      rotation: "+=360",
+      duration: 25,
+      repeat: -1,
+      ease: "none"
+    });
+
+    gsap.to(".spin-ellipse-right", {
+      rotation: "-=360",
+      duration: 25,
+      repeat: -1,
+      ease: "none"
+    });
+    
     let ic = gsap.matchMedia();
     ic.add("(min-width: 768px)", () => {
       gsap.from(".insight_card", {
@@ -58,7 +73,23 @@ const Insights = () => {
   })
 
   return (
-    <div className="w-full bg-[#00689F] py-12 md:py-24  relative overflow-hidden">
+    <div className="w-full bg-[#00689F] pt-12 md:pt-24  relative overflow-hidden">
+
+       <div className="spin-ellipse-left w-[40vw] z-10 absolute left-[-15%] top-[-35%] rotate-45 aspect-square border opacity-20 border-white rounded-full center">
+        <div className="size-5 rounded-full bg-[#00689F] border border-white absolute right-0 translate-x-2.5 ">
+        </div>
+        <div className="size-5 rounded-full bg-[#00689F] border border-white absolute left-0 -translate-x-2.5 ">
+        </div>
+      </div>
+      <div className="spin-ellipse-right w-[40vw] z-10 absolute right-[-15%] bottom-[-35%] -rotate-45 aspect-square opacity-50 border border-white rounded-full center">
+        <div className="size-5 rounded-full bg-white border border-white/40 absolute left-0 -translate-x-2.5 shadow-[0_0_15px_#ffffff,0_0_30px_#ffffff,0_0_45px_rgba(255,255,255,0.8)]">
+          <div className="absolute -inset-2 rounded-full bg-white/50 blur-md pointer-events-none"></div>
+        </div>
+        <div className="size-5 rounded-full bg-white border border-white/40 absolute right-0 translate-x-2.5 shadow-[0_0_15px_#ffffff,0_0_30px_#ffffff,0_0_45px_rgba(255,255,255,0.8)]">
+          <div className="absolute -inset-2 rounded-full bg-white/50 blur-md pointer-events-none"></div>
+        </div>
+      </div>
+
       {/* Background decoration can go here later */}
 
       <div className="container mx-auto px-4 relative z-10 space-y-16">

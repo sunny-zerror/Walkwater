@@ -22,10 +22,9 @@ const PageTransition = () => {
 
             const tl = gsap.timeline();
 
-            // 1. Curtain moves in to cover the screen
-            // Using -75vw because the left gradient is 75vw wide, so the solid 100vw center perfectly covers the screen.
+            // 1. Curtain moves in from bottom to cover the screen
             tl.to(curtainRef.current, {
-                x: "-75vw",
+                y: "-75lvh",
                 duration: 1,
                 ease: "power4.inOut"
             })
@@ -51,15 +50,15 @@ const PageTransition = () => {
                 duration: 0.3,
                 ease: "power2.in"
             })
-            // 6. Curtain continues moving left to reveal the new page
+            // 6. Curtain continues moving up to reveal the new page
             .to(curtainRef.current, {
-                x: "-250vw",
+                y: "-250lvh",
                 duration: 1,
                 ease: "power4.inOut"
             })
             // 7. Reset curtain position for next time
             .set(curtainRef.current, {
-                x: "100vw"
+                y: "100lvh"
             });
         };
 
@@ -70,22 +69,20 @@ const PageTransition = () => {
     return (
         <div className='PageTransition fixed inset-0 w-full h-screen z-[1000] pointer-events-none overflow-hidden'>
             <div className="w-full absolute inset-0 h-full flex items-center justify-center z-20">
-                <h2 ref={textRef} className="text-white capitalize text-5xl md:text-7xl font-bold opacity-0">
+                <h2 ref={textRef} className="text-black capitalize text-5xl md:text-7xl font-bold opacity-0">
                     {title}
                 </h2>
             </div>
             <div 
                 ref={curtainRef} 
-                className="PageTransition-curtainWrapper h-full absolute flex inset-0"
-                style={{ width: '250vw', transform: 'translateX(100vw)' }}
+                className="PageTransition-curtainWrapper w-full absolute flex flex-col inset-0"
+                style={{ height: '250lvh', transform: 'translateY(100lvh)' }}
             >
-                <div className="PageTransition-curtainGradientLeft shrink-0"></div>
-                <div className="PageTransition-curtainGradientTop hidden"></div>
+                <div className="PageTransition-curtainGradientTop shrink-0"></div>
                 <div className="PageTransition-curtainCentre shrink-0 relative flex items-center justify-center">
                    {/* Background color from CSS is applied here */}
                 </div>
-                <div className="PageTransition-curtainGradientBottom hidden"></div>
-                <div className="PageTransition-curtainGradientRight shrink-0"></div>
+                <div className="PageTransition-curtainGradientBottom shrink-0"></div>
             </div>
         </div>
     );

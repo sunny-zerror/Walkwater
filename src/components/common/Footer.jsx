@@ -14,6 +14,7 @@ const Footer = () => {
     <div className="w-full bg-[#00689F] py-10">
       <div className="container ">
         <div className="  bg-white rounded-3xl flex flex-col md:flex-row overflow-hidden  relative">
+          <video className="absolute top-1/2 -translate-y-1/2 opacity-50 w-full mix-blend-multiply pointer-events-none" loop autoPlay muted playsInline src="/videos/wave_video.mp4"></video>
 
           {/* Left Column (White Section) */}
           <div className="flex-1 p-8 md:p-14 lg:p-20 relative z-10 flex flex-col justify-between ">

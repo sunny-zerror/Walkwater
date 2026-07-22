@@ -43,7 +43,7 @@ const Hero = () => {
       delay: 0.5
     })
     tl.to(curtainRef.current, {
-      transform: "translateX(-250vw)",
+      y: "-250lvh",
     })
 
     tl.to(heading_split.lines, {
@@ -89,14 +89,12 @@ const Hero = () => {
         </div>
         <div
           ref={curtainRef}
-          className="PageTransition-curtainWrapper h-full absolute flex inset-0"
-          style={{ width: '250vw', transform: 'translateX(-70vw)' }}
+          className="PageTransition-curtainWrapper w-full absolute flex flex-col inset-0"
+          style={{ height: '250lvh', transform: 'translateY(-75lvh)' }}
         >
-          <div className="PageTransition-curtainGradientLeft shrink-0"></div>
-          <div className="PageTransition-curtainGradientTop hidden"></div>
+          <div className="PageTransition-curtainGradientTop shrink-0"></div>
           <div className="PageTransition-curtainCentre shrink-0 relative flex items-center justify-center"></div>
-          <div className="PageTransition-curtainGradientBottom hidden"></div>
-          <div className="PageTransition-curtainGradientRight shrink-0"></div>
+          <div className="PageTransition-curtainGradientBottom shrink-0"></div>
         </div>
       </div>
 

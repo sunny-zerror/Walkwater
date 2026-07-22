@@ -92,18 +92,8 @@ const Testimonials = () => {
                   <div className="bg-white h-full border-r border-[#00689F20] flex flex-col justify-between space-y-16 p-10 ">
                     {/* Star Rating */}
                     <div className="">
-                      <div className="flex gap-1 mb-6 text-[#86B039]">
-                        {[...Array(5)].map((_, i) =>
-                          i < testimonial.rating ? (
-                            <RiStarFill key={i} size={20} />
-                          ) : (
-                            <RiStarLine key={i} size={20} />
-                          )
-                        )}
-                      </div>
-
                       {/* Quote Text */}
-                      <p className="text-[#00689F] text-xl leading-tight  font-medium md:text-2xl grow">
+                      <p className="text-[#00689F] text-xl leading-tight  font-medium md:text-3xl grow">
                         "{testimonial.quote}"
                       </p>
                     </div>
