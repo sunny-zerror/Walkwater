@@ -3,7 +3,6 @@ import { useGSAP } from '@gsap/react'
 import { RiArrowRightLine } from '@remixicon/react'
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
-import Image from 'next/image'
 import Button from '../common/Button'
 import React, { useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -15,31 +14,31 @@ const data = [
     id: 1,
     title: "Industrial, Energy & Process",
     desc: "Driving industrial progress through exceptional leadership and strategic talent solutions.",
-    img: "/images/homepage/vertices/img1.png"
+    video: "/videos/verticals/industry.mp4"
   },
   {
     id: 2,
     title: "Technology & Digital",
     desc: "Identifying transformative leaders for organizations driving the next generation of technology and digital innovation.",
-    img: "/images/homepage/vertices/img2.png"
+    video: "/videos/verticals/technology.mp4"
   },
   {
     id: 3,
     title: "Consumer, Retail, Media & Services",
     desc: "Empowering consumer-focused organizations through exceptional leadership and strategic talent.",
-    img: "/images/homepage/vertices/img3.png"
+    video: "/videos/verticals/retail.mp4"
   },
   {
     id: 4,
     title: "Pharma, Healthcare & Lifesciences",
     desc: "Building future-ready leadership teams that shape the future of healthcare, science, and human well-being.",
-    img: "/images/homepage/vertices/img4.png"
+    video: "/videos/verticals/pharma.mp4"
   },
   {
     id: 5,
     title: "Banking, Financial Services and Consulting",
     desc: "Empowering financial and consulting organizations through exceptional leadership talent.",
-    img: "/images/homepage/vertices/img5.png"
+    video: "/videos/verticals/business.mp4"
   },
 ]
 
@@ -111,7 +110,9 @@ const IndustryVerticals = () => {
                 <p className='text-[#657882] leading-tight'>{item.desc}</p>
               </div>
               <div className="aspect-video relative overflow-hidden rounded-xl">
-                <Image fill src={item.img} className='cover' alt={item.title} />
+                <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+                  <source src={item.video} type="video/mp4" />
+                </video>
               </div>
             </div>
           ))}
@@ -127,8 +128,10 @@ const IndustryVerticals = () => {
             {data.map((item, i) => (
               <SwiperSlide key={i} className="h-auto!">
                 <div className="bg-[#F7F8FF] border border-[#00689F20] rounded-2xl w-full h-full flex flex-col overflow-hidden">
-                  <div className="w-full aspect-4/3 relative shrink-0">
-                    <Image fill src={item.img} className='object-cover' alt={item.title} />
+                  <div className="w-full aspect-4/3 relative shrink-0 overflow-hidden">
+                    <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+                      <source src={item.video} type="video/mp4" />
+                    </video>
                   </div>
                   <div className="p-5 flex flex-col gap-y-3 flex-1">
                     <h4 className="text-[#00689F]  leading-none">{item.title}</h4>
