@@ -91,7 +91,7 @@ const IndustryVerticals = () => {
       <div className="container w-full md:h-screen! flex flex-col py-16 md:py-0 md:justify-center md:pt-20 space-y-10 md:space-y-[5vh] md:sticky! md:top-0">
         <div className="grid grid-cols-1 md:grid-cols-6 gap-2 md:gap-0">
           <div className="md:col-span-4">
-            <h2 data-para-effect className="  leading-none text-[#00689F]">Industry Verticals</h2>
+            <h2 data-heading-effect className="  leading-none text-[#00689F]">Industry Verticals</h2>
           </div>
           <div className="md:col-span-2 space-y-5">
             <p data-para-effect className="text-lg md:text-xl   text-[#657882]  leading-tight">

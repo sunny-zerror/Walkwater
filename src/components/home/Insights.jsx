@@ -97,7 +97,7 @@ const Insights = () => {
         {/* Header Section */}
         <div className="grid grid-cols-1 md:grid-cols-6 relative z-10">
           <div className="md:col-span-4">
-            <h2 data-para-effect className="text-4xl md:text-5xl   leading-none text-white">
+            <h2 data-heading-effect className="text-4xl md:text-5xl   leading-none text-white">
               Insights
             </h2>
           </div>

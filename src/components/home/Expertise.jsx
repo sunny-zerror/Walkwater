@@ -199,7 +199,7 @@ const Expertise = () => {
     <>
       <div className=" container pt-12 md:pt-24  grid grid-cols-1 bg-white md:grid-cols-6">
         <div className="md:col-span-4">
-          <h2 data-para-effect className="  leading-none text-[#00689F]">Our Expertise</h2>
+          <h2 data-heading-effect className="  leading-none text-[#00689F]">Our Expertise</h2>
         </div>
         <div className="md:col-span-2 max-sm:mt-2 space-y-5 ">
           <p data-para-effect className="text-lg md:text-xl  text-[#657882]  leading-tight">

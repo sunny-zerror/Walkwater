@@ -49,7 +49,7 @@ const Testimonials = () => {
           {/* Left Column: Heading & Navigation */}
           <div className="flex flex-col justify-between h-full md:pr-10">
             <div className="space-y-2">
-              <h2 data-para-effect className=" leading-none text-[#00689F]">
+              <h2 data-heading-effect className=" leading-none text-[#00689F]">
                 Client Testimonials
               </h2>
               <p data-para-effect className=" text-lg md:text-xl text-[#657882] leading-tight max-w-sm">
