@@ -69,9 +69,8 @@ const Leadership = () => {
         delay: isExpanded ? 0.1 : 0,
         width: isExpanded ? '50%' : '25%',
         padding: isExpanded ? '1.25rem' : '0.625rem',
-        backgroundColor: isExpanded ? '#ffffff30' : 'rgba(255,255,255,0)',
-        opacity: isInactive ? 0.5 : 1,
-        filter: isInactive ? 'blur(2px)' : 'blur(0px)',
+        backgroundColor: isExpanded ? '#3084B1' : '#3084B100',
+        filter: isInactive ? 'blur(4px)' : 'blur(0px)',
         duration: 0.6,
         ease: "power2.inOut"
       }, 0);
@@ -79,7 +78,7 @@ const Leadership = () => {
       tl.current.to(`.img-container-${member.id}`, {
         delay: isExpanded ? 0 : 0.1,
         width: isExpanded ? '25%' : '100%',
-        backgroundColor: isExpanded ? '#ffffff50' : '#ffffff30',
+        backgroundColor: isExpanded ? '#71ABC9' : '#3084B1',
         duration: 0.6,
         ease: "power2.inOut"
       }, 0);
@@ -155,7 +154,7 @@ const Leadership = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-6 relative z-10">
           <div className="md:col-span-4">
-            <h2 data-heading-effect className="text-4xl md:text-5xl   leading-none text-white">
+            <h2 data-heading-effect className="w-fit  leading-none text-white">
               Our Leadership
             </h2>
           </div>

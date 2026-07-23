@@ -14,7 +14,7 @@ const Expertise = () => {
 
   useGSAP(() => {
     // Set initial states
-    gsap.set(".outer_circ", { rotate: -90, scale: 0 });
+    gsap.set(".outer_circ", { rotate: -180, scale: 0 });
     gsap.set(".inner_circ", { scale: 0 });
     gsap.set(".last_circ_paren", { opacity: 0 });
 
@@ -58,27 +58,27 @@ const Expertise = () => {
 
     // 3. Highlight the grad circles
     tl.to([".grad_circle", ".pulse_ring"], {
-      backgroundColor: "#86B039",
+      backgroundColor: "#00689F",
       duration: 0.4,
       ease: "power2.out",
     });
 
     // 4. Rotate circles to 90 and shrink inner circles
     tl.to(".outer_circ", {
-      rotate: 90,
+      rotate: 180,
       duration: 0.6,
       ease: "power2.inOut",
     }, "+=0.2");
 
     tl.to(".inner_circ", {
       scale: 0,
-      duration: 0.5,
+      duration: 0.6,
       ease: "power2.inOut",
     }, "<");
 
     // 5. Expand outer_center circle step-by-step
     tl.to(".outer_center", {
-      backgroundColor: "#86B039",
+      backgroundColor: "#00689F",
       duration: 0.3,
       ease: "power2.out",
     }, "<+=0.3");
@@ -199,7 +199,7 @@ const Expertise = () => {
     <>
       <div className=" container pt-12 md:pt-24  grid grid-cols-1 bg-white md:grid-cols-6">
         <div className="md:col-span-4">
-          <h2 data-heading-effect className="  leading-none text-[#00689F]">Our Expertise</h2>
+          <h2 data-heading-effect className="w-fit  leading-none text-[#00689F]">Our Expertise</h2>
         </div>
         <div className="md:col-span-2 max-sm:mt-2 space-y-5 ">
           <p data-para-effect className="text-lg md:text-xl  text-[#657882]  leading-tight">
@@ -212,8 +212,8 @@ const Expertise = () => {
         <div className="container sticky! top-0 w-full h-screen!  overflow-hidden">
 
           <div className="w-full h-full max-sm:scale-150 center">
-            <div className=" last_circ_paren opacity-0 size-[35vw] aspect-square border border-[#00000030] absolute flex items-end justify-center bg-[#86B039] rounded-full">
-              <div className="pulse_ring_2 absolute w-full h-full rounded-full bg-[#86B039] opacity-80"></div>
+            <div className=" last_circ_paren opacity-0 size-[35vw] aspect-square border border-[#00000030] absolute flex items-end justify-center bg-[#00689F] rounded-full">
+              <div className="pulse_ring_2 absolute w-full h-full rounded-full bg-[#00689F] opacity-80"></div>
               <div className=" last_1 opacity-0 size-[35vw] aspect-square border border-[#00000030] absolute bg-white/28 rounded-full"></div>
               <div className="last_2 opacity-0 size-[35vw] aspect-square border border-[#00000030] absolute rounded-full bg-white/40 "></div>
               <div className="last_3 opacity-0 size-[35vw] aspect-square border border-[#00000030] absolute rounded-full bg-white/70 "></div>

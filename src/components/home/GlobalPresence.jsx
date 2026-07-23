@@ -87,7 +87,7 @@ const GlobalPresence = () => {
 
         <div className="md:sticky h-fit md:top-24 md:pb-20 space-y-2 md:pr-20">
           <div className="md:col-span-4">
-            <h2 data-heading-effect className="   leading-none text-[#00689F]">
+            <h2 data-heading-effect className="w-fit   leading-none text-[#00689F]">
               Global Presence
             </h2>
           </div>

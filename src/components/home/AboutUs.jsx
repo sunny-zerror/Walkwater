@@ -95,7 +95,7 @@ const AboutUs = () => {
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-6 mb-12 md:mb-24">
           <div className="md:col-span-2">
-            <h2 data-heading-effect className="leading-none text-[#00689F]">About Us</h2>
+            <h2 data-heading-effect className="leading-none w-fit text-[#00689F]">About Us</h2>
           </div>
 
           <div className="md:col-span-4 max-sm:mt-2">
