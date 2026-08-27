@@ -13,8 +13,9 @@ const locations = [
   {
     id: 1,
     city: "Bangalore",
-    phone: "+91 99720 94034",
+    phone: "+91 99720 94034, +91 98450 93409",
     address: "3rd Floor, Central Quay 35/1, Yellappa Chetty Layout Ulsoor Road. Bangalore – 560 042.",
+    map:"https://www.google.com/maps?ll=12.975527,77.616141&z=13&t=m&hl=en&gl=IN&mapclient=embed&cid=8917403594044300598",
     img: "/images/homepage/global_presence/bangalore.png" // placeholder
   },
   {
@@ -22,13 +23,15 @@ const locations = [
     city: "Mumbai",
     phone: "+91 98676 63268",
     address: "Regus, Unit No. B-501, 5th floor Wing 'B' Supreme Business Park Supreme City, Powai. Mumbai – 400 076.",
+    map:"https://www.google.com/maps?ll=19.111139,72.908617&z=13&t=m&hl=en&gl=IN&mapclient=embed&cid=2540358889807036414",
     img: "/images/homepage/global_presence/mumbai.png"
   },
   {
     id: 3,
     city: "Pune",
-    phone: "+91 97654 08907",
+    phone: "91 98192 86785",
     address: "Regus Magarpatta, Level-6 Pentagon Tower P-2 Magarpatta City, Hadapsar. Pune – 411 013.",
+    map:"https://www.google.com/maps?ll=18.511749,73.925632&z=14&t=m&hl=en&gl=IN&mapclient=embed&cid=6447511236994343969",
     img: "/images/homepage/global_presence/pune.png"
   },
   {
@@ -36,6 +39,7 @@ const locations = [
     city: "Gurgaon",
     phone: "+91 88006 55008",
     address: "Suite #515, Whizdom Club by MQDC 5th Floor, Tapasya One Golf Course Road, Sector 53 Gurgaon – 122022.",
+    map:"https://www.google.com/maps?ll=28.436792,77.103118&z=13&t=m&hl=en&gl=IN&mapclient=embed&cid=5043732642565981673",
     img: "/images/homepage/global_presence/gurgaon.png"
   },
   {
@@ -43,6 +47,7 @@ const locations = [
     city: "USA",
     phone: "+91 98452 12997",
     address: "Pacific Workplaces 10080 N Wolfe Rd STE SW3200 Cupertino. CA 95014-2594.",
+    map:"https://www.google.com/maps/place/Pacific+Workplaces+-+Office+Space+Cupertino/@37.325611,-122.015468,2770m/data=!3m1!1e3!4m6!3m5!1s0x808fb5a6aa1ebae9:0xe9eb6f074bf1d1d1!8m2!3d37.3239277!4d-122.0130262!16s%2Fg%2F1tj73v8f?hl=en&entry=ttu&g_ep=EgoyMDI2MDgyNC4wIKXMDSoASAFQAw%3D%3D",
     img: "/images/homepage/global_presence/usa.png"
   }
 ];
@@ -87,7 +92,7 @@ const GlobalPresence = () => {
 
         <div className="md:sticky h-fit md:top-24 md:pb-20 space-y-2 md:pr-20">
           <div className="md:col-span-4">
-            <h2 data-heading-effect className="w-fit   leading-none text-[#00689F]">
+            <h2 data-heading-effect className="w-fit     text-[#00689F]">
               Global Presence
             </h2>
           </div>
@@ -101,9 +106,12 @@ const GlobalPresence = () => {
         {/* DESKTOP VIEW */}
         <div className="hidden md:block space-y-4 overflow-hidden">
           {locations.map((loc) => (
-            <div
+            <a
               key={loc.id}
-              className="c_city_card bg-[#F7F8FF] border border-[#00689F20] hover:bg-[#86B039] rounded-2xl p-4 flex  gap-4 md:gap-6 relative overflow-hidden group transition-colors duration-300 "
+              href={loc.map}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="c_city_card bg-[#F7F8FF] border border-[#00689F20] hover:bg-[#86B039] rounded-2xl p-4 flex gap-4 md:gap-6 relative overflow-hidden group transition-colors duration-300 cursor-pointer block"
             >
               {/* Image */}
               <div className="relative w-32 h-32 md:w-44 md:h-44 shrink-0 rounded-xl overflow-hidden bg-gray-200">
@@ -132,11 +140,11 @@ const GlobalPresence = () => {
               </div>
 
               {/* Map Icon */}
-              <div className="absolute top-4 border-2 border-white right-4 w-8 h-8 rounded-lg center text-white transition-all duration-300">
+              <div className="absolute top-4 border-2 border-white right-4 w-8 h-8 rounded-lg center text-white transition-all duration-300 group-hover:scale-125">
                 <img src="/icons/map_bg.svg" className="absolute inset-0 z-[-1]" alt="" />
                 <img src="/icons/location_target.svg" className="" alt="" />
               </div>
-            </div>
+            </a>
           ))}
         </div>
 
@@ -149,7 +157,12 @@ const GlobalPresence = () => {
           >
             {locations.map((loc) => (
               <SwiperSlide key={loc.id} className="h-auto!">
-                <div className="bg-[#F7F8FF] border border-[#00689F20] rounded-2xl flex flex-col overflow-hidden relative group h-full">
+                <a 
+                  href={loc.map}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#F7F8FF] border border-[#00689F20] rounded-2xl flex flex-col overflow-hidden relative group h-full cursor-pointer block transition-all duration-300"
+                >
                   <div className="w-full aspect-video relative shrink-0">
                     <Image
                       src={loc.img}
@@ -165,13 +178,13 @@ const GlobalPresence = () => {
                         <h4 className=" text-[#00689F] ">{loc.city}</h4>
                         <p className="text-[#00689F] text-base font-semibold">{loc.phone}</p>
                       </div>
-                      <div className="w-10 h-10 shrink-0 rounded-lg bg-[#00689F] flex items-center justify-center text-white shadow-md mt-1">
+                      <div className="w-10 h-10 shrink-0 rounded-lg bg-[#00689F] flex items-center justify-center text-white shadow-md mt-1 transition-transform duration-300 group-hover:scale-125">
                         <RiDirectionLine size={20} />
                       </div>
                     </div>
                     <p className="text-[#657882] leading-relaxed mt-2">{loc.address}</p>
                   </div>
-                </div>
+                </a>
               </SwiperSlide>
             ))}
           </Swiper>

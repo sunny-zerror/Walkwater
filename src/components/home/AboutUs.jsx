@@ -95,25 +95,21 @@ const AboutUs = () => {
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-6 mb-12 md:mb-24">
           <div className="md:col-span-2">
-            <h2 data-heading-effect className="leading-none w-fit text-[#00689F]">About Us</h2>
+            <h2 data-heading-effect className="  w-fit text-[#00689F]">About Us</h2>
           </div>
 
           <div className="md:col-span-4 max-sm:mt-2">
             <p data-para-effect className=" text-xl md:text-3xl text-[#00689F] leading-tight">
-              Founded in 2011, WalkWater Talent Advisors reimagines executive search
-              for a rapidly evolving world shaped by globalization, technology, and
-              startups. With deep domain expertise, global reach, and strong client
-              partnerships, the firm delivers innovative leadership hiring solutions.
-              Driven by a startup mindset and strong values, WalkWater creates
-              meaningful, future-ready talent experiences.
-            </p>
+              Leadership is the capacity to translate vision into reality.</p> <br />
+            <p data-para-effect className=" text-xl md:text-3xl text-[#00689F] leading-tight">
+              In 2011, a team of Executive Search industry leaders realized their collective vision – to rethink hiring practices for an era of unprecedented change. Globalisation, growing impact of technology and the rise of start-ups are now changing traditional notions of jobs, career stability, growth and opportunity; and most importantly changing the notions of leadership and expectations from corporate leaders. In this new era of leadership, WalkWater Talent Advisors has emerged as one of India’s fastest growing and innovative leadership search and talent advisory firms. The WalkWater team brings a unique mix of strengths – Intensive Client Partnering, Deep Domain Knowledge and Global Coverage; this coupled with a start-up drive to excel, and a constant focus on values, provides an unparalleled experience to our clients.</p>
           </div>
         </div>
 
-        <div ref={sectionRef} className="grid grid-cols-1 max-sm:gap-y-2 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
+        <div ref={sectionRef} className="grid grid-cols-1 max-sm:gap-y-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-stretch">
           {stats.map((item, index) => (
-            <div key={index} className="stat-card  md:aspect-square hover:bg-[#86B039] group transition-all duration-300 hover:py-24 ">
-              <div className={`h-full w-full flex flex-col justify-between max-sm:gap-y-20  p-5 border-t border-b border-black/20 group-hover:border-transparent transition-all duration-300 ${index === 0 ? "border-l" : ""} ${index !== 0 ? "border-l" : ""} ${index === stats.length - 1 ? "border-r" : ""}`}>
+            <div key={index} className="stat-card  md:aspect-square hover:bg-[#86B039] border border-black/20 rounded-lg group transition-all duration-300 hover:py-24 ">
+              <div className={`h-full w-full flex flex-col justify-between max-sm:gap-y-20  p-5  group-hover:border-transparent transition-all duration-300 `}>
                 <h6 data-para-effect className=" capitalize font-medium! text-[#657882] leading-tight group-hover:text-white transition-all duration-300">
                   {item.title}
                 </h6>

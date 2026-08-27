@@ -105,31 +105,21 @@ const Hero = () => {
 
         <div className="relative z-10 text-white  w-full container flex items-end">
           <div className="space-y-5">
-            <h1 className=" leading-none heading_split  max-sm:hidden ">
+            <h1 className="   heading_split  max-sm:hidden ">
               India’s Fastest Growing Leadership <br /> Search and Talent Advisory Firm
             </h1>
-            <h1 className=" leading-none heading_split  md:hidden ">
+            <h1 className="   heading_split  md:hidden ">
               India’s Fastest Growing Leadership Search and Talent Advisory Firm
             </h1>
             <p className="text-lg md:text-xl   heading_split  leading-tight max-sm:hidden">
-              Building future-ready leadership teams for global enterprises,  <br />high-growth businesses, and transformative organizations.
+              WalkWater Talent Advisors, one of the top executive  search <br /> firms in India for global enterprises, high-growth businesses,  <br />and transformative organizations.
             </p>
             <p className="text-lg md:text-xl   heading_split  leading-tight md:hidden">
-              Building future-ready leadership teams for global enterprises, high-growth businesses, and transformative organizations.
+              WalkWater Talent Advisors, one of the top executive search firms in India for global enterprises, high-growth businesses, and transformative organizations.
             </p>
             <div className="flex gap-4 items-center">
-              <Button label={"Get in Touch"} href={"/contact"} theme='light' className='blink_btn opacity-0' />
-              <CustomLink
-                href="/expertise"
-                label="Expertise"
-                className=" blink_btn opacity-0 inline-flex group relative items-center justify-center px-4 py-2 border border-transparent text-sm   rounded text-white hover:text-gray-200 transition-colors group"
-              >
-                <div className="relative">
-                  Explore Our Expertise
-                  <span className='absolute left-0 w-0 group-hover:w-full transition-all duration-300 bottom-0 bg-white h-px'></span>
-                </div>
-                <RiArrowRightUpLine size={18} className=" scale-0 group-hover:scale-100 origin-bottom-left transition-all duration-300 " />
-              </CustomLink>
+              <Button label={"  Explore Our Expertise"} href={"/expertise"} theme='light' className='blink_btn opacity-0' />
+
             </div>
           </div>
         </div>

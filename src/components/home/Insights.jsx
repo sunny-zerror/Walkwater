@@ -54,7 +54,7 @@ const Insights = () => {
       repeat: -1,
       ease: "none"
     });
-    
+
     let ic = gsap.matchMedia();
     ic.add("(min-width: 768px)", () => {
       gsap.from(".insight_card", {
@@ -75,7 +75,7 @@ const Insights = () => {
   return (
     <div className="w-full bg-[#00689F] pt-12 md:pt-24  relative overflow-hidden">
 
-       <div className="spin-ellipse-left w-[40vw] z-10 absolute left-[-15%] top-[-35%] rotate-45 aspect-square border opacity-20 border-white rounded-full center">
+      <div className="spin-ellipse-left w-[40vw] z-10 absolute left-[-15%] top-[-35%] rotate-45 aspect-square border opacity-20 border-white rounded-full center">
         <div className="size-5 rounded-full bg-[#00689F] border border-white absolute right-0 translate-x-2.5 ">
         </div>
         <div className="size-5 rounded-full bg-[#00689F] border border-white absolute left-0 -translate-x-2.5 ">
@@ -97,7 +97,7 @@ const Insights = () => {
         {/* Header Section */}
         <div className="grid grid-cols-1 md:grid-cols-6 relative z-10">
           <div className="md:col-span-4">
-            <h2 data-heading-effect className="w-fit   leading-none text-white">
+            <h2 data-heading-effect className="w-fit     text-white">
               Insights
             </h2>
           </div>
@@ -140,7 +140,7 @@ const Insights = () => {
 
               {/* Text Content */}
               <div className="md:px-2 ">
-                <h6 className="text-[#00689F] leading-none   mb-2 md:mb-4">
+                <h6 className="text-[#00689F]     mb-2 md:mb-4">
                   {insight.title}
                 </h6>
                 <p className="text-[#657882]  leading-tight line-clamp-2">
@@ -182,7 +182,7 @@ const Insights = () => {
 
                   {/* Text Content */}
                   <div className="flex flex-col flex-1">
-                    <h6 className="text-[#00689F] max-sm:text-lg! leading-none mb-2">
+                    <h6 className="text-[#00689F] max-sm:text-lg!   mb-2">
                       {insight.title}
                     </h6>
                     <p className="text-[#657882] leading-tight line-clamp-2">

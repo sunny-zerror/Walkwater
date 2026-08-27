@@ -2,11 +2,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'next-view-transitions';
 import Image from 'next/image';
-import { RiArrowDownSLine, RiArrowRightUpLine, RiMenuLine, RiCloseLine } from '@remixicon/react';
+import { RiArrowDownSLine, RiArrowRightUpLine, RiMenuLine, RiCloseLine, RiPhoneFill, RiMailFill, RiFacebookFill, RiLinkedinFill, RiFacebookCircleFill, RiLinkedinBoxFill, RiArrowRightLine } from '@remixicon/react';
 import CustomLink from './CustomLink';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { navItems, recentInsights } from '@/data/navData';
+import Button from './Button';
 
 // ─── Recent Insights Sidebar ────────────────────────────────────────────────
 const RecentInsightsSidebar = () => (
@@ -84,6 +85,7 @@ const Header = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedMobileNav, setExpandedMobileNav] = useState(null);
+  const [isScrolled, setIsScrolled] = useState(false);
   const timeoutRef = useRef(null);
   const headerRef = useRef(null);
 
@@ -123,9 +125,15 @@ const Header = () => {
     };
     window.addEventListener("resize", handleResize);
 
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 30);
+    };
+    window.addEventListener("scroll", handleScroll);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
     }
   }, []);
 
@@ -152,9 +160,48 @@ const Header = () => {
 
   return (
     <>
-      <header ref={headerRef} className="fixed top-0 left-0 -translate-y-full w-full bg-white z-200">
-        <div className="container">
-          <div className="grid grid-cols-12 items-center h-20 relative z-[210] bg-white">
+      <header ref={headerRef} className="fixed top-0 left-0 -translate-y-full w-full z-200 flex flex-col">
+        {/* ─── Top Bar ─────────────────────────────────────────────────── */}
+        <div className={`bg-[#86B039] text-white transition-all duration-300 origin-top overflow-hidden ${isScrolled ? 'h-0 opacity-0' : 'h-10 opacity-100'}`}>
+          <div className="container h-full">
+            <div className="flex items-center justify-between h-full text-xs font-medium">
+              <div className="flex items-center space-x-4">
+                <a href="tel:+919972094034" className="flex hover:underline items-center hover:opacity-80 transition-opacity">
+                  <RiPhoneFill className="w-3 h-3 mr-2" />
+                  +91 99720 94034
+                </a>
+                <span className="w-px h-4 bg-white/30 block"></span>
+                <a href="mailto:client@walkwatertalent.com" className="flex hover:underline items-center hover:opacity-80 transition-opacity">
+                  <RiMailFill className="w-3 h-3 mr-2" />
+                  client@walkwatertalent.com
+                </a>
+              </div>
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-3">
+                  <a href="https://www.facebook.com/WalkwaterTalentAdvisors" target='_blank' className="hover:opacity-80 transition-opacity" aria-label="Facebook">
+                    <RiFacebookCircleFill className="w-5 h-5" />
+                  </a>
+                  <a href="https://in.linkedin.com/company/walkwater-talent-advisors" target='_blank' className="hover:opacity-80 transition-opacity" aria-label="LinkedIn">
+                    <RiLinkedinBoxFill className="w-5 h-5" />
+                  </a>
+                </div>
+                <span className="w-px h-4 bg-white/30 block"></span>
+                <div className="flex items-center space-x-2">
+                  <Image src="/icons/india_flag.svg" alt="India" width={20} height={14} className="h-5 w-auto object-cover" />
+                  <Image src="/icons/canada_flag.svg" alt="Canada" width={20} height={14} className="h-5 w-auto object-cover" />
+                  <Image src="/icons/america_flag.svg" alt="USA" width={20} height={14} className="h-5 w-auto object-cover" />
+                  <Image src="/icons/european_flag.svg" alt="Europe" width={20} height={14} className="h-5 w-auto object-cover" />
+                  <Image src="/icons/singapore_flag.svg" alt="Singapore" width={20} height={14} className="h-5 w-auto object-cover" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ─── Main Navbar ──────────────────────────────────────────────── */}
+        <div className="bg-white shadow-sm w-full relative z-[210]">
+          <div className="container">
+            <div className="grid grid-cols-12 items-center h-20">
             {/* Logo */}
             <div className="col-span-9 md:col-span-3 flex items-center">
               <CustomLink label={"Home"} href="/" className="flex items-center">
@@ -212,14 +259,7 @@ const Header = () => {
 
             {/* Contact Button */}
             <div className="col-span-3 hidden md:flex items-center justify-end">
-              <CustomLink
-                label={"contact"}
-                href="/contact"
-                className="group inline-flex gap-x-1 items-center justify-center px-4 py-2 border border-transparent  rounded-md text-white bg-[#00689F]  hover:border-[#00557A] hover:bg-transparent transition-colors hover:text-[#00557A]"
-              >
-                Contact
-                <RiArrowRightUpLine size={18} />
-              </CustomLink>
+              <Button theme="solid" label="Get In Touch" href="/contact" />
             </div>
 
             {/* Mobile Menu Toggle */}
@@ -237,7 +277,7 @@ const Header = () => {
 
         {/* ─── Mobile Menu ────────────────────────────────────────── */}
         <div
-          className={`md:hidden fixed inset-0 top-20 bg-white z-[200] transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          className={`md:hidden absolute inset-x-0 top-full bg-white z-[200] transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
             }`}
         >
           <div data-lenis-prevent className="h-[calc(100svh-5rem)] overflow-y-auto p-5">
@@ -317,11 +357,12 @@ const Header = () => {
           onMouseLeave={handleDropdownLeave}
         >
 
-          <div className="bg-white border-b border-[#E8EDF1] rounded-2xl">
+          <div className="bg-white border-b border-[#E8EDF1] rounded-b-2xl">
             <div className="p-3">
               {hasDropdown && <DropdownPanel navItem={activeNav} />}
             </div>
           </div>
+        </div>
         </div>
       </header>
 

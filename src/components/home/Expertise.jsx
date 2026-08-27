@@ -142,7 +142,7 @@ const Expertise = () => {
       [".left_3", ".right_3"],
     ];
 
-    gsap.set(sections.flat(), {
+    gsap.set(sections.slice(1).flat(), {
       opacity: 0,
       y: 50,
     });
@@ -199,7 +199,7 @@ const Expertise = () => {
     <>
       <div className=" container pt-12 md:pt-24  grid grid-cols-1 bg-white md:grid-cols-6">
         <div className="md:col-span-4">
-          <h2 data-heading-effect className="w-fit  leading-none text-[#00689F]">Our Expertise</h2>
+          <h2 data-heading-effect className="w-fit    text-[#00689F]">Our Expertise</h2>
         </div>
         <div className="md:col-span-2 max-sm:mt-2 space-y-5 ">
           <p data-para-effect className="text-lg md:text-xl  text-[#657882]  leading-tight">
@@ -247,45 +247,45 @@ const Expertise = () => {
             </div>
           </div>
 
-          <div className="left_1 absolute md:w-[35rem] z-10 top-[15%] md:top-[25%] left-0 padding">
-            <h4 className="text-[#00689F]">CEO and Board Search</h4>
-            <p className="text-[#657882] leading-tight text-lg">
-              Identifying CEOs and board leaders who drive growth, lead transformation, and strengthen governance. Our search focuses on leadership capability, cultural fit, strategic vision, and proven experience.
+          <div className="left_1 space-y-4 absolute md:w-[32rem] z-10 top-[15%] md:top-[25%] left-0 padding">
+            <h4 data-heading-effect className="text-[#00689F]">CEO and Board Search</h4>
+            <p data-para-effect className="text-[#657882] leading-tight text-lg">
+              The rise of newer sectors and areas which never existed a few years ago, has made the nature of CEO's role much more unpredictable....
             </p>
           </div>
 
-          <div className="left_2 absolute md:w-[35rem] z-10 top-[15%] md:top-[25%] left-0 padding">
+          <div className="left_2 space-y-4 absolute md:w-[32rem] z-10 top-[15%] md:top-[25%] left-0 padding">
             <h4 className="text-[#00689F]">Talent Advisory</h4>
             <p className="text-[#657882] leading-tight text-lg">
-              Providing data-driven insights to support smarter talent decisions. From compensation benchmarking to leadership assessment and workforce planning, we help organizations build future-ready teams.
+              Organizations at different stages are seeking information about talent trends, market compensation, talent related sector specific data....
             </p>
           </div>
 
-          <div className="left_3 absolute md:w-[35rem] z-10 top-[15%] md:top-[25%] left-0 padding">
+          <div className="left_3 space-y-4 absolute md:w-[32rem] z-10 top-[15%] md:top-[25%] left-0 padding">
             <h4 className="text-[#00689F]">Diversity</h4>
             <p className="text-[#657882] leading-tight text-lg">
-              Building diverse and inclusive leadership teams that foster innovation and stronger decision-making. We connect organizations with exceptional talent from varied backgrounds.
+              India being a country of many languages and ethnicities makes for a very complex yet a very compelling landscape, for understanding the....
             </p>
           </div>
 
-          <div className="right_1 absolute md:w-[35rem] z-10 bottom-[15%] md:bottom-[25%] max-sm:left-0 md:right-0 padding">
-            <h4 className="text-[#00689F]">Talent Core</h4>
-            <p className="text-[#657882] leading-tight text-lg">
-              Our Talent Core practice identifies professionals who form the backbone of successful organizations. We help businesses hire leaders who deliver operational excellence and sustainable growth.
+          <div className="right_1 space-y-4 absolute md:w-[32rem] z-10 bottom-[15%] md:bottom-[25%] max-sm:left-0 md:right-0 padding">
+            <h4 data-heading-effect className="text-[#00689F]">Talent Core</h4>
+            <p data-para-effect className="text-[#657882] leading-tight text-lg">
+              Talent Core is WalkWater's specialized Executive Search offering for Core Talent of the organization. Every single organization needs right....
             </p>
           </div>
 
-          <div className="right_2 absolute md:w-[35rem] z-10 bottom-[15%] md:bottom-[25%] max-sm:left-0 md:right-0 padding">
+          <div className="right_2 space-y-4 absolute md:w-[32rem] z-10 bottom-[15%] md:bottom-[25%] max-sm:left-0 md:right-0 padding">
             <h4 className="text-[#00689F]">Entrepreneurial Services</h4>
             <p className="text-[#657882] leading-tight text-lg">
-              Supporting startups and growth-stage businesses in building leadership teams that scale innovation. We identify entrepreneurial leaders who thrive in fast-changing environments.
+              Start-ups are rewriting the rules of business, finding new ways to solve old problems. Driving growth in such a set-up requires leaders who are....
             </p>
           </div>
 
-          <div className="right_3 absolute md:w-[35rem] z-10 bottom-[15%] md:bottom-[25%] max-sm:left-0 md:right-0 padding">
+          <div className="right_3 space-y-4 absolute md:w-[32rem] z-10 bottom-[15%] md:bottom-[25%] max-sm:left-0 md:right-0 padding">
             <h4 className="text-[#00689F]">PE & VC</h4>
             <p className="text-[#657882] leading-tight text-lg">
-              Partnering with Private Equity and Venture Capital firms to identify leaders who maximize value. We build executive teams that drive performance and long-term growth.
+              The Private Equity and Venture Capital industry has been active in India since 1990s. With the high growth rate of India economy, the PE and VC....
             </p>
           </div>
         </div>

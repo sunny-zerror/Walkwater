@@ -91,7 +91,7 @@ const IndustryVerticals = () => {
       <div className="container w-full md:h-screen! flex flex-col py-16 md:py-0 md:justify-center md:pt-20 space-y-10 md:space-y-[5vh] md:sticky! md:top-0">
         <div className="grid grid-cols-1 md:grid-cols-6 gap-2 md:gap-0">
           <div className="md:col-span-4">
-            <h2 data-heading-effect className="w-fit  leading-none text-[#00689F]">Industry Verticals</h2>
+            <h2 data-heading-effect className="w-fit    text-[#00689F]">Industry Verticals</h2>
           </div>
           <div className="md:col-span-2 space-y-5">
             <p data-para-effect className="text-lg md:text-xl   text-[#657882]  leading-tight">
@@ -106,7 +106,7 @@ const IndustryVerticals = () => {
           {data.map((item, i) => (
             <div key={i} className={` slide ${i === 0 ? "relative p-10" : `  left-0 top-full p-10 absolute z-[${i}]`}  bg-[#F7F8FF] border border-[#00689F20] rounded-3xl w-full  grid   grid-cols-2  `}>
               <div className={`flex flex-col gap-y-5  justify-center ${i % 2 === 0 ? " pr-44" : "order-2 pl-10"}`}>
-                <h4 className='  text-[#00689F] leading-none'>{item.title}</h4>
+                <h4 className='  text-[#00689F]  '>{item.title}</h4>
                 <p className='text-[#657882] leading-tight'>{item.desc}</p>
               </div>
               <div className="aspect-video relative overflow-hidden rounded-xl">
@@ -134,7 +134,7 @@ const IndustryVerticals = () => {
                     </video>
                   </div>
                   <div className="p-5 flex flex-col gap-y-3 flex-1">
-                    <h4 className="text-[#00689F]  leading-none">{item.title}</h4>
+                    <h4 className="text-[#00689F]   ">{item.title}</h4>
                     <p className="text-[#657882]  leading-tight">{item.desc}</p>
                   </div>
                 </div>

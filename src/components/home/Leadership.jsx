@@ -1,7 +1,7 @@
 "use client";
 import { RiArrowRightLine, RiAddLine, RiCloseLine, RiLinkedinFill, RiFacebookFill } from "@remixicon/react";
 import Image from "next/image";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Button from "../common/Button";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -13,92 +13,91 @@ gsap.registerPlugin(ScrollTrigger)
 const teamData = [
   {
     id: 1,
-    name: "Harold Dsouza",
+    name: "Harold D'Souza",
     role: "Co-Founder & Director",
-    desc: "Harold brings over two decades of leadership and executive search experience, partnering with organizations to identify exceptional talent for critical leadership roles. ",
+    desc: [
+      "Harold has worked in the Executive Search industry since 1998 , when the industry was still developing into an important part of the corporate world. He has been part of the evolution of the search industry and over the last two decades has contributed to its current stature and positioning.",
+      "Before co-founding WalkWater, he was responsible for building the Technology Industry Practice in India for Accord Group India and DHR International. Earlier experiences has been with E&Y and PSS. His key expertise is building revenue and profit generating search businesses from scratch; and developing long standing relationships with leaders, across industry sectors.",
+      "A special area of focus is Indian Business Houses and entrepreneur driven companies. Harold also leads CEO and leadership searches, especially in Technology and related sectors. He also works closely with many start-ups and founders.",
+      "Harold is a firm believer in the power of instinct in personal and professional life. He is also an avid foodie, loves to cook and travel; and a keen squash player. He is also a non-fiction book lover and owns a huge collection of books at his home in Bangalore."
+    ],
     img: "/images/homepage/leadership/harold.png",
   },
   {
     id: 2,
     name: "Rahul Shah",
     role: "Co-Founder & Director",
-    desc: "Rahul brings over two decades of leadership and executive search experience, partnering with organizations to identify exceptional talent for critical leadership roles. ",
+    desc: [
+      "Rahul brings more than 20 years of industry experience, out of which, he has spent more than 17 years in the Executive Search industry. After his MBA, he worked for close to 3 years in the Steel Industry with Usha Martin and then moved to the Executive Search industry with ABC Consultants. He spent more than 9 years with ABC Consultants and was last designated as an Executive Director responsible for running the Bangalore office, the 3rd largest office by revenues.",
+      "As Co-Founder of WalkWater, he personally leads Senior Searches across sectors, with a sectoral specialisation in the Consumer, Pharma and Industrial sectors. In this exciting career, he has had the opportunity of working as a Trusted Talent Advisor with senior candidates and with a variety of clients across sectors – large Indian Conglomerates, Blue Chip MNCs, Emerging Companies and Mid-sized firms.",
+      "He is an Instrumentation Engineer from Bangalore University and has completed his MBA from XIM, Bhubaneswar. He is certified in Personal Profile Analysis from Thomas International.",
+      "Outside work, he is a biker and loves to travel and watch movies."
+    ],
     img: "/images/homepage/leadership/rahul.png",
   },
   {
     id: 3,
     name: "Kunal Girap",
     role: "Co-Founder & Director",
-    desc: "Kunal has extensive experience in leadership hiring and has successfully built teams for various fast-growing organizations.",
+    desc: [
+      "With over two decades of experience, Kunal leads senior searches across multiple sectors and is a trusted advisor to global business leaders in the Industry. He leads the Automotive, Aerospace & Defense, Process & Infrastructure practices for the firm with teams spread across India & US. Kunal is also architecting WalkWater’s digital journey and is passionate about technology and its impact on the executive search process.",
+      "He has multifaceted background in Project Management, Industrial Sales & Marketing, Manufacturing and Consulting that enables him to relate with candidates and clients across diverse sectors. Kunal worked with Tyco International, Hindalco and ABC Consultants before Co-founding WalkWater.",
+      "A graduate in Mechanical Engineering and Executive Management Program from IIM Bangalore, Kunal is a sports & fitness enthusiast and plays active club cricket in Mumbai. Kunal is a Rotarian and quite passionate about giving it back to the society through the Rotary platform."
+    ],
     img: "/images/homepage/leadership/kunal.png",
   },
   {
     id: 4,
     name: "Ashutosh Khanna",
     role: "Co-Founder & Director",
-    desc: "Ashutosh specializes in building leadership teams for emerging businesses and has a deep understanding of the talent landscape.",
+    desc: [
+      "Ashu has more than 20 years of experience out of which he has spent 18+ years in the Executive Search industry. Before co-founding WalkWater, Ashu led the Technology Practice at Korn/Ferry FutureStep. During his career in the industry, he has successfully partnered with numerous organisations on building their leadership team across India, US, Europe and South East Asia. He has had the privilege to work with well-known Leaders of large firms (MNC/ Indian) as well as Founders of Startup organizations across Technology and Consumer sectors.",
+      "With PGD in International Business from Symbiosis, Mechanical Engineering from Bangalore University and Diploma in Consumer Protection Laws, Ashu is also certified in Competency based interviewing from SHL and Right Management, Personality Profiling from Thomas International and Coaching Skills by Results Coaching, Australia.",
+      "Besides work, he loves to read, play, travel and do long distance running."
+    ],
     img: "/images/homepage/leadership/ashutosh.png",
   },
 ];
 
+const ModalWrapper = ({ isOpen, onClose, children }) => {
+  const [isMounted, setIsMounted] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [cachedChildren, setCachedChildren] = useState(children);
+
+  useEffect(() => {
+    if (isOpen) {
+      setCachedChildren(children);
+    }
+  }, [isOpen, children]);
+
+  useEffect(() => {
+    let timeoutId;
+    if (isOpen) {
+      setIsMounted(true);
+      timeoutId = setTimeout(() => setIsVisible(true), 50); // 50ms ensures browser paints initial state
+    } else {
+      setIsVisible(false);
+      timeoutId = setTimeout(() => setIsMounted(false), 300);
+    }
+    return () => clearTimeout(timeoutId);
+  }, [isOpen]);
+
+  if (!isMounted) return null;
+
+  return (
+    <div className={`fixed inset-0 z-[100000] flex items-center justify-center p-4 transition-all duration-300 ${isVisible ? "bg-[#00689F]/40 backdrop-blur-md opacity-100 visible" : "bg-[#00689F]/0 backdrop-blur-none opacity-0 invisible"}`}>
+      <div className="absolute inset-0 cursor-pointer" onClick={onClose}></div>
+      <div className={`bg-[#00689F] border border-white/20 relative z-10 w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 md:p-10 flex flex-col md:flex-row gap-8 shadow-2xl transition-all duration-300 transform ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
+        {cachedChildren}
+      </div>
+    </div>
+  );
+};
+
 const Leadership = () => {
-  const [expanded, setExpanded] = useState(null);
   const containerRef = useRef(null);
-  const tl = useRef(null);
-
-  const { contextSafe } = useGSAP({ scope: containerRef });
-
-  const toggleExpand = contextSafe((id) => {
-    const nextExpanded = expanded === id ? null : id;
-
-    if (tl.current) tl.current.kill();
-    tl.current = gsap.timeline();
-
-    const shiftContainer = nextExpanded === 4 || nextExpanded === 3;
-    tl.current.to('.slider-container', {
-      x: shiftContainer ? '-25%' : '0%',
-      duration: 0.7,
-      ease: "power2.inOut"
-    }, 0);
-
-    teamData.forEach((member) => {
-      const isExpanded = nextExpanded === member.id;
-      const isInactive = nextExpanded !== null && !isExpanded;
-
-      tl.current.to(`.card-${member.id}`, {
-        delay: isExpanded ? 0.1 : 0,
-        width: isExpanded ? '50%' : '25%',
-        padding: isExpanded ? '1.25rem' : '0.625rem',
-        backgroundColor: isExpanded ? '#3084B1' : '#3084B100',
-        filter: isInactive ? 'blur(4px)' : 'blur(0px)',
-        duration: 0.6,
-        ease: "power2.inOut"
-      }, 0);
-
-      tl.current.to(`.img-container-${member.id}`, {
-        delay: isExpanded ? 0 : 0.1,
-        width: isExpanded ? '25%' : '100%',
-        backgroundColor: isExpanded ? '#71ABC9' : '#3084B1',
-        duration: 0.6,
-        ease: "power2.inOut"
-      }, 0);
-
-      tl.current.to(`.desc-${member.id}`, {
-        opacity: isExpanded ? 1 : 0,
-        pointerEvents: isExpanded ? 'auto' : 'none',
-        duration: 0.3,
-        ease: "power2.inOut"
-      }, isExpanded ? 0.5 : 0);
-
-      tl.current.to(`.icon-${member.id}`, {
-        rotation: isExpanded ? 45 : 0,
-        duration: 0.3,
-        ease: "power2.inOut"
-      }, 0);
-    });
-
-    setExpanded(nextExpanded);
-  });
+  const [selectedLeader, setSelectedLeader] = useState(null);
+  const activeLeader = teamData.find(m => m.id === selectedLeader);
 
   useGSAP(() => {
     gsap.to(".spin-ellipse-left", {
@@ -117,14 +116,14 @@ const Leadership = () => {
 
     let mm = gsap.matchMedia();
     mm.add("(min-width: 768px)", () => {
-      gsap.from(".mem_card", {
-        xPercent: 100,
-        opacity: 0,
+      gsap.to(".mem_card", {
+        transform: "translateX(0)",
+        opacity: 1,
         stagger: 0.1,
         ease: "power2.out",
         scrollTrigger: {
           trigger: ".mem_card",
-          start: "top 70%",
+          start: "top 80%",
           toggleActions: "play none none reverse"
         }
       });
@@ -133,13 +132,10 @@ const Leadership = () => {
   }, { scope: containerRef });
 
   return (
-    <div className="w-full bg-[#00689F] py-12 md:py-24 overflow-hidden  relative" ref={containerRef}>
-
+    <div className="w-full bg-[#00689F] py-12 md:py-24 overflow-hidden relative" ref={containerRef}>
       <div className="spin-ellipse-left w-[40vw] z-10 absolute left-[-15%] top-[-35%] rotate-45 aspect-square border opacity-20 border-white rounded-full center">
-        <div className="size-5 rounded-full bg-[#00689F] border border-white absolute right-0 translate-x-2.5 ">
-        </div>
-        <div className="size-5 rounded-full bg-[#00689F] border border-white absolute left-0 -translate-x-2.5 ">
-        </div>
+        <div className="size-5 rounded-full bg-[#00689F] border border-white absolute right-0 translate-x-2.5 "></div>
+        <div className="size-5 rounded-full bg-[#00689F] border border-white absolute left-0 -translate-x-2.5 "></div>
       </div>
       <div className="spin-ellipse-right w-[40vw] z-10 absolute right-[-15%] bottom-[-35%] -rotate-45 aspect-square opacity-50 border border-white rounded-full center">
         <div className="size-5 rounded-full bg-white border border-white/40 absolute left-0 -translate-x-2.5 shadow-[0_0_15px_#ffffff,0_0_30px_#ffffff,0_0_45px_rgba(255,255,255,0.8)]">
@@ -150,11 +146,10 @@ const Leadership = () => {
         </div>
       </div>
 
-      <div className="container z-50 mx-auto px-4  space-y-16">
-
+      <div className="container z-50 mx-auto px-4 space-y-16 relative">
         <div className="grid grid-cols-1 md:grid-cols-6 relative z-10">
           <div className="md:col-span-4">
-            <h2 data-heading-effect className="w-fit  leading-none text-white">
+            <h2 data-heading-effect className="w-fit leading-none text-white">
               Our Leadership
             </h2>
           </div>
@@ -165,99 +160,60 @@ const Leadership = () => {
             <Button label={"Meet the Team"} theme="light" />
           </div>
         </div>
-        {/* DESKTOP */}
-        <div className="hidden md:block w-full overflow-hidden z-50 relative">
-          <div className="slider-container w-full flex">
-            {teamData.map((member) => {
-              return (
-                <div
-                  key={member.id}
-                  className={` mem_card card-${member.id} relative rounded-xl p-2.5 w-[25%] shrink-0 flex flex-col justify-between overflow-hidden`}
-                >
-                  <div className=" w-full flex items-start">
-                    <div
-                      onClick={() => toggleExpand(member.id)}
-                      className={`img-container-${member.id} cursor-pointer relative rounded-xl w-full bg-[#ffffff30] shrink-0 overflow-hidden aspect-3/3.5`}
-                    >
-                      <Image
-                        src={member.img}
-                        alt={member.name}
-                        fill
-                        className="cover hover:scale-105 transition-all duration-300"
-                      />
-                    </div>
-                    <div
-                      className={`h-full flex pl-5 flex-col justify-center`}
-                    >
-                      <div className={`desc-${member.id} h-full flex flex-col justify-center opacity-0 pointer-events-none`}>
-                        <p className="text-white text-base  mb-6">
-                          {member.desc}
-                        </p>
-                        <div className="flex gap-3 mt-auto">
-                          <button className="bg-white/10 flex items-center gap-x-1 hover:bg-white/30 text-white px-4 py-2 rounded-md text-sm   transition-colors">
-                            <RiLinkedinFill size={16} /> LinkedIn
-                          </button>
-                          <button className="bg-white/10 flex items-center gap-x-1 hover:bg-white/30 text-white px-4 py-2 rounded-md text-sm   transition-colors">
-                            <RiFacebookFill size={16} /> Facebook
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
 
-
-                  <div className="mt-2 w-full flex justify-between text-white items-center">
-                    <div className="flex flex-col">
-                      <h5 className="text-white  whitespace-nowrap">
-                        {member.name}
-                      </h5>
-                      <p className="text-white/80 text-sm whitespace-nowrap">{member.role}</p>
-                    </div>
-                    <button
-                      onClick={() => toggleExpand(member.id)}
-                      className={`w-8 h-8 rounded-md group bg-white text-[#00689F] shrink-0 flex items-center justify-center transition-all duration-300 z-10`}
-                    >
-                      <div className="group-hover:rotate-90 transition-all duration-300">
-                        <RiAddLine size={20} className={`icon-${member.id}`} />
-                      </div>
-                    </button>
-                  </div>
+        {/* DESKTOP GRID */}
+        <div className="hidden md:grid grid-cols-4 gap-6 w-full z-50 relative">
+          {teamData.map((member) => (
+            <div
+              key={member.id}
+              onClick={() => setSelectedLeader(member.id)}
+              className="mem_card translate-x-full opacity-0 group cursor-pointer  rounded-xl  flex flex-col justify-between"
+            >
+              <div className="w-full aspect-[3/3.5] relative  bg-[#3084B1] rounded-xl overflow-hidden mb-5">
+                <Image
+                  src={member.img}
+                  alt={member.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-all duration-500"
+                />
+              </div>
+              <div className="flex justify-between items-end">
+                <div className="flex flex-col">
+                  <h5 className="text-white whitespace-nowrap">{member.name}</h5>
+                  <p className="text-white/80 text-sm">{member.role}</p>
                 </div>
-              );
-            })}
-          </div>
-
+                <div className="w-8 h-8 rounded-md bg-white text-[#00689F] shrink-0 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1">
+                  <RiArrowRightLine size={20} className="-rotate-45" />
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* MOBILE SWIPER */}
         <div className="md:hidden w-full relative z-50">
           <Swiper
-            slidesPerView={1.1}
+            slidesPerView={1.2}
             spaceBetween={16}
             className="w-full"
           >
             {teamData.map((member) => (
               <SwiperSlide key={member.id} className="h-auto!">
-                <div className="bg-[#ffffff20] rounded-2xl w-full flex flex-col p-5 overflow-hidden h-full">
-                  <div className="">
-                    <div className="w-full bg-[#ffffff50] aspect-square relative rounded-xl overflow-hidden shrink-0">
-                      <Image fill src={member.img} className='object-cover' alt={member.name} />
-                    </div>
-                    <div className="mt-4">
-                      <h4 className="text-white leading-none">{member.name}</h4>
-                      <p className="text-white/80 text-sm mb-4">{member.role}</p>
-                      <p className="text-white leading-tight mb-6 flex-1">
-                        {member.desc}
-                      </p>
-                    </div>
+                <div
+                  onClick={() => setSelectedLeader(member.id)}
+                  className="bg-[#ffffff15] rounded-2xl w-full flex flex-col p-4 h-full cursor-pointer"
+                >
+                  <div className="w-full aspect-square relative rounded-xl overflow-hidden mb-4">
+                    <Image fill src={member.img} className="object-cover" alt={member.name} />
                   </div>
-                  <div className="w-full flex-1 flex items-end gap-x-2">
-                    <button className="bg-white/10 flex h-fit items-center justify-center w-[48%] gap-x-1 hover:bg-white/30 text-white py-2.5 rounded-md text-sm transition-colors">
-                      <RiLinkedinFill size={16} /> LinkedIn
-                    </button>
-                    <button className="bg-white/10 flex h-fit items-center justify-center w-[48%] gap-x-1 hover:bg-white/30 text-white py-2.5 rounded-md text-sm transition-colors">
-                      <RiFacebookFill size={16} /> Facebook
-                    </button>
+                  <div className="flex justify-between items-end mt-auto">
+                    <div>
+                      <h4 className="text-white leading-tight">{member.name}</h4>
+                      <p className="text-white/80 text-sm">{member.role}</p>
+                    </div>
+                    <div className="w-8 h-8 rounded-md bg-white text-[#00689F] shrink-0 flex items-center justify-center">
+                      <RiArrowRightLine size={20} className="-rotate-45" />
+                    </div>
                   </div>
                 </div>
               </SwiperSlide>
@@ -265,6 +221,47 @@ const Leadership = () => {
           </Swiper>
         </div>
       </div>
+
+      {/* OVERLAY MODAL */}
+      <ModalWrapper isOpen={!!selectedLeader} onClose={() => setSelectedLeader(null)}>
+        {activeLeader && (
+          <>
+            <button
+              onClick={() => setSelectedLeader(null)}
+              className="absolute top-4 right-4  w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-colors"
+            >
+              <RiCloseLine size={24} />
+            </button>
+
+            <div className="w-full md:w-[30%] shrink-0 ">
+              <div className="w-full max-sm:hidden aspect-[3/3.5] relative rounded-2xl overflow-hidden bg-[#3084B1]">
+                <Image fill src={activeLeader.img} className="object-cover" alt={activeLeader.name} />
+              </div>
+              <h4 className="text-white mt-4">{activeLeader.name}</h4>
+              <p className="text-white/80">{activeLeader.role}</p>
+
+            </div>
+
+            <div className="w-full md:w-[70%] pr-5 flex flex-col">
+
+              <div className="text-white/90 text-sm md:text-base space-y-4 flex-1 overflow-y-auto pr-2 custom-scrollbar">
+                {activeLeader.desc.map((para, i) => (
+                  <p key={i} className="">{para}</p>
+                ))}
+              </div>
+
+              {/* <div className="flex flex-wrap gap-4 mt-8 shrink-0">
+                <button className="bg-white/10 flex items-center gap-x-2 hover:bg-white/30 text-white px-5 py-2.5 rounded-lg text-sm transition-colors">
+                  <RiLinkedinFill size={18} /> LinkedIn
+                </button>
+                <button className="bg-white/10 flex items-center gap-x-2 hover:bg-white/30 text-white px-5 py-2.5 rounded-lg text-sm transition-colors">
+                  <RiFacebookFill size={18} /> Facebook
+                </button>
+              </div> */}
+            </div>
+          </>
+        )}
+      </ModalWrapper>
     </div>
   );
 };

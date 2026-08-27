@@ -74,25 +74,10 @@ const Footer = () => {
 
             {/* Bottom Row: Newsletter & Copyright */}
             <div className="flex flex-col md:flex-row justify-between md:items-end gap-10 mt-auto">
-              {/* Newsletter */}
-              <div className="w-full max-w-sm">
-                <h4 className=" text-[#00689F]  leading-none  mb-6">
-                  Subscribe for Latest<br />Newsletter
-                </h4>
-                <div className="relative w-full">
-                  <input
-                    type="email"
-                    placeholder="name@example.com"
-                    className="w-full bg-[#00689F] text-white placeholder:text-white/80 rounded-xl py-3.5 px-5 pr-14 outline-none text-sm md:text-base"
-                  />
-                  <button className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 hover:bg-transparent! hover:border-white border border-transparent hover:text-white bg-white rounded-md flex items-center justify-center text-[#00689F] transition-colors">
-                    <RiArrowRightLine size={18} />
-                  </button>
-                </div>
-              </div>
+
 
               {/* Copyright */}
-              <div className="text-sm text-[#00689F] flex flex-col md:text-right  ">
+              <div className="text-sm text-[#00689F] flex flex-col   ">
                 <p>© 2026 WalkWater Talent Advisors.</p>
                 <p>All rights reserved.</p>
               </div>
@@ -106,31 +91,21 @@ const Footer = () => {
             {/* Social Links */}
             <ul className=" space-y-2 md:space-y-6 max-sm:grid max-sm:grid-cols-2">
               <li>
-                <a href="#" className="flex items-center gap-4 hover:opacity-80 transition-opacity text-sm md:text-base">
+                <a href="https://www.facebook.com/WalkwaterTalentAdvisors" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 hover:opacity-80 transition-opacity text-sm md:text-base">
                   <RiFacebookCircleFill size={22} /> Facebook
                 </a>
               </li>
               <li>
-                <a href="#" className="flex items-center gap-4 hover:opacity-80 transition-opacity text-sm md:text-base">
+                <a href="https://in.linkedin.com/company/walkwater-talent-advisors" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 hover:opacity-80 transition-opacity text-sm md:text-base">
                   <RiLinkedinBoxFill size={22} /> Linkedin
-                </a>
-              </li>
-              <li>
-                <a href="#" className="flex items-center gap-4 hover:opacity-80 transition-opacity text-sm md:text-base">
-                  <RiInstagramLine size={22} /> Instagram
-                </a>
-              </li>
-              <li>
-                <a href="#" className="flex items-center gap-4 hover:opacity-80 transition-opacity text-sm md:text-base">
-                  <RiTwitterFill size={22} /> Twitter
                 </a>
               </li>
             </ul>
 
             {/* Contact Info */}
             <div className="mt-4">
-              <p className="text-base md:text-lg   ">+91 8049065000</p>
-              <p className="text-base md:text-lg  ">client@walkwatertalent.com</p>
+              <a href="tel:+919972094034" className="text-base md:text-lg block hover:opacity-80 transition-opacity">+91 99720 94034</a>
+              <a href="mailto:client@walkwatertalent.com" className="text-base md:text-lg block hover:opacity-80 transition-opacity mt-1">client@walkwatertalent.com</a>
             </div>
 
           </div>
