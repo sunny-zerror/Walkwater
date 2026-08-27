@@ -162,9 +162,9 @@ const Header = () => {
     <>
       <header ref={headerRef} className="fixed top-0 left-0 -translate-y-full w-full z-200 flex flex-col">
         {/* ─── Top Bar ─────────────────────────────────────────────────── */}
-        <div className={`bg-[#86B039] text-white transition-all duration-300 origin-top overflow-hidden ${isScrolled ? 'h-0 opacity-0' : 'h-10 opacity-100'}`}>
-          <div className="container h-full">
-            <div className="flex items-center justify-between h-full text-xs font-medium">
+        <div className={`bg-[#86B039] text-white transition-all duration-300 origin-top overflow-hidden ${isScrolled ? 'h-0 opacity-0' : ' h-14 md:h-10 opacity-100'}`}>
+          <div className="container h-full py-2  ">
+            <div className="flex flex-col md:flex-row items-center justify-between h-full text-xs font-medium">
               <div className="flex items-center space-x-4">
                 <a href="tel:+919972094034" className="flex hover:underline items-center hover:opacity-80 transition-opacity">
                   <RiPhoneFill className="w-3 h-3 mr-2" />
