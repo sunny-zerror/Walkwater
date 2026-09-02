@@ -197,7 +197,7 @@ const Expertise = () => {
 
   return (
     <>
-      <div className=" container pt-12 md:pt-24  grid grid-cols-1 bg-white  md:grid-cols-2">
+      <div className=" container h-fit! pt-12 md:pt-24  grid grid-cols-1 bg-white  md:grid-cols-2">
         <div className=" ">
           <h2 data-heading-effect className="w-fit    text-[#00689F]">Our Expertise</h2>
         </div>

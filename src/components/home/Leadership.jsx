@@ -146,8 +146,8 @@ const Leadership = () => {
         </div>
       </div>
 
-      <div className="container z-50 mx-auto px-4 space-y-16 relative">
-        <div className="grid grid-cols-1  md:grid-cols-2 relative z-10">
+      <div className=" px-0! z-50 space-y-16 relative">
+        <div className=" container h-fit! grid grid-cols-1  md:grid-cols-2 relative z-10">
           <div className=" ">
             <h2 data-heading-effect className="w-fit leading-none text-white">
               Our Leadership
@@ -162,7 +162,7 @@ const Leadership = () => {
         </div>
 
         {/* DESKTOP GRID */}
-        <div className="hidden md:grid grid-cols-4 gap-6 w-full z-50 relative">
+        <div className=" container  h-fit! hidden md:grid grid-cols-4 gap-6 w-full z-50 relative">
           {teamData.map((member) => (
             <div
               key={member.id}
@@ -192,16 +192,15 @@ const Leadership = () => {
 
         {/* MOBILE SWIPER */}
         <div className="md:hidden w-full relative z-50">
-          <Swiper
-            slidesPerView={1.2}
-            spaceBetween={16}
-            className="w-full"
-          >
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 px-4 w-full [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             {teamData.map((member) => (
-              <SwiperSlide key={member.id} className="h-auto!">
+              <div 
+                key={member.id} 
+                className="snap-center shrink-0 w-[80vw] h-auto"
+              >
                 <div
                   onClick={() => setSelectedLeader(member.id)}
-                  className="bg-[#ffffff15] rounded-2xl w-full flex flex-col p-4 h-full cursor-pointer"
+                  className=" bg-[#ffffff15] rounded-2xl w-full flex flex-col p-4 h-full cursor-pointer"
                 >
                   <div className="w-full aspect-square relative rounded-xl overflow-hidden mb-4">
                     <Image fill src={member.img} className="object-cover" alt={member.name} />
@@ -212,13 +211,13 @@ const Leadership = () => {
                       <p className="text-white/80 text-sm">{member.role}</p>
                     </div>
                     <div className="w-8 h-8 rounded-md bg-white text-[#00689F] shrink-0 flex items-center justify-center">
-                      <RiArrowRightLine size={20} className="-rotate-45" />
+                      <RiAddLine  className="size-4" />
                     </div>
                   </div>
                 </div>
-              </SwiperSlide>
+              </div>
             ))}
-          </Swiper>
+          </div>
         </div>
       </div>
 

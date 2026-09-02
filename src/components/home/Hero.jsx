@@ -103,7 +103,7 @@ const Hero = () => {
           <video loop muted playsInline autoPlay className='brightness-75 cover' src="/videos/hero_vid.mp4"></video>
         </div>
 
-        <div className="relative z-10 text-white  w-full container flex items-end">
+        <div className="relative z-10 text-white  w-full container  flex items-end">
           <div className="space-y-5">
             <h1 className="   heading_split  max-sm:hidden ">
               India’s Fastest Growing Leadership <br /> Search and Talent Advisory Firm

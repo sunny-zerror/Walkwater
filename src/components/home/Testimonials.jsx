@@ -44,7 +44,7 @@ const Testimonials = () => {
 
   return (
     <div className="w-full bg-[#F7F8FF] py-12 md:py-24 ">
-      <div className="container mx-auto px-4">
+      <div className="container h-fit! mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-0  items-center">
           {/* Left Column: Heading & Navigation */}
           <div className="flex flex-col justify-between h-full md:pr-10">

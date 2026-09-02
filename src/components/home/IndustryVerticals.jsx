@@ -88,8 +88,8 @@ const IndustryVerticals = () => {
 
   return (
     <div ref={containerRef} className='relative md:h-[400vh] w-full'>
-      <div className="container w-full md:h-screen! flex flex-col py-16 md:py-0 md:justify-center md:pt-20 space-y-10 md:space-y-[5vh] md:sticky! md:top-0">
-        <div className="grid grid-cols-1  md:grid-cols-2 gap-2 md:gap-0">
+      <div className=" container max-sm:px-0! relative w-full md:h-screen! flex flex-col py-16 md:py-0 md:justify-center md:pt-20 space-y-10 md:space-y-[5vh] md:sticky! md:top-0">
+        <div className=" max-sm:px-4  grid grid-cols-1  md:grid-cols-2 gap-2 md:gap-0">
           <div className=" ">
             <h2 data-heading-effect className="w-fit    text-[#00689F]">Industry Verticals</h2>
           </div>
@@ -102,7 +102,7 @@ const IndustryVerticals = () => {
         </div>
 
         {/* DESKTOP STACK */}
-        <div className="hidden md:block w-full relative overflow-hidden rounded-3xl">
+        <div className="  hidden md:block w-full relative overflow-hidden">
           {data.map((item, i) => (
             <div key={i} className={` slide ${i === 0 ? "relative p-10" : `  left-0 top-full p-10 absolute z-[${i}]`}  bg-[#F7F8FF] border border-[#00689F20] rounded-3xl w-full  grid   grid-cols-2  `}>
               <div className={`flex flex-col gap-y-5  justify-center ${i % 2 === 0 ? " pr-44" : "order-2 pl-10"}`}>
@@ -120,13 +120,12 @@ const IndustryVerticals = () => {
 
         {/* MOBILE SWIPER */}
         <div className="md:hidden w-full relative">
-          <Swiper
-            slidesPerView={1.1}
-            spaceBetween={16}
-            className="w-full"
-          >
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 px-4 w-full [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             {data.map((item, i) => (
-              <SwiperSlide key={i} className="h-auto!">
+              <div 
+                key={i} 
+                className="snap-center shrink-0 w-[80vw] h-auto"
+              >
                 <div className="bg-[#F7F8FF] border border-[#00689F20] rounded-2xl w-full h-full flex flex-col overflow-hidden">
                   <div className="w-full aspect-4/3 relative shrink-0 overflow-hidden">
                     <video autoPlay loop muted playsInline className="w-full h-full object-cover">
@@ -138,9 +137,9 @@ const IndustryVerticals = () => {
                     <p className="text-[#657882]  leading-tight">{item.desc}</p>
                   </div>
                 </div>
-              </SwiperSlide>
+              </div>
             ))}
-          </Swiper>
+          </div>
         </div>
       </div>
     </div>

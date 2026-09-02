@@ -64,6 +64,7 @@ const HeadingAnimation = () => {
                 })
 
                 const onMouseEnter = () => {
+                    if (window.innerWidth < 1020) return;
                     gsap.killTweensOf(split.chars)
                     const tl = gsap.timeline()
                     tl.to(split.chars, {

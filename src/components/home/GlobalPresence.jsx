@@ -149,45 +149,48 @@ const GlobalPresence = () => {
         </div>
 
         {/* MOBILE SWIPER */}
-        <div className="md:hidden w-full overflow-hidden">
-          <Swiper
-            slidesPerView={1.1}
-            spaceBetween={16}
-            className="w-full"
-          >
-            {locations.map((loc) => (
-              <SwiperSlide key={loc.id} className="h-auto!">
-                <a
-                  href={loc.map}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-[#F7F8FF] border border-[#00689F20] rounded-2xl flex flex-col overflow-hidden relative group h-full cursor-pointer block transition-all duration-300"
-                >
-                  <div className="w-full aspect-video relative shrink-0">
-                    <Image
-                      src={loc.img}
-                      fill
-                      alt={loc.city}
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-[#e2e8f0] -z-10"></div>
-                  </div>
-                  <div className="p-6 flex flex-col gap-2 flex-1">
-                    <div className="flex justify-between items-start w-full">
-                      <div>
-                        <h4 className=" text-[#00689F] ">{loc.city}</h4>
-                        <p className="text-[#00689F] text-base font-semibold">{loc.phone}</p>
-                      </div>
-                      <div className="w-10 h-10 shrink-0 rounded-lg bg-[#00689F] flex items-center justify-center text-white shadow-md mt-1 transition-transform duration-300 group-hover:scale-125">
-                        <RiDirectionLine size={20} />
-                      </div>
+      </div>
+      <div className="md:hidden max-sm:mt-10 w-full overflow-hidden">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 px-4 w-full [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          {locations.map((loc) => (
+            <div
+              key={loc.id}
+              className="snap-center shrink-0 w-[80vw] h-auto"
+            >
+              <a
+                href={loc.map}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#F7F8FF] border border-[#00689F20] rounded-2xl flex flex-col overflow-hidden relative group h-full cursor-pointer block transition-all duration-300"
+              >
+                <div className="w-full aspect-video relative shrink-0">
+                  <Image
+                    src={loc.img}
+                    fill
+                    alt={loc.city}
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-[#e2e8f0] -z-10"></div>
+                </div>
+                <div className="p-6 flex w-full flex-col gap-2 flex-1">
+                  <div className="flex justify-between items-start w-full">
+                    <div  className="w-full">
+                      <div className="flex w-full  justify-between">
+                      <h4 className=" text-[#00689F] ">{loc.city}</h4>
+                    <div className=" bg-[#00689F] w-8 h-8 rounded-lg center text-white transition-all duration-300 group-hover:scale-125">
+                      <img src="/icons/map_bg.svg" className="absolute inset-0 z-[-1]" alt="" />
+                      <img src="/icons/location_target.svg" className="w-4" alt="" />
                     </div>
-                    <p className="text-[#657882] leading-relaxed mt-2">{loc.address}</p>
+
+                      </div>
+                      <p className="text-[#00689F] text-base font-semibold">{loc.phone}</p>
+                    </div>
                   </div>
-                </a>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                  <p className="text-[#657882] leading-relaxed mt-2">{loc.address}</p>
+                </div>
+              </a>
+            </div>
+          ))}
         </div>
       </div>
     </div>

@@ -111,7 +111,7 @@ const AboutUs = () => {
           </div>
         </div>
 
-        <div ref={sectionRef} className="grid grid-cols-1 max-sm:gap-y-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-stretch">
+        <div ref={sectionRef} className="grid grid-cols-1 max-sm:gap-y-2 md:grid-cols-4 gap-3 items-stretch">
           {stats.map((item, index) => (
             <div key={index} className="stat-card  md:aspect-square hover:bg-[#86B039] border border-black/20 rounded-lg group transition-all duration-300 overflow-hidden ">
               <div className={`h-full w-full flex flex-col justify-between max-sm:gap-y-20  p-5  group-hover:border-transparent transition-all duration-300 `}>
@@ -119,7 +119,7 @@ const AboutUs = () => {
                   {item.title}
                 </h6>
 
-                <p data-value={item.value} data-suffix={item.suffix} className="stat-number text-5xl md:text-6xl group-hover:text-[7.5vw] font-semibold text-[#00689F] group-hover:text-white transition-all duration-300">
+                <p data-value={item.value} data-suffix={item.suffix} className="stat-number text-8xl md:text-6xl group-hover:text-[7.5vw] font-semibold text-[#00689F] group-hover:text-white transition-all duration-300">
                   0{item.suffix}
                 </p>
               </div>

@@ -92,10 +92,10 @@ const Insights = () => {
 
       {/* Background decoration can go here later */}
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="  relative z-10">
 
         {/* Header Section */}
-        <div className="grid grid-cols-1  md:grid-cols-2 relative z-10 mb-8 md:mb-16">
+        <div className="container h-fit! grid grid-cols-1  md:grid-cols-2 relative z-10 mb-8 md:mb-16">
           <div className=" ">
             <h2 data-heading-effect className="w-fit     text-white">
               Insights
@@ -111,7 +111,7 @@ const Insights = () => {
         </div>
 
         {/* Cards Section — Desktop */}
-        <div className="hidden md:grid grid-cols-4 gap-5">
+        <div className=" container h-fit! hidden md:grid grid-cols-4 gap-5">
           {insightsData.map((insight) => (
             <div
               key={insight.id}
@@ -153,14 +153,13 @@ const Insights = () => {
 
         {/* Cards Section — Mobile Swiper */}
         <div className="md:hidden w-full relative z-50">
-          <Swiper
-            slidesPerView={1.1}
-            spaceBetween={16}
-            className="w-full"
-          >
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 px-4 w-full [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             {insightsData.map((insight) => (
-              <SwiperSlide key={insight.id} className="h-auto!" >
-                <div className=" h-full bg-white rounded-3xl p-3 border border-gray-100 flex flex-col group cursor-pointer">
+              <div 
+                key={insight.id} 
+                className="snap-center shrink-0 w-[80vw] h-auto"
+              >
+                <div className=" h-full bg-white rounded-2xl p-3 border border-gray-100 flex flex-col group cursor-pointer">
                   {/* Image Container */}
                   <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-5 bg-[#e2e8f0]">
                     {insight.img ? (
@@ -190,9 +189,9 @@ const Insights = () => {
                     </p>
                   </div>
                 </div>
-              </SwiperSlide>
+              </div>
             ))}
-          </Swiper>
+          </div>
         </div>
 
       </div>

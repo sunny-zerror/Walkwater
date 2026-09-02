@@ -65,6 +65,7 @@ const GlobalParaReveal = () => {
         })
 
         const onMouseEnter = () => {
+          if (window.innerWidth < 1020) return;
           gsap.killTweensOf(split.words)
           const tl = gsap.timeline()
 

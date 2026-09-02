@@ -162,7 +162,7 @@ const Header = () => {
     <>
       <header ref={headerRef} className="fixed top-0 left-0 -translate-y-full w-full z-200 flex flex-col">
         {/* ─── Top Bar ─────────────────────────────────────────────────── */}
-        <div className={`bg-[#86B039] text-white transition-all duration-300 origin-top overflow-hidden ${isScrolled ? 'h-0 opacity-0' : ' h-14 md:h-10 opacity-100'}`}>
+        <div className={`bg-[#86B039] text-white transition-all duration-300 origin-top overflow-hidden ${isScrolled ? 'h-0 opacity-0' : ' h-8 md:h-10 opacity-100'}`}>
           <div className="container h-full py-2  ">
             <div className="flex flex-col md:flex-row items-center justify-between h-full text-xs font-medium">
               <div className=" w-full flex items-center space-x-4">
@@ -176,7 +176,7 @@ const Header = () => {
                   client@walkwatertalent.com
                 </a>
               </div>
-              <div className=" w-full flex items-center space-x-4 md:justify-end">
+              <div className=" w-full hidden  md:flex items-center space-x-4 md:justify-end">
                 <div className="flex items-center space-x-3 max-sm:w-1/2 max-sm:justify-end">
                   <a href="https://www.facebook.com/WalkwaterTalentAdvisors" target='_blank' className="hover:opacity-80 transition-opacity" aria-label="Facebook">
                     <RiFacebookCircleFill className="w-5 h-5" />
