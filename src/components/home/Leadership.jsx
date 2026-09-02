@@ -85,7 +85,7 @@ const ModalWrapper = ({ isOpen, onClose, children }) => {
   if (!isMounted) return null;
 
   return (
-    <div className={`fixed inset-0 z-[100000] flex items-center justify-center p-4 transition-all duration-300 ${isVisible ? "bg-[#00689F]/40 backdrop-blur-md opacity-100 visible" : "bg-[#00689F]/0 backdrop-blur-none opacity-0 invisible"}`}>
+    <div className={`fixed inset-0 z-[100000] flex items-center justify-center p-4 transition-all duration-300 ${isVisible ? "bg-[#ffffff]/30 backdrop-blur-sm opacity-100 visible" : "bg-[#ffffff]/0 backdrop-blur-none opacity-0 invisible"}`}>
       <div className="absolute inset-0 cursor-pointer" onClick={onClose}></div>
       <div className={`bg-[#00689F] border border-white/20 relative z-10 w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 md:p-10 flex flex-col md:flex-row gap-8 shadow-2xl transition-all duration-300 transform ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
         {cachedChildren}
@@ -147,13 +147,13 @@ const Leadership = () => {
       </div>
 
       <div className="container z-50 mx-auto px-4 space-y-16 relative">
-        <div className="grid grid-cols-1 md:grid-cols-6 relative z-10">
-          <div className="md:col-span-4">
+        <div className="grid grid-cols-1  md:grid-cols-2 relative z-10">
+          <div className=" ">
             <h2 data-heading-effect className="w-fit leading-none text-white">
               Our Leadership
             </h2>
           </div>
-          <div className="md:col-span-2 max-sm:mt-2 space-y-5">
+          <div className="  max-sm:mt-2 space-y-5">
             <p data-para-effect className="text-lg md:text-xl text-white leading-tight">
               Led by industry veterans, our founding team combines deep expertise, strategic insight, and a shared vision to redefine leadership hiring.
             </p>
@@ -169,7 +169,7 @@ const Leadership = () => {
               onClick={() => setSelectedLeader(member.id)}
               className="mem_card translate-x-full opacity-0 group cursor-pointer  rounded-xl  flex flex-col justify-between"
             >
-              <div className="w-full aspect-[3/3.5] relative  bg-[#3084B1] rounded-xl overflow-hidden mb-5">
+              <div className="w-full aspect-[3/3.5] relative  bg-[#3084B1] rounded-xl overflow-hidden mb-4">
                 <Image
                   src={member.img}
                   alt={member.name}
@@ -177,13 +177,13 @@ const Leadership = () => {
                   className="object-cover group-hover:scale-105 transition-all duration-500"
                 />
               </div>
-              <div className="flex justify-between items-end">
+              <div className="flex justify-between items-center">
                 <div className="flex flex-col">
                   <h5 className="text-white whitespace-nowrap">{member.name}</h5>
                   <p className="text-white/80 text-sm">{member.role}</p>
                 </div>
-                <div className="w-8 h-8 rounded-md bg-white text-[#00689F] shrink-0 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1">
-                  <RiArrowRightLine size={20} className="-rotate-45" />
+                <div className="w-8 h-8 rounded-md bg-[#ffffff] text-[#00689F] shrink-0 flex items-center justify-center transition-all duration-300 group-hover:bg-transparent border border-transparent group-hover:border-white group-hover:text-white">
+                  <RiAddLine className="size-4 group-hover:rotate-180 transition-all duration-300 leading-none origin-center" />
                 </div>
               </div>
             </div>
@@ -228,7 +228,7 @@ const Leadership = () => {
           <>
             <button
               onClick={() => setSelectedLeader(null)}
-              className="absolute top-4 right-4  w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-colors"
+              className="absolute top-4 right-4  w-10 h-10 bg-white/10 hover:bg-white hover:text-[#3084B1] text-white rounded-full flex items-center justify-center transition-colors duration-300"
             >
               <RiCloseLine size={24} />
             </button>

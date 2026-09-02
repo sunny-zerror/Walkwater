@@ -15,7 +15,7 @@ const locations = [
     city: "Bangalore",
     phone: "+91 99720 94034, +91 98450 93409",
     address: "3rd Floor, Central Quay 35/1, Yellappa Chetty Layout Ulsoor Road. Bangalore – 560 042.",
-    map:"https://www.google.com/maps?ll=12.975527,77.616141&z=13&t=m&hl=en&gl=IN&mapclient=embed&cid=8917403594044300598",
+    map: "https://www.google.com/maps?ll=12.975527,77.616141&z=13&t=m&hl=en&gl=IN&mapclient=embed&cid=8917403594044300598",
     img: "/images/homepage/global_presence/bangalore.png" // placeholder
   },
   {
@@ -23,7 +23,7 @@ const locations = [
     city: "Mumbai",
     phone: "+91 98676 63268",
     address: "Regus, Unit No. B-501, 5th floor Wing 'B' Supreme Business Park Supreme City, Powai. Mumbai – 400 076.",
-    map:"https://www.google.com/maps?ll=19.111139,72.908617&z=13&t=m&hl=en&gl=IN&mapclient=embed&cid=2540358889807036414",
+    map: "https://www.google.com/maps?ll=19.111139,72.908617&z=13&t=m&hl=en&gl=IN&mapclient=embed&cid=2540358889807036414",
     img: "/images/homepage/global_presence/mumbai.png"
   },
   {
@@ -31,7 +31,7 @@ const locations = [
     city: "Pune",
     phone: "91 98192 86785",
     address: "Regus Magarpatta, Level-6 Pentagon Tower P-2 Magarpatta City, Hadapsar. Pune – 411 013.",
-    map:"https://www.google.com/maps?ll=18.511749,73.925632&z=14&t=m&hl=en&gl=IN&mapclient=embed&cid=6447511236994343969",
+    map: "https://www.google.com/maps?ll=18.511749,73.925632&z=14&t=m&hl=en&gl=IN&mapclient=embed&cid=6447511236994343969",
     img: "/images/homepage/global_presence/pune.png"
   },
   {
@@ -39,7 +39,7 @@ const locations = [
     city: "Gurgaon",
     phone: "+91 88006 55008",
     address: "Suite #515, Whizdom Club by MQDC 5th Floor, Tapasya One Golf Course Road, Sector 53 Gurgaon – 122022.",
-    map:"https://www.google.com/maps?ll=28.436792,77.103118&z=13&t=m&hl=en&gl=IN&mapclient=embed&cid=5043732642565981673",
+    map: "https://www.google.com/maps?ll=28.436792,77.103118&z=13&t=m&hl=en&gl=IN&mapclient=embed&cid=5043732642565981673",
     img: "/images/homepage/global_presence/gurgaon.png"
   },
   {
@@ -47,7 +47,7 @@ const locations = [
     city: "USA",
     phone: "+91 98452 12997",
     address: "Pacific Workplaces 10080 N Wolfe Rd STE SW3200 Cupertino. CA 95014-2594.",
-    map:"https://www.google.com/maps/place/Pacific+Workplaces+-+Office+Space+Cupertino/@37.325611,-122.015468,2770m/data=!3m1!1e3!4m6!3m5!1s0x808fb5a6aa1ebae9:0xe9eb6f074bf1d1d1!8m2!3d37.3239277!4d-122.0130262!16s%2Fg%2F1tj73v8f?hl=en&entry=ttu&g_ep=EgoyMDI2MDgyNC4wIKXMDSoASAFQAw%3D%3D",
+    map: "https://www.google.com/maps/place/Pacific+Workplaces+-+Office+Space+Cupertino/@37.325611,-122.015468,2770m/data=!3m1!1e3!4m6!3m5!1s0x808fb5a6aa1ebae9:0xe9eb6f074bf1d1d1!8m2!3d37.3239277!4d-122.0130262!16s%2Fg%2F1tj73v8f?hl=en&entry=ttu&g_ep=EgoyMDI2MDgyNC4wIKXMDSoASAFQAw%3D%3D",
     img: "/images/homepage/global_presence/usa.png"
   }
 ];
@@ -91,12 +91,12 @@ const GlobalPresence = () => {
       <div className=" c_city_card_paren container flex flex-col md:grid md:grid-cols-2 md:h-[74rem]! gap-10 md:gap-0">
 
         <div className="md:sticky h-fit md:top-24 md:pb-20 space-y-2 md:pr-20">
-          <div className="md:col-span-4">
+          <div className=" ">
             <h2 data-heading-effect className="w-fit     text-[#00689F]">
               Global Presence
             </h2>
           </div>
-          <div className="md:col-span-2 space-y-5">
+          <div className="  space-y-5">
             <p data-para-effect className="text-lg md:text-xl  text-[#657882] leading-tight">
               Led by industry veterans, our founding team combines deep expertise, strategic insight, and a shared vision to redefine leadership hiring.
             </p>
@@ -157,7 +157,7 @@ const GlobalPresence = () => {
           >
             {locations.map((loc) => (
               <SwiperSlide key={loc.id} className="h-auto!">
-                <a 
+                <a
                   href={loc.map}
                   target="_blank"
                   rel="noopener noreferrer"

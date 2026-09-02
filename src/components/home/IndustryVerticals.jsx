@@ -89,11 +89,11 @@ const IndustryVerticals = () => {
   return (
     <div ref={containerRef} className='relative md:h-[400vh] w-full'>
       <div className="container w-full md:h-screen! flex flex-col py-16 md:py-0 md:justify-center md:pt-20 space-y-10 md:space-y-[5vh] md:sticky! md:top-0">
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-2 md:gap-0">
-          <div className="md:col-span-4">
+        <div className="grid grid-cols-1  md:grid-cols-2 gap-2 md:gap-0">
+          <div className=" ">
             <h2 data-heading-effect className="w-fit    text-[#00689F]">Industry Verticals</h2>
           </div>
-          <div className="md:col-span-2 space-y-5">
+          <div className="  space-y-5">
             <p data-para-effect className="text-lg md:text-xl   text-[#657882]  leading-tight">
               Deep sector understanding enables us to deliver leadership talent relevant to complex and evolving business environments.
             </p>

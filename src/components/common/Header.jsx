@@ -165,19 +165,19 @@ const Header = () => {
         <div className={`bg-[#86B039] text-white transition-all duration-300 origin-top overflow-hidden ${isScrolled ? 'h-0 opacity-0' : ' h-14 md:h-10 opacity-100'}`}>
           <div className="container h-full py-2  ">
             <div className="flex flex-col md:flex-row items-center justify-between h-full text-xs font-medium">
-              <div className="flex items-center space-x-4">
-                <a href="tel:+919972094034" className="flex hover:underline items-center hover:opacity-80 transition-opacity">
+              <div className=" w-full flex items-center space-x-4">
+                <a href="tel:+919972094034" className="flex max-sm:justify-end max-sm:w-1/2 hover:underline items-center hover:opacity-80 transition-opacity">
                   <RiPhoneFill className="w-3 h-3 mr-2" />
                   +91 99720 94034
                 </a>
                 <span className="w-px h-4 bg-white/30 block"></span>
-                <a href="mailto:client@walkwatertalent.com" className="flex hover:underline items-center hover:opacity-80 transition-opacity">
+                <a href="mailto:client@walkwatertalent.com" className=" max-sm:w-1/2  flex hover:underline items-center hover:opacity-80 transition-opacity">
                   <RiMailFill className="w-3 h-3 mr-2" />
                   client@walkwatertalent.com
                 </a>
               </div>
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center space-x-3">
+              <div className=" w-full flex items-center space-x-4 md:justify-end">
+                <div className="flex items-center space-x-3 max-sm:w-1/2 max-sm:justify-end">
                   <a href="https://www.facebook.com/WalkwaterTalentAdvisors" target='_blank' className="hover:opacity-80 transition-opacity" aria-label="Facebook">
                     <RiFacebookCircleFill className="w-5 h-5" />
                   </a>
@@ -186,7 +186,7 @@ const Header = () => {
                   </a>
                 </div>
                 <span className="w-px h-4 bg-white/30 block"></span>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 max-sm:w-1/2">
                   <Image src="/icons/india_flag.svg" alt="India" width={20} height={14} className="h-5 w-auto object-cover" />
                   <Image src="/icons/canada_flag.svg" alt="Canada" width={20} height={14} className="h-5 w-auto object-cover" />
                   <Image src="/icons/america_flag.svg" alt="USA" width={20} height={14} className="h-5 w-auto object-cover" />

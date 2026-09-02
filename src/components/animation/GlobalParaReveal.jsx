@@ -20,6 +20,7 @@ const GlobalParaReveal = () => {
       await document.fonts.ready
 
       const elements = gsap.utils.toArray("[data-para-effect]")
+      const listeners = []
 
       elements.forEach((el) => {
 
@@ -28,7 +29,7 @@ const GlobalParaReveal = () => {
         el.dataset.splitInitialized = "true"
 
         const split = new SplitText(el, {
-          type: "lines",
+          type: "lines,words",
           linesClass: "split-line",
         })
 
@@ -62,6 +63,26 @@ const GlobalParaReveal = () => {
             toggleActions: "play none none reverse",
           },
         })
+
+        const onMouseEnter = () => {
+          gsap.killTweensOf(split.words)
+          const tl = gsap.timeline()
+          tl.to(split.words, {
+              opacity: 0.2,
+              stagger: { amount: 0.6 },
+              duration: 0.15,
+              ease: "power2.inOut",
+          })
+          .to(split.words, {
+              opacity: 1,
+              stagger: { amount: 0.6 },
+              duration: 0.25,
+              ease: "power2.inOut",
+          }, 0.1)
+        }
+
+        el.addEventListener("mouseenter", onMouseEnter)
+        listeners.push({ el, handler: onMouseEnter })
       })
 
     })
@@ -73,6 +94,10 @@ const GlobalParaReveal = () => {
     return () => {
 
       clearTimeout(timeout)
+
+      listeners.forEach(({ el, handler }) => {
+          el.removeEventListener("mouseenter", handler)
+      })
 
       splits.forEach((split) => split.revert())
 

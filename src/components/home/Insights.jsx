@@ -73,7 +73,7 @@ const Insights = () => {
   })
 
   return (
-    <div className="w-full bg-[#00689F] pt-12 md:pt-24  relative overflow-hidden">
+    <div className="w-full bg-[#00689F] py-12 md:py-24  relative overflow-hidden">
 
       <div className="spin-ellipse-left w-[40vw] z-10 absolute left-[-15%] top-[-35%] rotate-45 aspect-square border opacity-20 border-white rounded-full center">
         <div className="size-5 rounded-full bg-[#00689F] border border-white absolute right-0 translate-x-2.5 ">
@@ -92,16 +92,16 @@ const Insights = () => {
 
       {/* Background decoration can go here later */}
 
-      <div className="container mx-auto px-4 relative z-10 space-y-16">
+      <div className="container mx-auto px-4 relative z-10">
 
         {/* Header Section */}
-        <div className="grid grid-cols-1 md:grid-cols-6 relative z-10">
-          <div className="md:col-span-4">
+        <div className="grid grid-cols-1  md:grid-cols-2 relative z-10 mb-8 md:mb-16">
+          <div className=" ">
             <h2 data-heading-effect className="w-fit     text-white">
               Insights
             </h2>
           </div>
-          <div className="md:col-span-2 max-sm:mt-2 space-y-5">
+          <div className="  max-sm:mt-2 space-y-5">
             <p data-para-effect className="text-lg md:text-xl text-[#ededed] leading-tight">
               Articles and perspectives on leadership trends, talent strategy, and market developments.
             </p>

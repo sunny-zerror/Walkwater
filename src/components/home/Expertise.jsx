@@ -142,7 +142,7 @@ const Expertise = () => {
       [".left_3", ".right_3"],
     ];
 
-    gsap.set(sections.slice(1).flat(), {
+    gsap.set(sections.flat(), {
       opacity: 0,
       y: 50,
     });
@@ -197,11 +197,11 @@ const Expertise = () => {
 
   return (
     <>
-      <div className=" container pt-12 md:pt-24  grid grid-cols-1 bg-white md:grid-cols-6">
-        <div className="md:col-span-4">
+      <div className=" container pt-12 md:pt-24  grid grid-cols-1 bg-white  md:grid-cols-2">
+        <div className=" ">
           <h2 data-heading-effect className="w-fit    text-[#00689F]">Our Expertise</h2>
         </div>
-        <div className="md:col-span-2 max-sm:mt-2 space-y-5 ">
+        <div className=" max-sm:mt-2 space-y-5 ">
           <p data-para-effect className="text-lg md:text-xl  text-[#657882]  leading-tight">
             Connecting organizations with exceptional leaders who strengthen teams, accelerate growth, and create lasting value.
           </p>
@@ -248,8 +248,8 @@ const Expertise = () => {
           </div>
 
           <div className="left_1 space-y-4 absolute md:w-[32rem] z-10 top-[15%] md:top-[25%] left-0 padding">
-            <h4 data-heading-effect className="text-[#00689F]">CEO and Board Search</h4>
-            <p data-para-effect className="text-[#657882] leading-tight text-lg">
+            <h4  className="text-[#00689F]">CEO and Board Search</h4>
+            <p className="text-[#657882] leading-tight text-lg">
               The rise of newer sectors and areas which never existed a few years ago, has made the nature of CEO's role much more unpredictable....
             </p>
           </div>
@@ -269,8 +269,8 @@ const Expertise = () => {
           </div>
 
           <div className="right_1 space-y-4 absolute md:w-[32rem] z-10 bottom-[15%] md:bottom-[25%] max-sm:left-0 md:right-0 padding">
-            <h4 data-heading-effect className="text-[#00689F]">Talent Core</h4>
-            <p data-para-effect className="text-[#657882] leading-tight text-lg">
+            <h4 className="text-[#00689F]">Talent Core</h4>
+            <p  className="text-[#657882] leading-tight text-lg">
               Talent Core is WalkWater's specialized Executive Search offering for Core Talent of the organization. Every single organization needs right....
             </p>
           </div>
