@@ -17,8 +17,8 @@ const HomePage = () => {
       <Leadership />
       <IndustryVerticals/>
       <Insights />
-      <GlobalPresence />
       <Testimonials />
+      <GlobalPresence />
     </>
   );
 };

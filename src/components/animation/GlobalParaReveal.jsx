@@ -67,18 +67,23 @@ const GlobalParaReveal = () => {
         const onMouseEnter = () => {
           gsap.killTweensOf(split.words)
           const tl = gsap.timeline()
-          tl.to(split.words, {
+
+          split.lines.forEach((line, index) => {
+            const lineWords = line.children
+
+            tl.to(lineWords, {
               opacity: 0.2,
-              stagger: { amount: 0.6 },
+              stagger: { amount: 0.4 },
               duration: 0.15,
               ease: "power2.inOut",
+            }, index * 0.05)
+              .to(lineWords, {
+                opacity: 1,
+                stagger: { amount: 0.4 },
+                duration: 0.25,
+                ease: "power2.inOut",
+              }, index * 0.05 + 0.1)
           })
-          .to(split.words, {
-              opacity: 1,
-              stagger: { amount: 0.6 },
-              duration: 0.25,
-              ease: "power2.inOut",
-          }, 0.1)
         }
 
         el.addEventListener("mouseenter", onMouseEnter)
@@ -96,7 +101,7 @@ const GlobalParaReveal = () => {
       clearTimeout(timeout)
 
       listeners.forEach(({ el, handler }) => {
-          el.removeEventListener("mouseenter", handler)
+        el.removeEventListener("mouseenter", handler)
       })
 
       splits.forEach((split) => split.revert())
