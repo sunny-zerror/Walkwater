@@ -13,26 +13,26 @@ gsap.registerPlugin(ScrollTrigger)
 const insightsData = [
   {
     id: 1,
-    title: "Leadership in ESG Excellence",
-    desc: "In recent times, Environmental, Social, and Governance (ESG) principles have evolved from a specialized focus to a fundamental business....",
-    img: "/images/homepage/insights/img1.png", // Empty for now
+    title: "The Strategic Evolution of India’s Pharma and Healthcare Companies in the Next Decade",
+    desc: "Summary India’s pharmaceutical and healthcare sectors are entering a crucial growth decade from a strong position of global integration and…",
+    img: "/images/homepage/insights/img1.jpg", // Empty for now
   },
   {
     id: 2,
-    title: "Purpose-Driven Leadership",
-    desc: "In the current values-oriented business environment, leadership transcends merely achieving financial targets; it focuses on creating...",
-    img: "/images/homepage/insights/img2.png", // Empty for now
+    title: "ESG Leadership",
+    desc: "In recent times, Environmental, Social, and Governance (ESG) principles have evolved from a specialized focus to a fundamental business necessity….",
+    img: "/images/homepage/insights/img2.jpg", // Empty for now
   },
   {
     id: 3,
-    title: "The Definitive Look at India’s Consumer CEO Journeys",
-    desc: "Introduction: Charting the Course of India’s Consumer Sector CEOs The Indian consumer landscape has undergone transformational changes over the last…",
+    title: "Purpose Driven Leadership",
+    desc: "In the current values-oriented business environment, leadership transcends merely achieving financial targets; it focuses on creating significant impact. Companies are…",
     img: "/images/homepage/insights/img3.jpg", // Empty for now
   },
   {
     id: 4,
-    title: "Navigating Executive Search in Indian Family-Owned Businesses",
-    desc: "India’s vibrant economic narrative is inextricably linked to the profound influence of its family-owned businesses (FOBs). These aren’t merely enterprises;...",
+    title: "Inside the Corner Office: The Definitive Look at India’s Consumer CEO Journeys",
+    desc: "Introduction: Charting the Course of India’s Consumer Sector CEOs The Indian consumer landscape has undergone transformational changes over the last…",
     img: "/images/homepage/insights/img4.jpg", // Empty for now
   },
 ];
@@ -118,7 +118,7 @@ const Insights = () => {
               className=" insight_card bg-white rounded-xl p-3  border border-gray-100 flex flex-col group cursor-pointer"
             >
               {/* Image Container */}
-              <div className="relative aspect-[16/9] md:aspect-[4/3] rounded-lg overflow-hidden mb-5 bg-[#e2e8f0]">
+              <div className="relative aspect-[4/3] rounded-lg overflow-hidden mb-5 bg-[#e2e8f0]">
                 {insight.img ? (
                   <Image
                     src={insight.img}
@@ -140,7 +140,7 @@ const Insights = () => {
 
               {/* Text Content */}
               <div className="md:px-2 ">
-                <h6 className="text-[#00689F]     mb-2 md:mb-4">
+                <h6 className="text-[#00689F] line-clamp-2     mb-2 md:mb-4">
                   {insight.title}
                 </h6>
                 <p className="text-[#657882]  leading-tight line-clamp-2">
@@ -161,7 +161,7 @@ const Insights = () => {
               >
                 <div className=" h-full bg-white rounded-2xl p-3 border border-gray-100 flex flex-col group cursor-pointer">
                   {/* Image Container */}
-                  <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-5 bg-[#e2e8f0]">
+                  <div className="relative aspect-4/3 rounded-2xl overflow-hidden mb-5 bg-[#e2e8f0]">
                     {insight.img ? (
                       <Image
                         src={insight.img}
@@ -181,7 +181,7 @@ const Insights = () => {
 
                   {/* Text Content */}
                   <div className="flex flex-col flex-1">
-                    <h6 className="text-[#00689F] max-sm:text-lg!   mb-2">
+                    <h6 className="text-[#00689F] max-sm:text-lg! line-clamp-2 leading-tight   mb-2">
                       {insight.title}
                     </h6>
                     <p className="text-[#657882] leading-tight line-clamp-2">
