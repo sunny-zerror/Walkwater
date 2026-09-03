@@ -106,10 +106,10 @@ const Hero = () => {
         <div className="relative z-10 text-white  w-full container  flex items-end">
           <div className="space-y-5">
             <h1 className="   heading_split  max-sm:hidden ">
-              India’s Fastest Growing Leadership <br /> Search and Talent Advisory Firm
+              India’s Fastest Growing Leadership <br /> Search & Talent Advisory Firm
             </h1>
             <h1 className="   heading_split  md:hidden ">
-              India’s Fastest Growing Leadership Search and Talent Advisory Firm
+              India’s Fastest Growing Leadership Search & Talent Advisory Firm
             </h1>
             <p className="text-lg md:text-xl   heading_split  leading-tight max-sm:hidden">
               WalkWater Talent Advisors, one of the top executive  search <br /> firms in India for global enterprises, high-growth businesses,  <br />and transformative organizations.

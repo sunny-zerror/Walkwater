@@ -13,7 +13,7 @@ const locations = [
   {
     id: 1,
     city: "Bangalore",
-    phone: "+91 99720 94034, +91 98450 93409",
+    phone: ["+91 99720 94034", "+91 98450 93409"],
     address: "3rd Floor, Central Quay 35/1, Yellappa Chetty Layout Ulsoor Road. Bangalore – 560 042.",
     map: "https://www.google.com/maps?ll=12.975527,77.616141&z=13&t=m&hl=en&gl=IN&mapclient=embed&cid=8917403594044300598",
     img: "/images/homepage/global_presence/bangalore.png" // placeholder
@@ -21,7 +21,7 @@ const locations = [
   {
     id: 2,
     city: "Mumbai",
-    phone: "+91 98676 63268",
+    phone: ["+91 98676 63268"],
     address: "Regus, Unit No. B-501, 5th floor Wing 'B' Supreme Business Park Supreme City, Powai. Mumbai – 400 076.",
     map: "https://www.google.com/maps?ll=19.111139,72.908617&z=13&t=m&hl=en&gl=IN&mapclient=embed&cid=2540358889807036414",
     img: "/images/homepage/global_presence/mumbai.png"
@@ -29,7 +29,7 @@ const locations = [
   {
     id: 3,
     city: "Pune",
-    phone: "91 98192 86785",
+    phone: ["+91 98192 86785"],
     address: "Regus Magarpatta, Level-6 Pentagon Tower P-2 Magarpatta City, Hadapsar. Pune – 411 013.",
     map: "https://www.google.com/maps?ll=18.511749,73.925632&z=14&t=m&hl=en&gl=IN&mapclient=embed&cid=6447511236994343969",
     img: "/images/homepage/global_presence/pune.png"
@@ -37,7 +37,7 @@ const locations = [
   {
     id: 4,
     city: "Gurgaon",
-    phone: "+91 88006 55008",
+    phone: ["+91 88006 55008"],
     address: "Suite #515, Whizdom Club by MQDC 5th Floor, Tapasya One Golf Course Road, Sector 53 Gurgaon – 122022.",
     map: "https://www.google.com/maps?ll=28.436792,77.103118&z=13&t=m&hl=en&gl=IN&mapclient=embed&cid=5043732642565981673",
     img: "/images/homepage/global_presence/gurgaon.png"
@@ -45,7 +45,7 @@ const locations = [
   {
     id: 5,
     city: "USA",
-    phone: "+91 98452 12997",
+    phone: ["+91 98452 12997"],
     address: "Pacific Workplaces 10080 N Wolfe Rd STE SW3200 Cupertino. CA 95014-2594.",
     map: "https://www.google.com/maps/place/Pacific+Workplaces+-+Office+Space+Cupertino/@37.325611,-122.015468,2770m/data=!3m1!1e3!4m6!3m5!1s0x808fb5a6aa1ebae9:0xe9eb6f074bf1d1d1!8m2!3d37.3239277!4d-122.0130262!16s%2Fg%2F1tj73v8f?hl=en&entry=ttu&g_ep=EgoyMDI2MDgyNC4wIKXMDSoASAFQAw%3D%3D",
     img: "/images/homepage/global_presence/usa.png"
@@ -131,7 +131,17 @@ const GlobalPresence = () => {
                     {loc.city}
                   </h5>
                   <p className="text-[#00689F] text-sm  transition-all duration-300 group-hover:text-white   mb-3">
-                    {loc.phone}
+                    {loc.phone.map((num, i) => (
+                      <React.Fragment key={num}>
+                        <span 
+                          onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.location.href = `tel:${num.replace(/\s/g, "")}`; }} 
+                          className="hover:underline cursor-pointer"
+                        >
+                          {num}
+                        </span>
+                        {i < loc.phone.length - 1 && ", "}
+                      </React.Fragment>
+                    ))}
                   </p>
                 </div>
                 <p className="text-[#657882]  transition-all duration-300 group-hover:text-[#EDEDED]">
@@ -183,7 +193,19 @@ const GlobalPresence = () => {
                     </div>
 
                       </div>
-                      <p className="text-[#00689F] text-base font-semibold">{loc.phone}</p>
+                      <p className="text-[#00689F] text-base font-semibold">
+                        {loc.phone.map((num, i) => (
+                          <React.Fragment key={num}>
+                            <span 
+                              onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.location.href = `tel:${num.replace(/\s/g, "")}`; }} 
+                              className="hover:underline cursor-pointer"
+                            >
+                              {num}
+                            </span>
+                            {i < loc.phone.length - 1 && ", "}
+                          </React.Fragment>
+                        ))}
+                      </p>
                     </div>
                   </div>
                   <p className="text-[#657882] leading-relaxed mt-2">{loc.address}</p>

@@ -99,13 +99,15 @@ const AboutUs = () => {
             <h2 data-heading-effect className="  w-fit text-[#00689F]">About Us</h2>
           </div>
 
-          <div className=" max-sm:mt-2">
-            <p data-para-effect className=" text-lg md:text-xl text-[#00689F] leading-tight">
-              Leadership is the capacity to translate vision into reality.</p> <br />
+          <div className=" max-sm:mt-2" >
+            <div className="" data-hover-parent="true">
+            <p data-para-effect className=" text-lg italic md:text-xl text-[#00689F] leading-tight">
+              "Leadership is the capacity to translate vision into reality."</p> <br />
             <p data-para-effect className=" text-lg md:text-xl text-[#00689F] leading-tight">
               In 2011, a team of Executive Search industry leaders realized their collective vision – to rethink hiring practices for an era of unprecedented change. Globalisation, growing impact of technology and the rise of start-ups are now changing traditional notions of jobs, career stability, growth and opportunity; and most importantly changing the notions of leadership and expectations from corporate leaders. </p> <br />
             <p data-para-effect className=" text-lg md:text-xl text-[#00689F] leading-tight">
                In this new era of leadership, WalkWater Talent Advisors has emerged as one of India’s fastest growing and innovative leadership search and talent advisory firms. The WalkWater team brings a unique mix of strengths – Intensive Client Partnering, Deep Domain Knowledge and Global Coverage; this coupled with a start-up drive to excel, and a constant focus on values, provides an unparalleled experience to our clients.</p>
+            </div>
                <br />
               <Button label={"Know Us"} href={"/about"} />
           </div>
@@ -115,7 +117,7 @@ const AboutUs = () => {
           {stats.map((item, index) => (
             <div key={index} className="stat-card  md:aspect-square hover:bg-[#86B039] border border-black/20 rounded-lg group transition-all duration-300 overflow-hidden ">
               <div className={`h-full w-full flex flex-col justify-between max-sm:gap-y-20  p-5  group-hover:border-transparent transition-all duration-300 `}>
-                <h6 data-para-effect className=" capitalize font-medium! text-[#657882] leading-tight group-hover:text-white transition-all duration-300">
+                <h6 className=" capitalize font-medium! text-[#657882] leading-tight group-hover:text-white transition-all duration-300">
                   {item.title}
                 </h6>
 

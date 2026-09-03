@@ -97,7 +97,7 @@ const IndustryVerticals = () => {
             <p data-para-effect className="text-lg md:text-xl   text-[#657882]  leading-tight">
               Deep sector understanding enables us to deliver leadership talent relevant to complex and evolving business environments.
             </p>
-            <Button label={"Explore Industries Verticals"} />
+            <Button label={"Explore Industry Verticals"} />
           </div>
         </div>
 
