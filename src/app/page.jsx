@@ -6,18 +6,16 @@ import Leadership from "@/components/home/Leadership";
 import Testimonials from "@/components/home/Testimonials";
 import Insights from "@/components/home/Insights";
 import GlobalPresence from "@/components/home/GlobalPresence";
-import Expertise from "@/components/home/Expertise";
+import WhatWeDo from "@/components/home/WhatWeDo";
 
 const HomePage = () => {
   return (
     <>
       <Hero />
       <AboutUs />
-      <Expertise/>
-      <Leadership />
+      <WhatWeDo/>
       <IndustryVerticals/>
       <Insights />
-      <Testimonials />
       <GlobalPresence />
     </>
   );

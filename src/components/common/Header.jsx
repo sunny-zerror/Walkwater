@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'next-view-transitions';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { RiArrowDownSLine, RiArrowRightUpLine, RiMenuLine, RiCloseLine, RiPhoneFill, RiMailFill, RiFacebookFill, RiLinkedinFill, RiFacebookCircleFill, RiLinkedinBoxFill, RiArrowRightLine } from '@remixicon/react';
 import CustomLink from './CustomLink';
@@ -88,6 +89,10 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const timeoutRef = useRef(null);
   const headerRef = useRef(null);
+  const pathname = usePathname();
+
+  // Transparent over the home hero video; solid white once scrolled, on other pages, or with the mobile menu open
+  const isSolid = pathname !== "/" || isScrolled || isMobileMenuOpen;
 
   const handleMouseEnter = (index) => {
     clearTimeout(timeoutRef.current);
@@ -199,7 +204,7 @@ const Header = () => {
         </div>
 
         {/* ─── Main Navbar ──────────────────────────────────────────────── */}
-        <div className="bg-white shadow-sm w-full relative z-[210]">
+        <div className={`w-full relative z-210 transition-all duration-300 ${isSolid ? "bg-white shadow-sm" : "bg-transparent"}`}>
           <div className="container">
             <div className="grid grid-cols-12 items-center h-20">
             {/* Logo */}
@@ -227,8 +232,7 @@ const Header = () => {
                     <CustomLink
                       key={index}
                       href={navItem.href}
-                      className={`relative flex items-center p-1 px-2 rounded-md  cursor-pointer border border-transparent transition-colors hover:text-[#00689F] hover:bg-[#F7F8FF] hover:border-[#00689F20]!  text-[#7A7A7A] hover:text-black"
-                        }`}
+                      className={`relative flex items-center p-1 px-2 rounded-md  cursor-pointer border border-transparent transition-colors hover:text-[#00689F] hover:bg-[#F7F8FF] hover:border-[#00689F20]! ${isSolid ? "text-[#7A7A7A]" : "text-white"}`}
                       onMouseEnter={() => {
                         clearTimeout(timeoutRef.current);
                         setActiveDropdown(null);
@@ -242,7 +246,7 @@ const Header = () => {
                 return (
                   <div
                     key={index}
-                    className={`relative flex items-center p-1 px-2 rounded-md  cursor-pointer border border-transparent transition-colors ${isActive ? "text-[#00689F] bg-[#F7F8FF] border-[#00689F20]!" : "text-[#7A7A7A] hover:text-black"
+                    className={`relative flex items-center p-1 px-2 rounded-md  cursor-pointer border border-transparent transition-colors ${isActive ? "text-[#00689F] bg-[#F7F8FF] border-[#00689F20]!" : isSolid ? "text-[#7A7A7A] hover:text-black" : "text-white"
                       }`}
                     onMouseEnter={() => handleMouseEnter(index)}
                     onMouseLeave={handleMouseLeave}
@@ -259,13 +263,13 @@ const Header = () => {
 
             {/* Contact Button */}
             <div className="col-span-3 hidden md:flex items-center justify-end">
-              <Button theme="solid" label="Get In Touch" href="/contact" />
+              <Button theme={isSolid ? "solid" : "transparent"} label="Get In Touch" href="/contact" />
             </div>
 
             {/* Mobile Menu Toggle */}
             <div className="col-span-3 flex md:hidden items-center justify-end">
               <button
-                className="text-[#00689F] p-2 focus:outline-none"
+                className={`p-2 focus:outline-none transition-colors duration-300 ${isSolid ? "text-[#00689F]" : "text-white"}`}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle Menu"
               >

@@ -28,8 +28,10 @@ const HeadingAnimation = () => {
 
                 el.dataset.splitInitialized = "true"
 
+                // Split into words first so chars stay grouped and lines only break between words
                 const split = new SplitText(el, {
-                    type: "chars",
+                    type: "words,chars",
+                    wordsClass: "split-word",
                 })
 
                 splits.push(split)

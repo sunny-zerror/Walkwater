@@ -1,44 +1,26 @@
 "use client";
 import React, { useRef } from 'react';
-import { Link } from 'next-view-transitions';
 import Image from 'next/image';
-import { RiArrowRightUpLine } from '@remixicon/react';
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/dist/ScrollTrigger'
 import { useGSAP } from '@gsap/react';
-import Button from '../common/Button';
-import CustomLink from '../common/CustomLink';
-import SplitText from 'gsap/dist/SplitText';
-gsap.registerPlugin(ScrollTrigger, SplitText)
+gsap.registerPlugin(ScrollTrigger)
 
 const Hero = () => {
+  const sectionRef = useRef(null)
+  const videoRef = useRef(null)
+  const logoRef = useRef(null)
+  const curtainRef = useRef(null)
 
-  const curtainRef = useRef()
   useGSAP(() => {
-
-    const heading_split = SplitText.create(".heading_split", {
-      type: "lines",
-      linesClass: "split-line"
-    });
-
-    [...heading_split.lines].forEach((line) => {
-      const wrapper = document.createElement("div");
-
-      wrapper.classList.add("line-wrapper");
-
-      line.parentNode.insertBefore(wrapper, line);
-      wrapper.appendChild(line);
-    });
-
-    gsap.set([heading_split.lines], { yPercent: 100 });
-
+    // Intro: logo fades in/out, then the gradient curtain slides up to reveal the page
     const tl = gsap.timeline({
       delay: 0.5
     })
-    tl.to(".anim_tt", {
+    tl.to(logoRef.current, {
       opacity: 1
     })
-    tl.to(".anim_tt", {
+    tl.to(logoRef.current, {
       opacity: 0,
       delay: 0.5
     })
@@ -46,25 +28,11 @@ const Hero = () => {
       y: "-250lvh",
     })
 
-    tl.to(heading_split.lines, {
-      yPercent: 0,
-      duration: 0.8,
-      ease: "expo.out",
-      stagger: 0.05,
-    });
-    tl.to([".blink_btn",], {
-      opacity: 1,
-      stagger: 0.15
-    }, "<");
-
-
-    if (window.innerWidth < 750) return
-    gsap.to([".hero_bg_video"], {
-      y: 200,
-      filter: "brightness(0.2)",
+    gsap.to(videoRef.current, {
+      yPercent: 30,
       ease: "none",
       scrollTrigger: {
-        trigger: ".hero_section",
+        trigger: sectionRef.current,
         start: "top top",
         end: "bottom top",
         scrub: true,
@@ -74,18 +42,17 @@ const Hero = () => {
 
   return (
     <>
-
-      <div className='PageTransition fixed inset-0 w-full h-screen z-[1000] pointer-events-none overflow-hidden'>
+      <div className='PageTransition fixed inset-0 w-full h-screen z-1000 pointer-events-none overflow-hidden'>
         <div className="w-full absolute inset-0 h-full flex items-center justify-center z-20">
           <Image
+            ref={logoRef}
             src="/logo.svg"
             alt="WalkWater Talent Advisors"
             width={400}
             height={100}
-            className="h-16  anim_tt opacity-0 w-auto object-contain"
+            className="h-16 opacity-0 w-auto object-contain"
             priority
           />
-
         </div>
         <div
           ref={curtainRef}
@@ -98,31 +65,8 @@ const Hero = () => {
         </div>
       </div>
 
-      <section className="  hero_section relative w-full h-screen pb-20 overflow-hidden">
-        <div className=" hero_bg_video absolute inset-0 brightness-100 overflow-hidden z-0">
-          <video loop muted playsInline autoPlay className='brightness-75 cover' src="/videos/hero_vid.mp4"></video>
-        </div>
-
-        <div className="relative z-10 text-white  w-full container  flex items-end">
-          <div className="space-y-5">
-            <h1 className="   heading_split  max-sm:hidden ">
-              India’s Fastest Growing Leadership <br /> Search & Talent Advisory Firm
-            </h1>
-            <h1 className="   heading_split  md:hidden ">
-              India’s Fastest Growing Leadership Search & Talent Advisory Firm
-            </h1>
-            <p className="text-lg md:text-xl   heading_split  leading-tight max-sm:hidden">
-              WalkWater Talent Advisors, one of the top executive  search <br /> firms in India for global enterprises, high-growth businesses,  <br />and transformative organizations.
-            </p>
-            <p className="text-lg md:text-xl   heading_split  leading-tight md:hidden">
-              WalkWater Talent Advisors, one of the top executive search firms in India for global enterprises, high-growth businesses, and transformative organizations.
-            </p>
-            <div className="flex gap-4 items-center">
-              <Button label={"  Explore Our Expertise"} href={"/expertise"} theme='light' className='blink_btn opacity-0' />
-
-            </div>
-          </div>
-        </div>
+      <section ref={sectionRef} className="relative w-full h-screen overflow-hidden">
+        <video ref={videoRef} loop muted playsInline autoPlay className='absolute inset-0 brightness-75 cover will-change-transform' src="/videos/hero_vid.mp4"></video>
       </section>
     </>
   );

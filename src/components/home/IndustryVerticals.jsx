@@ -4,6 +4,7 @@ import { RiArrowRightLine } from '@remixicon/react'
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import Button from '../common/Button'
+import CustomLink from '../common/CustomLink'
 import React, { useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -13,32 +14,60 @@ const data = [
   {
     id: 1,
     title: "Industrial, Energy & Process",
-    desc: "Driving industrial progress through exceptional leadership and strategic talent solutions.",
-    video: "/videos/verticals/industry.mp4"
+    desc: "Deep sector expertise helps us identify leaders who drive transformation, strengthen performance, and deliver sustainable growth across industrial, energy, and process businesses.",
+    video: "/videos/verticals/industry.mp4",
+    links: [
+      { label: "Case Studies", href: "/" },
+      { label: "Industry & Talent Insights", href: "/" },
+      { label: "Sub Sectors of Expertise", href: "/" },
+    ],
+    href: "/",
   },
   {
     id: 2,
     title: "Technology & Digital",
-    desc: "Identifying transformative leaders for organizations driving the next generation of technology and digital innovation.",
-    video: "/videos/verticals/technology.mp4"
+    desc: "Our technology and digital expertise connects organizations with leaders who drive innovation, accelerate transformation, build digital capabilities, and navigate markets confidently.",
+    video: "/videos/verticals/technology.mp4",
+    links: [
+      { label: "Case Studies", href: "/" },
+      { label: "Industry & Talent Insights", href: "/" },
+      { label: "Sub Sectors of Expertise", href: "/" },
+    ],
+    href: "/",
   },
   {
     id: 3,
     title: "Consumer, Retail, Media & Services",
-    desc: "Empowering consumer-focused organizations through exceptional leadership and strategic talent.",
-    video: "/videos/verticals/retail.mp4"
+    desc: "Our expertise connects organizations with leaders who understand consumer needs, drive innovation, strengthen brands, and accelerate growth across competitive markets.",
+    video: "/videos/verticals/retail.mp4",
+    links: [
+      { label: "Case Studies", href: "/" },
+      { label: "Industry & Talent Insights", href: "/" },
+      { label: "Sub Sectors of Expertise", href: "/" },
+    ],
+    href: "/",
   },
   {
     id: 4,
-    title: "Pharma, Healthcare & Lifesciences",
-    desc: "Building future-ready leadership teams that shape the future of healthcare, science, and human well-being.",
-    video: "/videos/verticals/pharma.mp4"
+    title: "Pharma, Healthcare & Life Sciences",
+    desc: "Our expertise connects organizations with leaders who drive innovation, navigate complexity, and deliver sustainable growth across healthcare and life sciences.",
+    video: "/videos/verticals/pharma.mp4",
+    links: [
+      { label: "Case Studies", href: "/" },
+      { label: "Industry & Talent Insights", href: "/" },
+      { label: "Sub Sectors of Expertise", href: "/" },
+    ],
+    href: "/",
   },
   {
     id: 5,
-    title: "Banking, Financial Services and Consulting",
-    desc: "Empowering financial and consulting organizations through exceptional leadership talent.",
-    video: "/videos/verticals/business.mp4"
+    title: "Banking, Financial Services & Consulting",
+    desc: "Our expertise connects organizations with leaders who navigate complexity, drive transformation, and create sustainable growth across financial services and consulting.",
+    video: "/videos/verticals/business.mp4",
+    links: [
+      { label: "Sub Sectors of Expertise", href: "/" },
+    ],
+    href: "/",
   },
 ]
 
@@ -88,26 +117,32 @@ const IndustryVerticals = () => {
 
   return (
     <div ref={containerRef} className='relative md:h-[400vh] w-full'>
-      <div className=" container max-sm:px-0! relative w-full md:h-screen! flex flex-col py-16 md:py-0 md:justify-center md:pt-20 space-y-10 md:space-y-[5vh] md:sticky! md:top-0">
-        <div className=" max-sm:px-4  grid grid-cols-1  md:grid-cols-2 gap-2 md:gap-0">
-          <div className=" ">
-            <h2 data-heading-effect className="w-fit    text-[#00689F]">Industry Verticals</h2>
-          </div>
-          <div className="  space-y-5">
-            <p data-para-effect className="text-lg md:text-xl   text-[#657882]  leading-tight">
-              Deep sector understanding enables us to deliver leadership talent relevant to complex and evolving business environments.
-            </p>
-            <Button label={"Explore Industry Verticals"} />
-          </div>
+      <div className=" container max-sm:px-0! relative w-full md:h-screen! flex flex-col py-16 md:py-0 md:justify-center md:pt-20 space-y-10 md:space-y-14 md:sticky! md:top-0">
+        <div className="max-sm:px-4 text-center space-y-4">
+          <h2 data-heading-effect className="w-fit mx-auto leading-none text-[#00689F]">Industry Verticals</h2>
+          <p data-para-effect className="text-base md:text-lg text-[#657882] leading-tight">
+            Deep sector expertise helps us deliver relevant leadership talent.
+          </p>
         </div>
 
         {/* DESKTOP STACK */}
-        <div className="  hidden md:block w-full relative overflow-hidden">
+        <div className="  hidden md:block w-full relative overflow-hidden rounded-3xl">
           {data.map((item, i) => (
             <div key={i} className={` slide ${i === 0 ? "relative p-10" : `  left-0 top-full p-10 absolute z-[${i}]`}  bg-[#F7F8FF] border border-[#00689F20] rounded-3xl w-full  grid   grid-cols-2  `}>
-              <div className={`flex flex-col gap-y-5  justify-center ${i % 2 === 0 ? " pr-44" : "order-2 pl-10"}`}>
-                <h4 className='  text-[#00689F]  '>{item.title}</h4>
-                <p className='text-[#657882] leading-tight'>{item.desc}</p>
+              <div className={`flex flex-col gap-y-8 justify-between ${i % 2 === 0 ? " pr-20" : "order-2 pl-10"}`}>
+                <div className="flex flex-col gap-y-5">
+                  <h4 className='  text-[#00689F]  '>{item.title}</h4>
+                  <p className='text-[#657882] leading-tight'>{item.desc}</p>
+                  <ul className="space-y-2">
+                    {item.links.map((link, j) => (
+                      <li key={j} className="flex items-center gap-x-3">
+                        <span className="size-1.5 shrink-0 rounded-full bg-[#86B039]"></span>
+                        <CustomLink href={link.href} label={link.label} className="text-[#00689F] font-medium hover:underline underline-offset-4" />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <Button label="Explore More" href={item.href} />
               </div>
               <div className="aspect-video relative overflow-hidden rounded-xl">
                 <video autoPlay loop muted playsInline className="w-full h-full object-cover">
@@ -135,6 +170,15 @@ const IndustryVerticals = () => {
                   <div className="p-5 flex flex-col gap-y-3 flex-1">
                     <h4 className="text-[#00689F]   ">{item.title}</h4>
                     <p className="text-[#657882]  leading-tight">{item.desc}</p>
+                    <ul className="space-y-2">
+                      {item.links.map((link, j) => (
+                        <li key={j} className="flex items-center gap-x-3">
+                          <span className="size-1.5 shrink-0 rounded-full bg-[#86B039]"></span>
+                          <CustomLink href={link.href} label={link.label} className="text-[#00689F] text-sm font-medium" />
+                        </li>
+                      ))}
+                    </ul>
+                    <Button label="Explore More" href={item.href} className="mt-auto" />
                   </div>
                 </div>
               </div>
