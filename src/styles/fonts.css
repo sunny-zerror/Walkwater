@@ -8,6 +8,9 @@
   font-display: swap;
   src: url(../../public/fonts/MonaSans-VariableFont_wdth\,wght.ttf);
 }
+.mona{
+  font-family: mona;
+}
 html,
 body {
   font-size: 14px;

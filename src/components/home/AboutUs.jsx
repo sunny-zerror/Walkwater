@@ -25,7 +25,7 @@ const AboutUs = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 75%",
+          start: "top 90%",
           toggleActions: "play none none reverse",
         },
       });

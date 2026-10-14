@@ -5,6 +5,15 @@ import gsap from 'gsap';
 // True once any client-side route change has started; the home text loader only runs on a hard load
 export let hasNavigated = false;
 
+// True once the home hero intro (text loader + curtain) has finished; the header waits for it
+export let heroIntroDone = false;
+
+export const finishHeroIntro = () => {
+    if (heroIntroDone) return;
+    heroIntroDone = true;
+    window.dispatchEvent(new Event('hero-intro-done'));
+};
+
 export const transitionPage = (href, title, router) => {
     hasNavigated = true;
     window.dispatchEvent(

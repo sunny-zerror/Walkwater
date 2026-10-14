@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/dist/ScrollTrigger'
 import { useGSAP } from '@gsap/react';
-import { hasNavigated } from '../common/PageTransition';
+import { hasNavigated, finishHeroIntro } from '../common/PageTransition';
 import AutoplayVideo from '../common/AutoplayVideo';
 gsap.registerPlugin(ScrollTrigger)
 
@@ -20,6 +20,7 @@ const Hero = () => {
   useGSAP(() => {
     if (hasNavigated) {
       gsap.set(loaderRef.current, { autoAlpha: 0 })
+      finishHeroIntro()
     } else {
       const elapsed = performance.now() / 1000
       const mm = gsap.matchMedia()
@@ -28,7 +29,7 @@ const Hero = () => {
         const chars = lineRef.current.querySelectorAll(".loader-char")
         const sweepStart = Math.max(0, 0.3 - elapsed)
         const sweepDuration = gsap.utils.clamp(1, 1.6, 2 - elapsed - sweepStart)
-        const charDuration = 0.4
+        const charDuration = 0.1
         const stagger = (sweepDuration - charDuration) / Math.max(1, chars.length - 1)
 
         // Every char starts at opacity 25 and fills to the full blue, one after another
@@ -39,14 +40,15 @@ const Hero = () => {
           ease: "power1.out",
           stagger,
         }, sweepStart)
-        tl.to(lineRef.current, { opacity: 0, duration: 0.6, ease: "power2.in" }, Math.max(2 - elapsed, sweepStart + sweepDuration))
-        tl.to(curtainRef.current, { y: "-250lvh", duration: 0.35, ease: "power2.in" })
+        tl.to(lineRef.current, { opacity: 0, duration: 0.6, delay:1, ease: "power2.in" })
+        tl.to(curtainRef.current, { y: "-250lvh", duration: 0.5, ease: "power2.in" })
         tl.set(loaderRef.current, { autoAlpha: 0 })
+        tl.call(finishHeroIntro)
       })
 
       // Reduced motion: the line shows without movement, holds, and the loader disappears
       mm.add("(prefers-reduced-motion: reduce)", () => {
-        gsap.set(loaderRef.current, { autoAlpha: 0, delay: Math.max(0, 2.6 - elapsed) })
+        gsap.set(loaderRef.current, { autoAlpha: 0, delay: Math.max(0, 2.6 - elapsed), onComplete: finishHeroIntro })
       })
     }
 
@@ -83,9 +85,9 @@ const Hero = () => {
 
   return (
     <>
-      <div ref={loaderRef} className='PageTransition fixed inset-0 w-full h-screen z-1000 pointer-events-none overflow-hidden'>
+      <div ref={loaderRef} className='PageTransition mona fixed inset-0 w-full h-screen z-1000 pointer-events-none overflow-hidden'>
         <div ref={lineRef} className="container absolute inset-0 h-full flex items-center justify-center z-20">
-          <p className="max-w-200 text-center text-balance  font-semibold text-[#00689F] text-[1.75rem] md:text-[2.5rem] leading-tight animate-loader-in motion-reduce:animate-none">
+          <p className="max-w-200 text-center text-balance  font-semibold text-[#00689F] text-[2.25rem] md:text-[2.75rem] leading-tight animate-loader-in motion-reduce:animate-none">
             <span className="sr-only">{LOADER_LINE}</span>
             {/* Split per char for the sweep; each word stays on one line */}
             <span aria-hidden="true">
@@ -114,7 +116,10 @@ const Hero = () => {
       </div>
 
       <section ref={sectionRef} className="relative w-full h-screen overflow-hidden">
-        <AutoplayVideo ref={videoRef} preload="auto" className='absolute inset-0 brightness-75 cover will-change-transform' src="/videos/hero_vid.mp4" />
+        <AutoplayVideo ref={videoRef} preload="auto" poster="/images/homepage/hero_poster.webp" className='absolute inset-0  cover will-change-transform'>
+          <source src="/videos/walkwater_v7_1080.mp4" type="video/mp4" />
+          <source src="/videos/walkwater_v7_1080.webm" type="video/webm" />
+        </AutoplayVideo>
 
         <button
           type="button"

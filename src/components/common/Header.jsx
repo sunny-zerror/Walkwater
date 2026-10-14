@@ -9,6 +9,7 @@ import gsap from 'gsap';
 import { navItems, recentInsights } from '@/data/navData';
 import Button from './Button';
 import { Link } from 'next-view-transitions';
+import { hasNavigated, heroIntroDone } from './PageTransition';
 
 // ─── Recent Insights Sidebar ────────────────────────────────────────────────
 const RecentInsightsSidebar = () => (
@@ -171,11 +172,15 @@ const Header = () => {
   }, [isMobileMenuOpen]);
 
   useGSAP(() => {
-    // Slides in as the home text loader clears (2.6s after navigation start, however long hydration took)
-    gsap.to(headerRef.current, {
-      transform: "translateY(0)",
-      delay: Math.max(0, 2.6 - performance.now() / 1000)
-    })
+    const slideIn = () => gsap.to(headerRef.current, { transform: "translateY(0)", duration: 0.6, delay: 0.75, ease: "power3.out" })
+
+    // On a hard load of home, wait for the hero intro to finish; everywhere else slide straight in
+    if (pathname !== "/" || hasNavigated || heroIntroDone) {
+      slideIn()
+      return
+    }
+    window.addEventListener("hero-intro-done", slideIn, { once: true })
+    return () => window.removeEventListener("hero-intro-done", slideIn)
   })
 
   // Dropdown sheet: slides down with an expo ease and its items stagger in; closing plays it back
