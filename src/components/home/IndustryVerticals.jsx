@@ -65,7 +65,7 @@ const data = [
 
 // Dot marker that swaps for an arrow while its row is hovered; the link keeps its own hover
 const LinkItem = ({ link, linkClassName }) => (
-  <li className="group/item flex items-center gap-x-3">
+  <li className="group/item flex items-center w-fit block gap-x-3">
     <span className="relative size-3.5 shrink-0 center">
       <span className="size-1.5 rounded-full bg-[#86B039] transition-all duration-200 group-hover/item:opacity-0 group-hover/item:scale-0"></span>
       <RiArrowRightLine className="absolute inset-0 size-3.5 text-[#86B039] opacity-0 -translate-x-1 transition-all duration-200 group-hover/item:opacity-100 group-hover/item:translate-x-0" />
@@ -125,7 +125,7 @@ const IndustryVerticals = () => {
       <div className=" container max-sm:px-0! relative w-full md:h-screen! flex flex-col gap-y-stack py-section md:pt-[calc(var(--spacing-header)+2rem)]  md:sticky! md:top-0">
         <div className="max-sm:px-4 text-center space-y-title shrink-0">
           <h2 data-heading-effect data-heading-start="top bottom" className="w-fit mx-auto leading-none text-[#00689F]">Industry Verticals</h2>
-          <p data-para-effect className="text-base md:text-lg text-[#657882] leading-tight">
+          <p data-para-effect className="section-desc text-[#657882]">
             Deep domain knowledge across five sectors, from industrials to financial services.
           </p>
         </div>

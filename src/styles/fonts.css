@@ -26,7 +26,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.15;
   font-family: mona, sans-serif;
 }
@@ -58,8 +58,16 @@ h4 {
 h5 {
   font-size: 1.75rem;
 }
-h6{
+h6,
+.section-desc{
   font-size: 1.25rem;
+}
+
+/* Short description under a section's h2; colour stays per section (grey or white) */
+.section-desc{
+  font-weight: 400;
+  line-height: 1.35;
+  text-wrap: pretty;
 }
 
 @media (max-width:750px) {
@@ -78,7 +86,8 @@ h4 {
 h5 {
   font-size: 1.5rem;
 }
-h6{
+h6,
+.section-desc{
   font-size: 1rem;
 }
 }

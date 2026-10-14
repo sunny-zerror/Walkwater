@@ -20,7 +20,6 @@ const GlobalParaReveal = () => {
       await document.fonts.ready
 
       const elements = gsap.utils.toArray("[data-para-effect]")
-      const listeners = []
 
       elements.forEach((el) => {
 
@@ -29,7 +28,7 @@ const GlobalParaReveal = () => {
         el.dataset.splitInitialized = "true"
 
         const split = new SplitText(el, {
-          type: "lines,words",
+          type: "lines",
           linesClass: "split-line",
         })
 
@@ -63,61 +62,6 @@ const GlobalParaReveal = () => {
             toggleActions: "play none none reverse",
           },
         })
-
-        const onMouseEnter = () => {
-          if (window.innerWidth < 1020) return;
-          gsap.killTweensOf(split.words)
-          const tl = gsap.timeline()
-
-          split.lines.forEach((line, index) => {
-            const lineWords = line.children
-
-            tl.to(lineWords, {
-              opacity: 0.2,
-              stagger: { amount: 0.4 },
-              duration: 0.15,
-              ease: "power2.inOut",
-            }, index * 0.05)
-              .to(lineWords, {
-                opacity: 1,
-                color: "#86B039",
-                stagger: { amount: 0.4 },
-                duration: 0.25,
-                ease: "power2.inOut",
-              }, index * 0.05 + 0.1)
-          })
-        }
-
-        const onMouseLeave = () => {
-          if (window.innerWidth < 1020) return;
-          gsap.killTweensOf(split.words)
-          const tl = gsap.timeline()
-
-          split.lines.forEach((line, index) => {
-            const lineWords = line.children
-
-            tl.to(lineWords, {
-              opacity: 0.2,
-              stagger: { amount: 0.4 },
-              duration: 0.15,
-              ease: "power2.inOut",
-            }, index * 0.05)
-              .to(lineWords, {
-                opacity: 1,
-                color: "",
-                stagger: { amount: 0.4 },
-                duration: 0.25,
-                ease: "power2.inOut",
-              }, index * 0.05 + 0.1)
-          })
-        }
-
-        const triggerEl = el.closest('[data-hover-parent]') || el;
-
-        triggerEl.addEventListener("mouseenter", onMouseEnter)
-        triggerEl.addEventListener("mouseleave", onMouseLeave)
-        listeners.push({ el: triggerEl, event: "mouseenter", handler: onMouseEnter })
-        listeners.push({ el: triggerEl, event: "mouseleave", handler: onMouseLeave })
       })
 
     })
@@ -129,10 +73,6 @@ const GlobalParaReveal = () => {
     return () => {
 
       clearTimeout(timeout)
-
-      listeners.forEach(({ el, event, handler }) => {
-        el.removeEventListener(event, handler)
-      })
 
       splits.forEach((split) => split.revert())
 

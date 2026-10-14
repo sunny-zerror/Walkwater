@@ -154,7 +154,7 @@ const Leadership = () => {
             </h2>
           </div>
           <div className="  max-sm:mt-2 space-y-5">
-            <p data-para-effect className="text-lg md:text-xl text-white leading-tight">
+            <p data-para-effect className="section-desc text-white">
               Led by industry veterans, our founding team combines deep expertise, strategic insight, and a shared vision to redefine leadership hiring.
             </p>
             <Button label={"Meet the Team"} theme="light" />

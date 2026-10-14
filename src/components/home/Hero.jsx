@@ -87,7 +87,7 @@ const Hero = () => {
     <>
       <div ref={loaderRef} className='PageTransition mona fixed inset-0 w-full h-screen z-1000 pointer-events-none overflow-hidden'>
         <div ref={lineRef} className="container absolute inset-0 h-full flex items-center justify-center z-20">
-          <p className="max-w-200 text-center text-balance  font-semibold text-[#00689F] text-[2.25rem] md:text-[2.75rem] leading-tight animate-loader-in motion-reduce:animate-none">
+          <p className="max-w-200 text-center text-balance  font-bold text-[#00689F] text-[2.25rem] md:text-[2.75rem] leading-tight animate-loader-in motion-reduce:animate-none">
             <span className="sr-only">{LOADER_LINE}</span>
             {/* Split per char for the sweep; each word stays on one line */}
             <span aria-hidden="true">

@@ -96,7 +96,7 @@ const GlobalPresence = () => {
           <h2 data-heading-effect className="w-fit mx-auto leading-none text-[#00689F]">
             Global Presence
           </h2>
-          <p data-para-effect className="text-base md:text-lg text-[#657882] leading-tight">
+          <p data-para-effect className="section-desc text-[#657882]">
             Five offices across India and the US, with leadership searches completed in 10+ countries.
           </p>
         </div>

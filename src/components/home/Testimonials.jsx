@@ -52,7 +52,7 @@ const Testimonials = () => {
               <h2 data-heading-effect className="w-fit   text-[#00689F]">
                 Client Testimonials
               </h2>
-              <p data-para-effect className=" text-lg md:text-xl text-[#657882] leading-tight max-w-sm">
+              <p data-para-effect className="section-desc text-[#657882] max-w-sm">
                 Stories, feedback, and experiences from our clients.
               </p>
             </div>

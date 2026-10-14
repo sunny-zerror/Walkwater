@@ -48,14 +48,19 @@ const HeadingAnimation = () => {
                     wrapper.appendChild(char)
                 })
 
-                gsap.set(split.chars, {
+                // data-heading-effect="words" reveals word by word; otherwise char by char.
+                // The hover effect below stays per char either way.
+                const byWords = el.dataset.headingEffect === "words"
+                const revealTargets = byWords ? split.words : split.chars
+
+                gsap.set(revealTargets, {
                     opacity: 0.1,
                 })
 
-                gsap.to(split.chars, {
+                gsap.to(revealTargets, {
                     opacity: 1,
                     duration: 1,
-                    stagger: 0.08,
+                    stagger: byWords ? 0.15 : 0.08,
                     ease: "expo.out",
 
                     scrollTrigger: {

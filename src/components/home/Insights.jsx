@@ -8,9 +8,9 @@ import { useGSAP } from "@gsap/react";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import gsap from "gsap";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode, Mousewheel } from "swiper/modules";
+import { Mousewheel } from "swiper/modules";
 import 'swiper/css';
-import 'swiper/css/free-mode';
+import SliderArrows from "../common/SliderArrows";
 gsap.registerPlugin(ScrollTrigger)
 
 const insightsData = [
@@ -38,11 +38,39 @@ const insightsData = [
     desc: "The Indian consumer landscape has undergone transformational changes over the last…",
     img: "/images/homepage/insights/img4.jpg",
   },
+  {
+    id: 5,
+    title: "Navigating Executive Search in Indian Family-Owned Businesses",
+    desc: "India’s vibrant economic narrative is inextricably linked to the profound influence of its family-owned businesses (FOBs). These aren’t merely enterprises;…",
+    img: "/images/homepage/insights/img5.jpg",
+  },
+  {
+    id: 6,
+    title: "Recruitment for Startups vs. Corporations – Key Differences and Strategies",
+    desc: "In the current dynamic business environment, recruitment cannot be approached with a one-size-fits-all methodology. The specific needs, objectives, and resources…",
+    img: "/images/homepage/insights/img6.jpg",
+  },
+  {
+    id: 7,
+    title: "Talent Report – Renewable Energy: The Question of Human Capital 2024",
+    desc: "“If an alien came to visit, I’d be embarrassed to tell them that we fight wars to pull fossil fuels…",
+    img: "/images/homepage/insights/img7.jpg",
+  },
+  {
+    id: 8,
+    title: "Talent Report – Chief Digital and Information Officer 2024",
+    desc: "Today, technology is playing a pivotal role in transforming organizations. The shift of the…",
+    img: "/images/homepage/insights/img8.jpg",
+  },
 ];
 
 const Insights = () => {
   // Card gap follows the --spacing-grid token; the root font size scales with the viewport
   const [gap, setGap] = useState(16);
+  const [swiper, setSwiper] = useState(null);
+  // Arrows dim at either end of the track
+  const [edges, setEdges] = useState({ start: true, end: false });
+  const updateEdges = (s) => setEdges({ start: s.isBeginning, end: s.isEnd });
 
   useEffect(() => {
     const updateGap = () => setGap(spacingToPx("--spacing-grid"));
@@ -85,18 +113,24 @@ const Insights = () => {
           <h2 data-heading-effect className="w-fit mx-auto text-white">
             Latest Insights
           </h2>
-          <p data-para-effect className="text-base md:text-lg text-white/90 leading-tight">
+          <p data-para-effect className="section-desc text-white/90">
             Leadership and talent perspectives for a changing business landscape.
           </p>
         </div>
 
         {/* Cards Slider */}
         <div className="container h-fit!">
+          <div className="relative">
           <Swiper
-            modules={[FreeMode, Mousewheel]}
-            freeMode={{ enabled: true, sticky: false }}
-            mousewheel={{ forceToAxis: true }}
+            onSwiper={(s) => { setSwiper(s); updateEdges(s); }}
+            onProgress={updateEdges}
+            onResize={updateEdges}
+            modules={[Mousewheel]}
+            mousewheel={{ forceToAxis: true, thresholdDelta: 20 }}
             grabCursor
+            // Cards stay put while dragging; on release they step to the next/previous card
+            followFinger={false}
+            speed={700}
             spaceBetween={gap}
             slidesPerView={1.15}
             breakpoints={{
@@ -136,11 +170,34 @@ const Insights = () => {
                 </div>
               </SwiperSlide>
             ))}
-          </Swiper>
-        </div>
 
-        <div className="center">
-          <Button label={"Explore Insights"} theme="transparent" />
+            {/* Closing card: replaces the old "Explore Insights" button under the slider */}
+            <SwiperSlide className="h-auto!">
+              <div className="insight_card group relative h-full min-h-80 bg-[#ffffff] hover:bg-[#86B039] rounded-xl p-card flex flex-col transition-colors duration-300">
+                <div className="px-1.5 pt-1.5">
+                  <span className="inline-block rounded-full border border-[#00689F30] group-hover:border-white/50 px-3 py-1 text-xs font-medium tracking-wide text-[#00689F] group-hover:text-white transition-colors duration-300">
+                    Insights Library
+                  </span>
+                </div>
+
+                <div className="mt-auto px-1.5 pb-2 space-y-3">
+                  <h5 className="text-[#00689F] group-hover:text-white leading-tight transition-colors duration-300">
+                    View All Insights
+                  </h5>
+                  <p className="text-[#657882] group-hover:text-white/90 text-sm leading-relaxed transition-colors duration-300">
+                    Talent reports, leadership research and perspectives from across our practice areas.
+                  </p>
+                </div>
+
+                {/* The button's link is stretched over the card (after:inset-0), so the whole card is clickable */}
+                <div className="px-1.5 pt-4 pb-2">
+                  <Button label="View All Insights" href="/insights" theme="white" className="border-[#00689F50]! group-hover:border-[#ffffff]! after:absolute after:inset-0 after:rounded-xl" />
+                </div>
+              </div>
+            </SwiperSlide>
+          </Swiper>
+          <SliderArrows swiper={swiper} atStart={edges.start} atEnd={edges.end} />
+          </div>
         </div>
       </div>
     </div>

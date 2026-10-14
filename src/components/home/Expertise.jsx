@@ -202,7 +202,7 @@ const Expertise = () => {
           <h2 data-heading-effect className="w-fit    text-[#00689F]">Our Expertise</h2>
         </div>
         <div className=" max-sm:mt-2 space-y-5 ">
-          <p data-para-effect className="text-lg md:text-xl  text-[#657882]  leading-tight">
+          <p data-para-effect className="section-desc text-[#657882]">
             Connecting organizations with exceptional leaders who strengthen teams, accelerate growth, and create lasting value.
           </p>
           <Button label={"Explore Our Expertise"} />

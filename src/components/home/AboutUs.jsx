@@ -61,10 +61,10 @@ const AboutUs = () => {
     <section id="about" className="py-section scroll-mt-header">
       <div className="container">
         <div className="relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center">
-          <h2 data-heading-effect className="text-[#00689F]">
+          <h2 data-heading-effect="words" className="text-[#00689F]">
             “Leadership is the capacity to translate vision into reality.”
           </h2>
-          <p data-para-effect className="mt-title text-base md:text-lg text-[#657882] leading-snug">
+          <p data-para-effect className="mt-title section-desc text-[#657882]">
             In 2011, a team of executive search leaders set out to rethink leadership hiring for an era of rapid change. Today, WalkWater Talent Advisors is one of India&apos;s fastest-growing and most innovative leadership search and talent advisory firms, built on intensive client partnering, deep domain knowledge and global coverage.
           </p>
           <Button label={"Read More"} href={"/about"} className="mt-8 rounded-full! pl-4!" />
@@ -85,7 +85,7 @@ const AboutUs = () => {
                 <p
                   data-value={item.value}
                   data-suffix={item.suffix}
-                  className="stat-number text-5xl md:text-6xl font-semibold text-[#00689F]"
+                  className="stat-number text-5xl md:text-6xl font-bold text-[#00689F]"
                 >
                   0{item.suffix}
                 </p>

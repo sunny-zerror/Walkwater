@@ -17,6 +17,12 @@ const Button = ({ label, href = "/", className = "", theme = "outline" }) => {
           link: "bg-[#ffffff] text-[#00689F] border-[#ffffff] hover:bg-transparent hover:text-[#ffffff] hover:border-[#ffffff]",
           icon: "bg-[#00689F] text-[#ffffff] group-hover:bg-[#ffffff] group-hover:text-[#00689F]"
         };
+      // Stays white on hover (only the arrow animates), for buttons sitting on cards that turn green
+      case "white":
+        return {
+          link: "bg-[#ffffff] text-[#00689F] border-[#ffffff]",
+          icon: "bg-[#00689F] text-[#ffffff]"
+        };
       case "transparent":
         return {
           link: "bg-transparent text-[#ffffff] border-[#ffffff] hover:bg-[#ffffff] hover:text-[#00689F] hover:border-[#ffffff]",
