@@ -47,7 +47,7 @@ const RecentInsightsSidebar = () => (
 
 const DropdownPanel = ({ navItem }) => (
   <div className="flex gap-8 ">
-    <div className="flex-1 p-5 pb-0">
+    <div className="flex-1 pt-5 pb-0">
       <h6 data-panel-item className="pb-2 border-b border-[#E8EDF1] font-semibold text-[#00689F] tracking-wide mb-6">
         {navItem.label}
       </h6>
