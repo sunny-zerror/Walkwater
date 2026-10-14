@@ -2,7 +2,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 
+// True once any client-side route change has started; the home text loader only runs on a hard load
+export let hasNavigated = false;
+
 export const transitionPage = (href, title, router) => {
+    hasNavigated = true;
     window.dispatchEvent(
         new CustomEvent('start-page-transition', {
             detail: { href, title, router }

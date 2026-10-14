@@ -1,8 +1,9 @@
 "use client";
 import { RiShareLine } from "@remixicon/react";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../common/Button";
+import { spacingToPx } from "@/utils/spacing";
 import { useGSAP } from "@gsap/react";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import gsap from "gsap";
@@ -22,7 +23,7 @@ const insightsData = [
   {
     id: 2,
     title: "ESG Leadership",
-    desc: "In recent times, Environmental, Social, and Governance (ESG) principles have evolved from a specialized focus to a fundamental business necessity….",
+    desc: "In recent times, Environmental, Social, and Governance (ESG) principles have evolved from a specialized focus to a fundamental business necessity…",
     img: "/images/homepage/insights/img2.jpg",
   },
   {
@@ -34,12 +35,21 @@ const insightsData = [
   {
     id: 4,
     title: "Inside the Corner Office: The Definitive Look at India’s Consumer CEO Journeys",
-    desc: "Introduction: Charting the Course of India’s Consumer Sector CEOs The Indian consumer landscape has undergone transformational changes over the last…",
+    desc: "The Indian consumer landscape has undergone transformational changes over the last…",
     img: "/images/homepage/insights/img4.jpg",
   },
 ];
 
 const Insights = () => {
+  // Card gap follows the --spacing-grid token; the root font size scales with the viewport
+  const [gap, setGap] = useState(16);
+
+  useEffect(() => {
+    const updateGap = () => setGap(spacingToPx("--spacing-grid"));
+    updateGap();
+    window.addEventListener("resize", updateGap);
+    return () => window.removeEventListener("resize", updateGap);
+  }, []);
 
   useGSAP(() => {
     let ic = gsap.matchMedia();
@@ -60,7 +70,7 @@ const Insights = () => {
   })
 
   return (
-    <div className="w-full bg-[#00689F] py-16 md:py-24 relative overflow-hidden">
+    <div className="w-full bg-[#00689F] py-section relative overflow-hidden">
       <Image
         src="/images/homepage/insights/insights_bg.svg"
         alt=""
@@ -68,10 +78,10 @@ const Insights = () => {
         className="object-cover"
       />
 
-      <div className="relative z-10 space-y-10 md:space-y-14">
+      <div className="relative z-10 space-y-stack">
 
         {/* Header Section */}
-        <div className="container h-fit! text-center space-y-4">
+        <div className="container h-fit! text-center space-y-title">
           <h2 data-heading-effect className="w-fit mx-auto text-white">
             Latest Insights
           </h2>
@@ -87,19 +97,19 @@ const Insights = () => {
             freeMode={{ enabled: true, sticky: false }}
             mousewheel={{ forceToAxis: true }}
             grabCursor
-            spaceBetween={16}
+            spaceBetween={gap}
             slidesPerView={1.15}
             breakpoints={{
-              640: { slidesPerView: 2.2, spaceBetween: 16 },
-              1024: { slidesPerView: 3.3, spaceBetween: 16 },
+              640: { slidesPerView: 2.2 },
+              1024: { slidesPerView: 3.3 },
             }}
             className="overflow-visible!"
           >
             {insightsData.map((insight) => (
               <SwiperSlide key={insight.id} className="h-auto!">
-                <div className="insight_card h-full bg-[#ffffff] hover:bg-[#86B039] rounded-xl p-2.5 flex flex-col group cursor-pointer transition-colors duration-300">
+                <div className="insight_card h-full bg-[#ffffff] hover:bg-[#86B039] rounded-xl p-card flex flex-col group cursor-pointer transition-colors duration-300">
                   {/* Image Container */}
-                  <div className="relative aspect-4/3 rounded-lg overflow-hidden bg-[#e2e8f0]">
+                  <div className="relative aspect-867/450 rounded-lg overflow-hidden bg-[#e2e8f0]">
                     <Image
                       src={insight.img}
                       fill
@@ -116,7 +126,7 @@ const Insights = () => {
 
                   {/* Text Content */}
                   <div className="px-1.5 pt-4 pb-2">
-                    <h6 className="text-[#00689F] group-hover:text-white line-clamp-2 leading-tight mb-3 transition-colors duration-300">
+                    <h6 className="text-[#00689F] h-12  group-hover:text-white line-clamp-2 leading-tight mb-3 transition-colors duration-300">
                       {insight.title}
                     </h6>
                     <p className="text-[#657882] group-hover:text-white/90 text-sm leading-relaxed line-clamp-2 transition-colors duration-300">

@@ -106,19 +106,19 @@ export const navItems = [
         icon: "/icons/processor.svg",
       },
       {
-        label: "Consumer, Retail & Media",
+        label: "Consumer, Retail, Media & Services",
         desc: "Helping brands find leaders who inspire growth and customer loyalty.",
         href: "/industry/consumer-retail-media",
         icon: "/icons/youtubeTv.svg",
       },
       {
-        label: "Pharma & Healthcare",
+        label: "Pharma, Healthcare & Life Sciences",
         desc: "Helping healthcare businesses build stronger leadership teams.",
         href: "/industry/pharma-healthcare",
         icon: "/icons/react.svg",
       },
       {
-        label: "Banking & Financial Services",
+        label: "Banking, Financial Services & Consulting",
         desc: "Connecting financial organizations with leaders who drive growth and innovation.",
         href: "/industry/banking-financial-services",
         icon: "/icons/stock.svg",

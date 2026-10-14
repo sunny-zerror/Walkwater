@@ -60,7 +60,8 @@ const HeadingAnimation = () => {
 
                     scrollTrigger: {
                         trigger: el,
-                        start: "top 85%",
+                        // data-heading-start lets a section reveal its heading earlier
+                        start: el.dataset.headingStart || "top 85%",
                         toggleActions: "play none none reverse",
                     },
                 })

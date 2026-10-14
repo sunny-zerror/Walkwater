@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import AutoplayVideo from "./AutoplayVideo";
 import {
   RiFacebookCircleFill,
   RiLinkedinBoxFill,
@@ -8,16 +9,17 @@ import {
   RiTwitterFill,
   RiArrowRightLine,
 } from "@remixicon/react";
+import { Link } from "next-view-transitions";
 
 const Footer = () => {
   return (
     <div className="w-full bg-[#00689F] py-10">
       <div className="container ">
         <div className="  bg-white rounded-3xl flex flex-col md:flex-row overflow-hidden  relative">
-          <video className="absolute top-1/2 -translate-y-1/2 opacity-50 w-full mix-blend-multiply pointer-events-none" loop autoPlay muted playsInline src="/videos/wave_video.mp4"></video>
+          <AutoplayVideo className="absolute top-1/2 -translate-y-1/2 opacity-50 w-full mix-blend-multiply pointer-events-none" src="/videos/wave_video.mp4" />
 
           {/* Left Column (White Section) */}
-          <div className="flex-1 p-8 md:p-14 lg:p-20 relative z-10 flex flex-col justify-between ">
+          <div className="flex-1 p-8 md:p-14 lg:p-20 relative z-10 flex flex-col justify-between  ">
 
             {/* Abstract background image placeholder */}
             <div className="absolute bottom-0 left-0 w-full h-1/2 pointer-events-none -z-10 bg-gradient-to-t from-blue-50/40 to-transparent">
@@ -42,31 +44,31 @@ const Footer = () => {
               <div className=" grid grid-cols-2 md:flex  gap-20 ">
                 <ul className=" space-y-2 md:space-y-4">
                   <li>
-                    <a href="#" className="text-[#00689F]   border-b border-[#00689F] pb-0.5">Home</a>
+                    <Link href="#" className="text-[#00689F]   border-b border-[#00689F] pb-0.5">Home</Link>
                   </li>
                   <li>
-                    <a href="#" className="text-[#657882] hover:text-[#00689F] transition-colors text-sm md:text-base">About</a>
+                    <Link href="#" className="text-[#657882] hover:text-[#00689F] transition-colors text-sm md:text-base">About Us</Link>
                   </li>
                   <li>
-                    <a href="#" className="text-[#657882] hover:text-[#00689F] transition-colors text-sm md:text-base">Expertise</a>
+                    <Link href="#" className="text-[#657882] hover:text-[#00689F] transition-colors text-sm md:text-base">Expertise</Link>
                   </li>
                   <li>
-                    <a href="#" className="text-[#657882] hover:text-[#00689F] transition-colors text-sm md:text-base">Industry Verticals</a>
+                    <Link href="#" className="text-[#657882] hover:text-[#00689F] transition-colors text-sm md:text-base">Industry Verticals</Link>
                   </li>
                   <li>
-                    <a href="#" className="text-[#657882] hover:text-[#00689F] transition-colors text-sm md:text-base">Insights</a>
+                    <Link href="#" className="text-[#657882] hover:text-[#00689F] transition-colors text-sm md:text-base">Insights</Link>
                   </li>
                 </ul>
 
                 <ul className=" space-y-2 md:space-y-4">
                   <li>
-                    <a href="#" className="text-[#657882] hover:text-[#00689F] transition-colors text-sm md:text-base">Contact</a>
+                    <Link href="#" className="text-[#657882] hover:text-[#00689F] transition-colors text-sm md:text-base">Contact</Link>
                   </li>
                   <li>
-                    <a href="#" className="text-[#657882] hover:text-[#00689F] transition-colors text-sm md:text-base">Terms & Conditions</a>
+                    <Link href="#" className="text-[#657882] hover:text-[#00689F] transition-colors text-sm md:text-base">Terms & Conditions</Link>
                   </li>
                   <li>
-                    <a href="#" className="text-[#657882] hover:text-[#00689F] transition-colors text-sm md:text-base">Privacy & Policy</a>
+                    <Link href="#" className="text-[#657882] hover:text-[#00689F] transition-colors text-sm md:text-base">Privacy Policy</Link>
                   </li>
                 </ul>
               </div>
@@ -90,22 +92,22 @@ const Footer = () => {
 
             {/* Social Links */}
             <ul className=" space-y-2 md:space-y-6 max-sm:grid max-sm:grid-cols-2">
-              <li>
-                <a href="https://www.facebook.com/WalkwaterTalentAdvisors" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 hover:opacity-80 transition-opacity text-sm md:text-base">
+              <li className="hover:underline">
+                <Link href="https://www.facebook.com/WalkwaterTalentAdvisors" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80 transition-opacity text-sm md:text-base">
                   <RiFacebookCircleFill size={22} /> Facebook
-                </a>
+                </Link>
               </li>
-              <li>
-                <a href="https://in.linkedin.com/company/walkwater-talent-advisors" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 hover:opacity-80 transition-opacity text-sm md:text-base">
-                  <RiLinkedinBoxFill size={22} /> Linkedin
-                </a>
+              <li className="hover:underline">
+                <Link href="https://in.linkedin.com/company/walkwater-talent-advisors" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80 transition-opacity text-sm md:text-base">
+                  <RiLinkedinBoxFill size={22} /> LinkedIn
+                </Link>
               </li>
             </ul>
 
             {/* Contact Info */}
             <div className="mt-4">
-              <a href="tel:+919972094034" className="text-base md:text-lg block hover:opacity-80 transition-opacity">+91 99720 94034</a>
-              <a href="mailto:client@walkwatertalent.com" className="text-base md:text-lg block hover:opacity-80 transition-opacity mt-1">client@walkwatertalent.com</a>
+              <Link href="tel:+919972094034" className="text-base md:text-lg block hover:underline hover:opacity-80 transition-opacity">+91 99720 94034</Link>
+              <Link href="mailto:client@walkwatertalent.com" className="text-base md:text-lg block hover:underline hover:opacity-80 transition-opacity mt-1">client@walkwatertalent.com</Link>
             </div>
 
           </div>

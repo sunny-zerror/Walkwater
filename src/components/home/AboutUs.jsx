@@ -11,8 +11,8 @@ gsap.registerPlugin(ScrollTrigger);
 const stats = [
   { title: "Client Relationships", value: 500, suffix: "+" },
   { title: "Leaders Placed", value: 1200, suffix: "+" },
-  { title: "Advisory Studies", value: 55, suffix: "+" },
-  { title: "Countries Covered", value: 10, suffix: "+" },
+  { title: "Talent Advisory Studies", value: 55, suffix: "+" },
+  { title: "Countries Searched In", value: 10, suffix: "+" },
 ];
 
 const AboutUs = () => {
@@ -58,20 +58,20 @@ const AboutUs = () => {
   );
 
   return (
-    <section className="pt-12 md:pt-24">
+    <section id="about" className="py-section scroll-mt-header">
       <div className="container">
         <div className="relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center">
-          <h2 data-heading-effect className="text-[#00689F] leading-none">
+          <h2 data-heading-effect className="text-[#00689F]">
             “Leadership is the capacity to translate vision into reality.”
           </h2>
-          <p data-para-effect className="mt-4 text-base md:text-lg text-[#657882] leading-snug">
-            Founded in 2011, WalkWater Talent Advisors is a fast-growing leadership search and talent advisory firm, combining deep domain expertise, global coverage, strong client partnerships, and an entrepreneurial approach to help organizations navigate the evolving world of leadership and talent.
+          <p data-para-effect className="mt-title text-base md:text-lg text-[#657882] leading-snug">
+            In 2011, a team of executive search leaders set out to rethink leadership hiring for an era of rapid change. Today, WalkWater Talent Advisors is one of India&apos;s fastest-growing and most innovative leadership search and talent advisory firms, built on intensive client partnering, deep domain knowledge and global coverage.
           </p>
           <Button label={"Read More"} href={"/about"} className="mt-8 rounded-full! pl-4!" />
         </div>
       </div>
 
-      <div ref={sectionRef} className="relative mt-4 md:mt-6 py-10 md:py-16 overflow-x-clip">
+      <div ref={sectionRef} className="relative mt-stack overflow-x-clip">
         <img
           src="/images/homepage/wave_img.svg"
           alt=""
