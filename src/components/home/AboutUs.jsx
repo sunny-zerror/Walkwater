@@ -60,12 +60,18 @@ const AboutUs = () => {
   return (
     <section id="about" className="py-section scroll-mt-header">
       <div className="container">
-        <div className="relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center">
+        <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
           <h2 data-heading-effect="words" className="text-[#00689F]">
             “Leadership is the capacity to translate vision into reality.”
           </h2>
+          <p data-para-effect className="mt-title pt-5 section-desc text-[#657882]">
+            In 2011, a team of Executive Search industry leaders realized their collective vision – to rethink hiring practices for an era of unprecedented change. Globalisation, growing impact of technology and the rise of start-ups are now changing traditional notions of jobs, career stability, growth and opportunity; and most importantly changing the notions of leadership and expectations from corporate leaders. <br /> <br />
+          </p>
           <p data-para-effect className="mt-title section-desc text-[#657882]">
-            In 2011, a team of executive search leaders set out to rethink leadership hiring for an era of rapid change. Today, WalkWater Talent Advisors is one of India&apos;s fastest-growing and most innovative leadership search and talent advisory firms, built on intensive client partnering, deep domain knowledge and global coverage.
+             In this new era of leadership, WalkWater Talent Advisors has emerged as one of India’s fastest growing and innovative leadership search and talent advisory firms. <br /> <br />
+          </p>
+          <p data-para-effect className="mt-title section-desc text-[#657882]">
+             The WalkWater team brings a unique mix of strengths – Intensive Client Partnering, Deep Domain Knowledge and Global Coverage; this coupled with a start-up drive to excel, and a constant focus on values, provides an unparalleled experience to our clients.
           </p>
           <Button label={"Read More"} href={"/about"} className="mt-8 rounded-full! pl-4!" />
         </div>

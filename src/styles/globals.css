@@ -3,12 +3,11 @@
 @theme static {
   --spacing-section: 4rem;
   --spacing-stack: 2.5rem;
-  --spacing-title: 0.5rem;
+  --spacing-title: 0.75rem;
   --spacing-grid: 1rem;
   --spacing-card: 0.75rem;
   --spacing-gutter: 1rem;
   --spacing-header: 5rem;
-  --spacing-topbar: 2rem;
 }
 
 @media (width >= 48rem) {
@@ -18,7 +17,6 @@
     --spacing-grid: 1.25rem;
     --spacing-card: 1rem;
     --spacing-gutter: 3.5rem;
-    --spacing-topbar: 2.5rem;
   }
 }
 

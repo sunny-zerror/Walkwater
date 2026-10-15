@@ -5,7 +5,8 @@ import React, { useEffect, useRef } from "react";
 // React doesn't render `muted` into the server HTML, so the browser can refuse autoplay before
 // hydration. This forces mute, then retries play() once data is ready, when the tab becomes
 // visible again, and on the first user interaction (covers iOS / data-saver blocks).
-const AutoplayVideo = ({ ref, children, ...props }) => {
+// With autoStart={false} it only preloads and stays paused; the parent starts it with play().
+const AutoplayVideo = ({ ref, children, autoStart = true, ...props }) => {
   const videoRef = useRef(null);
 
   const setRef = (node) => {
@@ -22,6 +23,11 @@ const AutoplayVideo = ({ ref, children, ...props }) => {
     video.defaultMuted = true;
     video.playsInline = true;
     video.setAttribute("muted", "");
+
+    if (!autoStart) {
+      video.pause();
+      return;
+    }
 
     const tryPlay = () => {
       if (video.paused) video.play().catch(() => {});
@@ -46,7 +52,7 @@ const AutoplayVideo = ({ ref, children, ...props }) => {
   }, []);
 
   return (
-    <video ref={setRef} autoPlay loop muted playsInline {...props}>
+    <video ref={setRef} autoPlay={autoStart} loop muted playsInline {...props}>
       {children}
     </video>
   );

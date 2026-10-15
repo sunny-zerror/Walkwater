@@ -40,7 +40,6 @@ const HeadingAnimation = () => {
 
                     const wrapper = document.createElement("span")
 
-                    wrapper.style.overflow = "hidden"
                     wrapper.style.display = "inline-block"
 
                     char.parentNode.insertBefore(wrapper, char)

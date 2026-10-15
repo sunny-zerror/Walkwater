@@ -11,7 +11,7 @@ import WhatWeDo from "@/components/home/WhatWeDo";
 const HomePage = () => {
   return (
     <>
-      <Hero />
+    <Hero />
       <AboutUs />
       <WhatWeDo/>
       <IndustryVerticals/>

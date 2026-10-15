@@ -1,7 +1,7 @@
 "use client";
 import { RiShareLine } from "@remixicon/react";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Button from "../common/Button";
 import { spacingToPx } from "@/utils/spacing";
 import { useGSAP } from "@gsap/react";
@@ -11,58 +11,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Mousewheel } from "swiper/modules";
 import 'swiper/css';
 import SliderArrows from "../common/SliderArrows";
+import { insightCategories, insightsData } from "@/data/insightsData";
 gsap.registerPlugin(ScrollTrigger)
-
-const insightsData = [
-  {
-    id: 1,
-    title: "The Strategic Evolution of India’s Pharma and Healthcare Companies in the Next Decade",
-    desc: "India’s pharmaceutical and healthcare sectors are entering a crucial growth decade from a strong position of global integration and…",
-    img: "/images/homepage/insights/img1.jpg",
-  },
-  {
-    id: 2,
-    title: "ESG Leadership",
-    desc: "In recent times, Environmental, Social, and Governance (ESG) principles have evolved from a specialized focus to a fundamental business necessity…",
-    img: "/images/homepage/insights/img2.jpg",
-  },
-  {
-    id: 3,
-    title: "Purpose-Driven Leadership",
-    desc: "In the current values-oriented business environment, leadership transcends merely achieving financial targets; it focuses on creating significant impact. Companies are…",
-    img: "/images/homepage/insights/img3.jpg",
-  },
-  {
-    id: 4,
-    title: "Inside the Corner Office: The Definitive Look at India’s Consumer CEO Journeys",
-    desc: "The Indian consumer landscape has undergone transformational changes over the last…",
-    img: "/images/homepage/insights/img4.jpg",
-  },
-  {
-    id: 5,
-    title: "Navigating Executive Search in Indian Family-Owned Businesses",
-    desc: "India’s vibrant economic narrative is inextricably linked to the profound influence of its family-owned businesses (FOBs). These aren’t merely enterprises;…",
-    img: "/images/homepage/insights/img5.jpg",
-  },
-  {
-    id: 6,
-    title: "Recruitment for Startups vs. Corporations – Key Differences and Strategies",
-    desc: "In the current dynamic business environment, recruitment cannot be approached with a one-size-fits-all methodology. The specific needs, objectives, and resources…",
-    img: "/images/homepage/insights/img6.jpg",
-  },
-  {
-    id: 7,
-    title: "Talent Report – Renewable Energy: The Question of Human Capital 2024",
-    desc: "“If an alien came to visit, I’d be embarrassed to tell them that we fight wars to pull fossil fuels…",
-    img: "/images/homepage/insights/img7.jpg",
-  },
-  {
-    id: 8,
-    title: "Talent Report – Chief Digital and Information Officer 2024",
-    desc: "Today, technology is playing a pivotal role in transforming organizations. The shift of the…",
-    img: "/images/homepage/insights/img8.jpg",
-  },
-];
 
 const Insights = () => {
   // Card gap follows the --spacing-grid token; the root font size scales with the viewport
@@ -79,10 +29,58 @@ const Insights = () => {
     return () => window.removeEventListener("resize", updateGap);
   }, []);
 
+  const sectionRef = useRef(null);
+  const [activeCategory, setActiveCategory] = useState("All");
+  const isSwitching = useRef(false);
+  const revealRef = useRef(null);
+  const filteredInsights = activeCategory === "All"
+    ? insightsData
+    : insightsData.filter((insight) => insight.category === activeCategory);
+
+  const { contextSafe } = useGSAP({ scope: sectionRef });
+
+  // Current cards drop out, the list swaps, then the new cards rise in (see the effect below)
+  const switchCategory = contextSafe((category) => {
+    if (category === activeCategory || isSwitching.current) return;
+    isSwitching.current = true;
+    // The scroll reveal only knows the first set of cards, so settle it and hand over to the switch animation
+    if (revealRef.current) {
+      revealRef.current.scrollTrigger?.kill();
+      revealRef.current.progress(1).kill();
+      revealRef.current = null;
+    }
+    gsap.to(".insight_card", {
+      y: -20,
+      opacity: 0,
+      duration: 0.25,
+      ease: "power2.in",
+      stagger: 0.03,
+      overwrite: true,
+      onComplete: () => setActiveCategory(category),
+    });
+  });
+
+  useGSAP(() => {
+    if (!isSwitching.current) return;
+    swiper?.slideTo(0, 0);
+    gsap.fromTo(".insight_card",
+      { y: 40, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: "power3.out",
+        stagger: 0.08,
+        overwrite: true,
+        onComplete: () => { isSwitching.current = false; },
+      }
+    );
+  }, { dependencies: [activeCategory], scope: sectionRef });
+
   useGSAP(() => {
     let ic = gsap.matchMedia();
     ic.add("(min-width: 768px)", () => {
-      gsap.from(".insight_card", {
+      revealRef.current = gsap.from(".insight_card", {
         xPercent: 100,
         opacity: 0,
         stagger: 0.1,
@@ -95,10 +93,10 @@ const Insights = () => {
       });
     });
     return () => ic.revert();
-  })
+  }, { scope: sectionRef })
 
   return (
-    <div className="w-full bg-[#00689F] py-section relative overflow-hidden">
+    <div ref={sectionRef} className="w-full bg-[#00689F] py-section relative overflow-hidden">
       <Image
         src="/images/homepage/insights/insights_bg.svg"
         alt=""
@@ -116,6 +114,28 @@ const Insights = () => {
           <p data-para-effect className="section-desc text-white/90">
             Leadership and talent perspectives for a changing business landscape.
           </p>
+
+          {/* Category filter: outlined pills, the active one filled white */}
+          <div role="tablist" aria-label="Insight categories" className="flex flex-wrap justify-center gap-2 pt-6">
+            {insightCategories.map((category) => {
+              const isActive = category === activeCategory;
+              return (
+                <button
+                  key={category}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => switchCategory(category)}
+                  className={`rounded-full border px-4 py-1.5 text-sm font-medium cursor-pointer transition-colors duration-300 ${isActive
+                    ? "bg-[#ffffff] border-[#ffffff] text-[#00689F]"
+                    : "border-white/50 text-white hover:bg-[#ffffff]/10 hover:border-[#ffffff]"
+                    }`}
+                >
+                  {category}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Cards Slider */}
@@ -135,11 +155,11 @@ const Insights = () => {
             slidesPerView={1.15}
             breakpoints={{
               640: { slidesPerView: 2.2 },
-              1024: { slidesPerView: 3.3 },
+              1024: { slidesPerView: 3 },
             }}
             className="overflow-visible!"
           >
-            {insightsData.map((insight) => (
+            {filteredInsights.map((insight) => (
               <SwiperSlide key={insight.id} className="h-auto!">
                 <div className="insight_card h-full bg-[#ffffff] hover:bg-[#86B039] rounded-xl p-card flex flex-col group cursor-pointer transition-colors duration-300">
                   {/* Image Container */}
@@ -163,7 +183,7 @@ const Insights = () => {
                     <h6 className="text-[#00689F] h-12  group-hover:text-white line-clamp-2 leading-tight mb-3 transition-colors duration-300">
                       {insight.title}
                     </h6>
-                    <p className="text-[#657882] group-hover:text-white/90 text-sm leading-relaxed line-clamp-2 transition-colors duration-300">
+                    <p className="text-[#657882] group-hover:text-white/90 line-clamp-2 transition-colors duration-300">
                       {insight.desc}
                     </p>
                   </div>

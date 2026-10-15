@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-import { RiArrowDownSLine, RiPhoneFill, RiMailFill, RiFacebookCircleFill, RiLinkedinBoxFill } from '@remixicon/react';
+import { RiArrowDownSLine } from '@remixicon/react';
 import CustomLink from './CustomLink';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -108,8 +108,8 @@ const Header = () => {
   // Transparent over the home hero video; solid once scrolled, on other pages, or with a sheet open
   const isSolid = pathname !== "/" || isScrolled || isSheetOpen;
 
-  // The sheets start at the top of the viewport, so their content clears the green bar and the nav
-  const sheetOffset = isScrolled ? "h-header" : "h-[calc(var(--spacing-topbar)+var(--spacing-header))]";
+  // The sheets start at the top of the viewport, so their content clears the nav
+  const sheetOffset = "h-header";
 
   const openDropdown = (index) => {
     clearTimeout(timeoutRef.current);
@@ -160,16 +160,26 @@ const Header = () => {
     }
   }, []);
 
+  // Freeze the page (Lenis and native scroll) while the dropdown or mobile menu is open
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    if (!isSheetOpen) return;
+    const html = document.documentElement;
+    const header = headerRef.current;
+    // Pad by the scrollbar width so the page and the fixed header don't jump when it disappears
+    const scrollbar = window.innerWidth - html.clientWidth;
+
+    window.lenis?.stop();
+    html.style.overflow = "hidden";
+    document.body.style.paddingRight = `${scrollbar}px`;
+    if (header) header.style.paddingRight = `${scrollbar}px`;
+
     return () => {
-      document.body.style.overflow = "";
+      window.lenis?.start();
+      html.style.overflow = "";
+      document.body.style.paddingRight = "";
+      if (header) header.style.paddingRight = "";
     };
-  }, [isMobileMenuOpen]);
+  }, [isSheetOpen]);
 
   useGSAP(() => {
     const slideIn = () => gsap.to(headerRef.current, { transform: "translateY(0)", duration: 0.6, delay: 0.75, ease: "power3.out" })
@@ -224,44 +234,6 @@ const Header = () => {
         onMouseEnter={handleHeaderEnter}
         onMouseLeave={handleHeaderLeave}
       >
-        {/* ─── Top Bar ─────────────────────────────────────────────────── */}
-        <div className={`relative z-10 bg-[#86B039] text-white transition-all duration-300 origin-top overflow-hidden ${isScrolled ? 'h-0 opacity-0' : 'h-topbar opacity-100'}`}>
-          <div className="container h-full py-2 max-sm:px-3!">
-            {/* One row on every width: contacts on the left, socials and flags on the right */}
-            <div className="flex items-center justify-between gap-2 h-full text-[9px] min-[390px]:text-[10px] sm:text-xs font-medium whitespace-nowrap">
-              <div className="flex items-center gap-2 md:gap-4 min-w-0">
-                <Link href="tel:+919972094034" className="flex hover:underline items-center hover:opacity-80 transition-opacity">
-                  <RiPhoneFill className="w-2.5 h-2.5 md:w-3 md:h-3 mr-1 md:mr-2 shrink-0" />
-                  +91 99720 94034
-                </Link>
-                <span className="w-px h-3 md:h-4 bg-white/30 block shrink-0"></span>
-                <Link href="mailto:client@walkwatertalent.com" className="flex min-w-0 hover:underline items-center hover:opacity-80 transition-opacity">
-                  <RiMailFill className="w-2.5 h-2.5 md:w-3 md:h-3 mr-1 md:mr-2 shrink-0" />
-                  <span className="truncate">client@walkwatertalent.com</span>
-                </Link>
-              </div>
-              <div className="flex items-center gap-1.5 md:gap-4 shrink-0">
-                <div className="flex items-center gap-1 md:gap-3">
-                  <Link href="https://www.facebook.com/WalkwaterTalentAdvisors" target='_blank' className="hover:opacity-80 transition-opacity" aria-label="Facebook">
-                    <RiFacebookCircleFill className="w-3.5 h-3.5 md:w-5 md:h-5" />
-                  </Link>
-                  <Link href="https://in.linkedin.com/company/walkwater-talent-advisors" target='_blank' className="hover:opacity-80 transition-opacity" aria-label="LinkedIn">
-                    <RiLinkedinBoxFill className="w-3.5 h-3.5 md:w-5 md:h-5" />
-                  </Link>
-                </div>
-                <span className="w-px h-3 md:h-4 bg-white/30 block"></span>
-                <div className="flex items-center gap-0.5 md:gap-2">
-                  <Image src="/icons/india_flag.svg" alt="India" width={20} height={14} className="h-3 md:h-5 w-auto object-cover" />
-                  <Image src="/icons/canada_flag.svg" alt="Canada" width={20} height={14} className="h-3 md:h-5 w-auto object-cover" />
-                  <Image src="/icons/america_flag.svg" alt="USA" width={20} height={14} className="h-3 md:h-5 w-auto object-cover" />
-                  <Image src="/icons/european_flag.svg" alt="Europe" width={20} height={14} className="h-3 md:h-5 w-auto object-cover" />
-                  <Image src="/icons/singapore_flag.svg" alt="Singapore" width={20} height={14} className="h-3 md:h-5 w-auto object-cover" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* ─── Main Navbar ──────────────────────────────────────────────── */}
         <div className={`w-full relative z-210 transition-all duration-300 ${isSheetOpen ? "bg-transparent" : isSolid ? "bg-white shadow-sm" : "bg-transparent"}`}>
           <div className="container">
@@ -439,7 +411,7 @@ const Header = () => {
 
       {/* ─── Backdrop Overlay ────────────────────────────────────── */}
       <div
-        className={`fixed backdrop-blur-xs inset-0 bg-black/40 z-199 transition-opacity top-0 duration-300 ${hasDropdown ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+        className={`fixed backdrop-blur-xs inset-0 bg-black/40 z-199 transition-all top-0 duration-500 ${hasDropdown ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
           }`}
         onClick={() => setActiveDropdown(null)}
       />

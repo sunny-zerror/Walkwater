@@ -122,7 +122,7 @@ const IndustryVerticals = () => {
     <div ref={containerRef} className='relative md:h-[400vh] w-full'>
       {/* Desktop: one sticky screen. Top padding clears the fixed header, the bottom matches the side gutter,
           and the stack takes whatever height is left */}
-      <div className=" container max-sm:px-0! relative w-full md:h-screen! flex flex-col gap-y-stack py-section md:pt-[calc(var(--spacing-header)+2rem)]  md:sticky! md:top-0">
+      <div className=" container max-sm:px-0! relative w-full md:h-screen! flex flex-col gap-y-stack py-section  md:sticky! md:top-0">
         <div className="max-sm:px-4 text-center space-y-title shrink-0">
           <h2 data-heading-effect data-heading-start="top bottom" className="w-fit mx-auto leading-none text-[#00689F]">Industry Verticals</h2>
           <p data-para-effect className="section-desc text-[#657882]">
