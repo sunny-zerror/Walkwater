@@ -31,6 +31,23 @@ const Hero = () => {
     return () => window.removeEventListener("hero-intro-done", onDone)
   }, [])
 
+  // Pause the video while the hero is off screen and pick it up again on return
+  // (only once the intro has started it, so the loader stays in charge before that)
+  useEffect(() => {
+    const video = videoRef.current
+    const section = sectionRef.current
+    if (!introDone || !video || !section) return
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        if (video.paused) video.play().catch(() => {})
+      } else {
+        video.pause()
+      }
+    })
+    observer.observe(section)
+    return () => observer.disconnect()
+  }, [introDone])
+
   // Mirror the video's real mute state (covers the browser forcing a muted start)
   useEffect(() => {
     const video = videoRef.current
@@ -274,7 +291,7 @@ const Hero = () => {
       >
         {/* On a hard load the video only preloads; the sound choice starts it */}
         <AutoplayVideo ref={videoRef} autoStart={hasNavigated} preload="auto" poster="/images/homepage/hero_poster.webp" className='absolute inset-0  cover will-change-transform'>
-          <source src="/videos/hero_vid.mp4" type="video/mp4" />
+          <source src="/videos/hero_vid.mp4?v=2" type="video/mp4" />
         </AutoplayVideo>
 
         {/* Cursor-follow sound toggle (mouse); a click anywhere on the hero toggles it */}
