@@ -122,7 +122,7 @@ const IndustryVerticals = () => {
     <div ref={containerRef} className='relative md:h-[400vh] w-full'>
       {/* Desktop: one sticky screen. Top padding clears the fixed header, the bottom matches the side gutter,
           and the stack takes whatever height is left */}
-      <div className=" container max-sm:px-0! relative w-full md:h-screen! flex flex-col gap-y-stack py-section  md:sticky! md:top-0">
+      <div className=" container max-sm:px-0! relative w-full md:h-screen! flex flex-col gap-y-stack pt-section pb-[calc(var(--spacing-section)/2)] mb-[calc(var(--spacing-section)/2)] md:sticky! md:top-0">
         <div className="max-sm:px-4 text-center space-y-title shrink-0">
           <h2 data-heading-effect data-heading-start="top bottom" className="w-fit mx-auto leading-none text-[#00689F]">Industry Verticals</h2>
           <p data-para-effect className="section-desc text-[#657882]">
@@ -136,7 +136,7 @@ const IndustryVerticals = () => {
             <div key={i} style={i === 0 ? undefined : { zIndex: i }} className={` slide ${i === 0 ? "relative" : "absolute inset-x-0 top-full"} h-full p-8 lg:p-10 grid grid-cols-2 gap-x-10 lg:gap-x-16 bg-[#F7F8FF] border border-[#00689F20] rounded-3xl`}>
               <div className={`min-h-0 flex flex-col gap-y-8 justify-between ${i % 2 === 0 ? "" : "order-2"}`}>
                 <div className="flex flex-col gap-y-5">
-                  <h4 className='  text-[#00689F]  '>{item.title}</h4>
+                  <h3 className='  text-[#00689F]  '>{item.title}</h3>
                   <p className='text-[#657882] leading-tight'>{item.desc}</p>
                   <ul className="space-y-2">
                     {item.links.map((link, j) => (

@@ -6,15 +6,21 @@ import { useGSAP } from '@gsap/react';
 import { hasNavigated, finishHeroIntro } from '../common/PageTransition';
 import AutoplayVideo from '../common/AutoplayVideo';
 import { RiVolumeMuteLine, RiVolumeUpLine } from '@remixicon/react';
+import Image from 'next/image';
 gsap.registerPlugin(ScrollTrigger)
 
 const LOADER_LINE = "India's Fastest-Growing Leadership Search and Talent Advisory Firm"
+
+// Soft-edged left-to-right wipe: GSAP moves --wipe-in to reveal and --wipe-out to hide
+const WIPE_GRADIENT = "linear-gradient(90deg, transparent calc(var(--wipe-out) - 30%), #000 var(--wipe-out), #000 calc(var(--wipe-in) - 30%), transparent var(--wipe-in))"
+const WIPE_MASK = { "--wipe-in": "0%", "--wipe-out": "0%", maskImage: WIPE_GRADIENT }
 
 const Hero = () => {
   const sectionRef = useRef(null)
   const videoRef = useRef(null)
   const loaderRef = useRef(null)
   const lineRef = useRef(null)
+  const logoRef = useRef(null)
   const curtainRef = useRef(null)
   const choiceRef = useRef(null)
   const followerRef = useRef(null)
@@ -134,22 +140,16 @@ const Hero = () => {
       const mm = gsap.matchMedia()
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const chars = lineRef.current.querySelectorAll(".loader-char")
-        const sweepStart = Math.max(0, 0.3 - elapsed)
-        const sweepDuration = gsap.utils.clamp(1, 1.6, 2 - elapsed - sweepStart)
-        const charDuration = 0.1
-        const stagger = (sweepDuration - charDuration) / Math.max(1, chars.length - 1)
-
-        // Every char starts at opacity 25 and fills to the full blue, one after another
-        const tl = gsap.timeline()
-        tl.to(chars, {
-          opacity: 1,
-          duration: charDuration,
-          ease: "power1.out",
-          stagger,
-        }, sweepStart)
+        const line = lineRef.current.querySelector("p")
+        const tl = gsap.timeline({ delay: Math.max(0, 0.2 - elapsed) })
+        // The logo is revealed by a soft gradient edge moving left to right, then wiped away the same way
+        tl.to(logoRef.current, { "--wipe-in": "130%", duration: 1, ease: "power2.inOut" })
+        tl.to(logoRef.current, { "--wipe-out": "130%", duration: 0.85, ease: "power2.inOut" }, "+=0.2")
+        // Then the line is revealed by the same gradient wipe
+        tl.set(lineRef.current, { autoAlpha: 1 })
+        tl.to(line, { "--wipe-in": "130%", duration: 1, ease: "power2.inOut" }, "+=0.07")
         // Once the line has filled, the sound choice fades in and the loader waits for a click
-        tl.fromTo(choiceRef.current, { autoAlpha: 0, y: "1rem" }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power3.out" }, "+=0.2")
+        tl.fromTo(choiceRef.current, { autoAlpha: 0, y: "1rem" }, { autoAlpha: 1, y: 0, duration: 0.42, ease: "power3.out" }, "+=0.14")
       })
 
       // Reduced motion: the line and the choice show straight away
@@ -232,22 +232,22 @@ const Hero = () => {
   return (
     <>
       <div ref={loaderRef} className='PageTransition mona fixed inset-0 w-full h-svh z-1000 pointer-events-none overflow-hidden'>
-        <div ref={lineRef} className="container absolute inset-0 h-full flex items-center justify-center z-20">
-          <p className="max-w-200 text-center text-balance  font-bold text-[#00689F] text-[2.25rem] md:text-[2.75rem] leading-tight animate-loader-in motion-reduce:animate-none">
-            <span className="sr-only">{LOADER_LINE}</span>
-            {/* Split per char for the sweep; each word stays on one line */}
-            <span aria-hidden="true">
-              {LOADER_LINE.split(" ").map((word, w) => (
-                <React.Fragment key={w}>
-                  {w > 0 && " "}
-                  <span className="whitespace-nowrap">
-                    {[...word].map((char, c) => (
-                      <span key={c} className="loader-char opacity-15 motion-reduce:opacity-100">{char}</span>
-                    ))}
-                  </span>
-                </React.Fragment>
-              ))}
-            </span>
+        {/* Logo first: a gradient wipe reveals it from left to right before the line */}
+        <div className="absolute inset-0 flex items-center justify-center z-20 motion-reduce:hidden">
+          <div
+            ref={logoRef}
+            className="w-60 md:w-80"
+            style={WIPE_MASK}
+          >
+            <Image src="/logo.svg" alt="WalkWater Talent Advisors" width={237} height={44} className="w-full h-auto" priority />
+          </div>
+        </div>
+        <div ref={lineRef} className="container absolute inset-0 h-full flex items-center justify-center z-20 motion-safe:invisible">
+          <p
+            style={WIPE_MASK}
+            className="max-w-200 text-center text-balance  font-bold text-[#00689F] text-[2.25rem] md:text-[2.75rem] leading-tight motion-reduce:mask-none!"
+          >
+            {LOADER_LINE}
           </p>
         </div>
         <div
@@ -298,9 +298,9 @@ const Hero = () => {
         <div
           ref={followerRef}
           aria-hidden="true"
-          className="pointer-coarse:hidden invisible absolute top-0 left-0 z-30 pointer-events-none flex items-center gap-x-2 rounded-full bg-[#ffffff] text-[#00689F] text-sm font-medium whitespace-nowrap p-2 shadow-lg"
+          className="pointer-coarse:hidden invisible absolute top-0 left-0 z-30 pointer-events-none flex items-center gap-x-2 rounded-full bg-white/30 backdrop-blur-md text-[#00689F] text-sm font-medium whitespace-nowrap p-2 shadow-lg"
         >
-          <span className="p-1.5 center rounded-full bg-[#00689F] text-[#ffffff]">
+          <span className="p-1.5 center rounded-full text-[#ffffff]">
             {isMuted ? <RiVolumeMuteLine size={16} /> : <RiVolumeUpLine size={16} />}
           </span>
         </div>
